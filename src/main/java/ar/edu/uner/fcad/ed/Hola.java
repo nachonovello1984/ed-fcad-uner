@@ -11,6 +11,6 @@ package ar.edu.uner.fcad.ed;
  */
 public class Hola {
     public static void main (){
-        System.out.println("Hola!");
+        System.out.println("X!");
     }
 }

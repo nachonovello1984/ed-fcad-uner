@@ -1,7 +1,7 @@
 package ar.edu.uner.fcad.ed.arbolesbinariosyheaps;
 
-import ar.edu.uner.fcad.ed.edlineales.ColaPorEnlaces;
-import ar.edu.uner.fcad.ed.edlineales.Iterador;
+import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
 
 /**
  * Estructura de Datos

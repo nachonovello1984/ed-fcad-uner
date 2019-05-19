@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.edu.uner.fcad.ed.edlineales;
+package ar.edu.uner.fcad.ed.edlineales.colas;
 
 /**
  *
  * @author Nacho
  * @param <T>
  */
-public interface ColaAleatoria<T> {
+public interface Cola<T> {
 
     /**
      * Indica si la estructura está vacía
@@ -26,16 +26,16 @@ public interface ColaAleatoria<T> {
     public boolean isFull();
 
     /**
-     * Obtiene un elemento aleatoriamente de la estructura
+     * Obtiene el elemento ubicado en el frente
      *
      * @return
      */
-    public T random();
+    public T getFront();
 
     /**
-     * Quita un elemento aleatoriamente de la estructura. 
+     * Quita el elemento ubicado en el frente.
      */
-    public void removeRandom();
+    public void dequeue();
 
     /**
      * Agrega un elemento al final de la estructura

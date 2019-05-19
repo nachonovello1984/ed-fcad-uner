@@ -5,6 +5,12 @@
  */
 package ar.edu.uner.fcad.ed.edlineales;
 
+import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
+import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorPosicion;
+import ar.edu.uner.fcad.ed.edlineales.pilas.PilaPorEnlaces;
+import ar.edu.uner.fcad.ed.edlineales.pilas.PilaPorPosicion;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
+
 /**
  *
  * @author nacho

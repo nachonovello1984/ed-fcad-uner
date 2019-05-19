@@ -2,7 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.edu.uner.fcad.ed.edlineales;
+package ar.edu.uner.fcad.ed.edlineales.colas;
+
+import ar.edu.uner.fcad.ed.edlineales.NodoLista;
 
 /**
  *
@@ -45,7 +47,7 @@ public class ColaPorEnlaces<T> implements Cola<T>{
         T resultado = null;
 
         if (!isEmpty()) {
-            resultado = front.elemento;
+            resultado = front.getElemento();
         }
 
         return resultado;
@@ -57,7 +59,7 @@ public class ColaPorEnlaces<T> implements Cola<T>{
     @Override
     public void dequeue() {
         if (!isEmpty()) {
-            this.front = this.front.siguiente;
+            this.front = this.front.getSiguiente();
         }
     }
 
@@ -72,8 +74,8 @@ public class ColaPorEnlaces<T> implements Cola<T>{
             this.front = nuevoNodo;
             this.back = nuevoNodo;
         } else {
-            this.back.siguiente = nuevoNodo;
-            this.back = back.siguiente;
+            this.back.setSiguiente(nuevoNodo);
+            this.back = back.getSiguiente();
         }
     }
 
@@ -93,7 +95,7 @@ public class ColaPorEnlaces<T> implements Cola<T>{
         
         while(nodoActual != null){
             resultado += ", " + nodoActual.toString();
-            nodoActual = nodoActual.siguiente;
+            nodoActual = nodoActual.getSiguiente();
         }
         
         if(resultado.length() > 0){

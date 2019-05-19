@@ -1,6 +1,6 @@
 package ar.edu.uner.fcad.ed.edjerarquicas;
 
-import ar.edu.uner.fcad.ed.edlineales.ColaPorEnlaces;
+import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
 import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 
 /**

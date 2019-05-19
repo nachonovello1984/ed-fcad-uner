@@ -5,8 +5,8 @@
  */
 package ar.edu.uner.fcad.ed.mapasdiccionarios.diccionarios;
 
-import ar.edu.uner.fcad.ed.edlineales.Iterador;
-import ar.edu.uner.fcad.ed.edlineales.Iterable;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterable;
 import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 import ar.edu.uner.fcad.ed.mapasdiccionarios.Entrada;
 

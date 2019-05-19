@@ -4,7 +4,7 @@
  */
 package ar.edu.uner.fcad.ed.edjerarquicas;
 
-import ar.edu.uner.fcad.ed.edlineales.Iterador;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
 import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 
 /**

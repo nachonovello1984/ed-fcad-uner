@@ -5,7 +5,7 @@
  */
 package ar.edu.uner.fcad.ed.mapasdiccionarios.conjuntos;
 
-import ar.edu.uner.fcad.ed.edlineales.Iterable;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterable;
 
 /**
  *

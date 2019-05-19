@@ -5,7 +5,7 @@
 package ar.edu.uner.fcad.ed.arbolesabbyavl;
 
 
-import ar.edu.uner.fcad.ed.edlineales.Iterador;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
 import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 
 /**

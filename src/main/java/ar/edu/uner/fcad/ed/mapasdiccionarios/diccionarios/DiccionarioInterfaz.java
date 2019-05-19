@@ -7,7 +7,7 @@ package ar.edu.uner.fcad.ed.mapasdiccionarios.diccionarios;
 
 import ar.edu.uner.fcad.ed.mapasdiccionarios.Entrada;
 
-import ar.edu.uner.fcad.ed.edlineales.Iterable;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterable;
 
 /**
  *

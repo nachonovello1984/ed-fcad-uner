@@ -1,6 +1,6 @@
 package ar.edu.uner.fcad.ed.mapasdiccionarios;
 
-import ar.edu.uner.fcad.ed.edlineales.Iterador;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
 import ar.edu.uner.fcad.ed.mapasdiccionarios.diccionarios.DiccionarioConLista;
 import ar.edu.uner.fcad.ed.mapasdiccionarios.diccionarios.DiccionarioInterfaz;
 import ar.edu.uner.fcad.ed.mapasdiccionarios.mapas.MapaConLista;

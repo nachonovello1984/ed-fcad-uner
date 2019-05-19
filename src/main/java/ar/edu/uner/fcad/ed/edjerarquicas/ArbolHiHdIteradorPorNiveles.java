@@ -4,7 +4,7 @@
  */
 package ar.edu.uner.fcad.ed.edjerarquicas;
 
-import ar.edu.uner.fcad.ed.edlineales.ColaPorEnlaces;
+import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

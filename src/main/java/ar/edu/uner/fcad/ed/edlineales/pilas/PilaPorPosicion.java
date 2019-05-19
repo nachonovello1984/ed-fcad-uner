@@ -1,20 +1,32 @@
-package ar.edu.uner.fcad.ed.edlineales;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+package ar.edu.uner.fcad.ed.edlineales.pilas;
+
+import java.lang.reflect.Array;
+
 /**
  *
  * @author Nacho
  * @param <T>
  */
-public class PilaPorEnlaces<T> implements Pila<T> {
+public class PilaPorPosicion <T> implements Pila<T>{
 
-    protected NodoLista<T> tope;
-
-    public PilaPorEnlaces() {
+    private static final int CAPACIDAD = 10;
+    
+    protected T[] arreglo;
+    protected int tope;
+    protected int capacidad;
+    
+    public PilaPorPosicion(Class<T> clazz){
+        this.capacidad = CAPACIDAD;
+        this.arreglo = nuevoArreglo(clazz, capacidad);
         makeEmpty();
+    }
+    
+    private T[] nuevoArreglo(Class<T> clazz, int capacidad) {
+        return (T[]) Array.newInstance(clazz, capacidad);
     }
 
     /**
@@ -23,7 +35,7 @@ public class PilaPorEnlaces<T> implements Pila<T> {
      */
     @Override
     public boolean isEmpty() {
-        return tope == null;
+        return tope == -1;
     }
 
     /**
@@ -32,7 +44,7 @@ public class PilaPorEnlaces<T> implements Pila<T> {
      */
     @Override
     public boolean isFull() {
-        return false;
+        return tope == CAPACIDAD - 1;
     }
 
     /**
@@ -41,29 +53,28 @@ public class PilaPorEnlaces<T> implements Pila<T> {
      */
     @Override
     public T top() {
-        return tope.elemento;
+        if (isEmpty()) {
+            return null;
+        }
+        
+        return arreglo[tope];
     }
 
     /**
      * Quita la posición ubicada en el tope de la pila.
      */
-    @Override
     public void pop() {
-        this.tope = this.tope.siguiente;
+        this.tope--;
     }
 
     /**
-     * Agrega el elemento pasado por parámetro en el tope de la pila. 
-     * @param x
+     * Agrega el elemento pasado por parámetro en el tope de la pila.
+     * @param elemento 
      */
     @Override
-    public void push(T x) {
-        if (isEmpty()) {
-            this.tope = new NodoLista(x);
-        } else {
-            NodoLista<T> nuevoNodo = new NodoLista(x);
-            nuevoNodo.siguiente = tope;
-            this.tope = nuevoNodo;
+    public void push(T elemento) {
+        if(!isFull()){
+            this.arreglo[++tope] = elemento;
         }
     }
 
@@ -72,17 +83,16 @@ public class PilaPorEnlaces<T> implements Pila<T> {
      */
     @Override
     public final void makeEmpty() {
-        this.tope = null;
+        this.tope = -1;
     }
+    
     
     @Override
     public String toString(){
         String resultado = "";
         
-        NodoLista<T> nodoActual = tope;
-        while(nodoActual != null){
-            resultado += ", " + nodoActual.toString();
-            nodoActual = nodoActual.siguiente;
+        for(int i = tope; i >= 0; i--){
+            resultado += ", " + arreglo[i].toString();
         }
         
         if(resultado.length() > 0){
@@ -91,4 +101,5 @@ public class PilaPorEnlaces<T> implements Pila<T> {
         
         return resultado;
     }
+    
 }

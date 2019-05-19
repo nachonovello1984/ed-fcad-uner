@@ -4,6 +4,9 @@
  */
 package ar.edu.uner.fcad.ed.edlineales;
 
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterable;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.IteradorListaPorPosicion;
 import java.lang.reflect.Array;
 
 /**

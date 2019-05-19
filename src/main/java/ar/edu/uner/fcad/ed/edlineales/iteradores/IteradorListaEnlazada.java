@@ -2,7 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.edu.uner.fcad.ed.edlineales;
+package ar.edu.uner.fcad.ed.edlineales.iteradores;
+
+import ar.edu.uner.fcad.ed.edlineales.NodoLista;
 
 
 /**
@@ -19,7 +21,7 @@ public class IteradorListaEnlazada<T> implements Iterador<T>{
 
     @Override
     public boolean existeSiguiente() {
-        return nodoActual.siguiente != null;
+        return nodoActual.getSiguiente() != null;
     }
 
     @Override
@@ -27,8 +29,8 @@ public class IteradorListaEnlazada<T> implements Iterador<T>{
         T resultado = null;
         
         if(existeSiguiente()){
-            nodoActual = nodoActual.siguiente;
-            resultado = nodoActual.elemento;
+            nodoActual = nodoActual.getSiguiente();
+            resultado = nodoActual.getElemento();
         }
      
         return resultado;

@@ -4,17 +4,17 @@ Este proyecto sirve tanto de ejemplo de implementación de las Estructuras de Da
 ## Para utilizar en proyectos Maven
 ```xml
 <repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
 </repositories>
 ```
 Y en la sección dependencies:
 ```xml
 <dependency>
-	    <groupId>com.github.nachonovello1984</groupId>
-	    <artifactId>ed-fcad-uner</artifactId>
-	    <version>-SNAPSHOT</version>
+  <groupId>com.github.nachonovello1984</groupId>
+  <artifactId>ed-fcad-uner</artifactId>
+  <version>-SNAPSHOT</version>
 </dependency>
 ```

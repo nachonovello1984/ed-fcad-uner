@@ -1,5 +1,5 @@
 # Estructuras de Datos - FCAD | UNER
-Este proyecto sirve tanto de ejemplo de implementación de las Estructuras de Datos típicas y sirve de base para realizar las actividades de las asignatura.
+Este proyecto sirve tanto de ejemplo de implementación de las Estructuras de Datos típicas como de base para realizar las actividades de las asignatura.
 
 ## Para utilizar en proyectos Maven
 ```xml

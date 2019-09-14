@@ -16,24 +16,24 @@ public class ArbolABBIteradorInOrden<T> implements Iterador<T> {
     }
 
     private ListaEnlazadaNoOrdenada<T> generarRecorrido(ArbolABB<T> arbolAbb) {
-        ListaEnlazadaNoOrdenadaExt<T> resultado = new ListaEnlazadaNoOrdenadaExt();
+        ListaEnlazadaNoOrdenada<T> resultado = new ListaEnlazadaNoOrdenada();
 
-        resultado.agregarTodos(agregarNodos(arbolAbb.getRaiz()));
+        resultado.addAll(agregarNodos(arbolAbb.getRaiz()));
 
         return resultado;
     }
 
     private ListaEnlazadaNoOrdenada<T> agregarNodos(NodoABB<T> nodo){
-        ListaEnlazadaNoOrdenadaExt<T> resultado = new ListaEnlazadaNoOrdenadaExt();
+        ListaEnlazadaNoOrdenada<T> resultado = new ListaEnlazadaNoOrdenada();
 
         if(nodo.getTieneHijoIzquierdo()){
-            resultado.agregarTodos(agregarNodos(nodo.getHijoIzquierdo()));
+            resultado.addAll(agregarNodos(nodo.getHijoIzquierdo()));
         }
         
         resultado.addToRear(nodo.getValor());
 
         if(nodo.getTieneHijoDerecho()){
-            resultado.agregarTodos(agregarNodos(nodo.getHijoDerecho()));
+            resultado.addAll(agregarNodos(nodo.getHijoDerecho()));
         }
 
         return resultado;

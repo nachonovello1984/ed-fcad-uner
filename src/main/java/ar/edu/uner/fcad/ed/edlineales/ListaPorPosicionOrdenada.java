@@ -14,7 +14,8 @@ import java.lang.reflect.Array;
  * @author Nacho
  * @param <T>
  */
-public class ListaPorPosicionOrdenada<T extends Comparable<? super T>> implements ListaOrdenada<T>, Iterable<T> {
+public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
+        implements ListaOrdenada<T>, Iterable<T> {
 
     private static final int CAPACIDAD = 10;
     protected T[] arreglo;
@@ -42,7 +43,7 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>> implement
         int indiceInsercion = determinarIndiceInsercion(element);
 
         ultimaPosicion++;
-        
+
         //No hay elementos o el insertado es el mayor => va último
         if (indiceInsercion == -1) {
             arreglo[ultimaPosicion] = element;
@@ -66,14 +67,9 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>> implement
             return null;
         }
 
-        T resultado = null;
-
-        try {
-            resultado = this.arreglo[0];
-            excluirPosicion(0);
-            ultimaPosicion--;
-        } catch (Exception exc) {
-        }
+        T resultado = this.arreglo[0];
+        excluirPosicion(0);
+        ultimaPosicion--;
 
         return resultado;
     }
@@ -263,9 +259,11 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>> implement
     }
 
     /**
-     * Devuelve la posición dentro del arreglo que tiene ocupar el nuevo elemento.
+     * Devuelve la posición dentro del arreglo que tiene ocupar el nuevo
+     * elemento.
+     *
      * @param element
-     * @return 
+     * @return
      */
     private int determinarIndiceInsercion(T element) {
         int resultado = -1;
@@ -277,7 +275,7 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>> implement
                 break;
             }
         }
-        
+
         return resultado;
     }
 }

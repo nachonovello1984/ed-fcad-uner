@@ -22,22 +22,22 @@ public class ArbolABBIteradorPosOrden<T> implements Iterador<T>{
     }
 
     private ListaEnlazadaNoOrdenada<T> generarRecorrido(ArbolABB<T> arbolAbb) {
-        ListaEnlazadaNoOrdenadaExt<T> resultado = new ListaEnlazadaNoOrdenadaExt();
+        ListaEnlazadaNoOrdenada<T> resultado = new ListaEnlazadaNoOrdenada();
 
-        resultado.agregarTodos(agregarSubArbol(arbolAbb.getRaiz()));
+        resultado.addAll(agregarSubArbol(arbolAbb.getRaiz()));
 
         return resultado;
     }
 
     private ListaEnlazadaNoOrdenada<T> agregarSubArbol(NodoABB<T> nodoActual){
-        ListaEnlazadaNoOrdenadaExt<T> resultado = new ListaEnlazadaNoOrdenadaExt();
+        ListaEnlazadaNoOrdenada<T> resultado = new ListaEnlazadaNoOrdenada();
 
         if(nodoActual.getTieneHijoIzquierdo()){
-            resultado.agregarTodos(agregarSubArbol(nodoActual.getHijoIzquierdo()));
+            resultado.addAll(agregarSubArbol(nodoActual.getHijoIzquierdo()));
         }
         
         if(nodoActual.getTieneHijoDerecho()){
-            resultado.agregarTodos(agregarSubArbol(nodoActual.getHijoDerecho()));
+            resultado.addAll(agregarSubArbol(nodoActual.getHijoDerecho()));
         }
         
         resultado.addToRear(nodoActual.getValor());

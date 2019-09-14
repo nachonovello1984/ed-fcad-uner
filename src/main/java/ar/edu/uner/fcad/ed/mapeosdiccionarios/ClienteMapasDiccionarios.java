@@ -1,12 +1,12 @@
-package ar.edu.uner.fcad.ed.mapasdiccionarios;
+package ar.edu.uner.fcad.ed.mapeosdiccionarios;
 
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
-import ar.edu.uner.fcad.ed.mapasdiccionarios.diccionarios.DiccionarioConLista;
-import ar.edu.uner.fcad.ed.mapasdiccionarios.diccionarios.DiccionarioInterfaz;
-import ar.edu.uner.fcad.ed.mapasdiccionarios.mapas.MapaConLista;
-import ar.edu.uner.fcad.ed.mapasdiccionarios.mapas.MapaInterfaz;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.diccionarios.DiccionarioConLista;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.diccionarios.DiccionarioInterfaz;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.mapas.MapeoConLista;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.mapas.MapeoInterfaz;
 
 /**
  *
@@ -18,7 +18,7 @@ public class ClienteMapasDiccionarios {
         try {
             System.out.println("Mapa");
             System.out.println("====================================");
-            MapaInterfaz<String, Integer> mapa = new MapaConLista();
+            MapeoInterfaz<String, Integer> mapa = new MapeoConLista();
             
             mapa.put("Chelsea", 34);
             mapa.put("Liverpool", 37);

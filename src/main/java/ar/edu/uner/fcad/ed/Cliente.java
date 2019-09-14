@@ -4,7 +4,7 @@ import ar.edu.uner.fcad.ed.arbolesabbyavl.ClienteABByAVL;
 import ar.edu.uner.fcad.ed.arbolesbinariosyheaps.ClienteArbolBinarioHeap;
 import ar.edu.uner.fcad.ed.edjerarquicas.ClienteEDJerarquicas;
 import ar.edu.uner.fcad.ed.edlineales.ClienteEDLineales;
-import ar.edu.uner.fcad.ed.mapasdiccionarios.ClienteMapasDiccionarios;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.ClienteMapasDiccionarios;
 
 /**
  *

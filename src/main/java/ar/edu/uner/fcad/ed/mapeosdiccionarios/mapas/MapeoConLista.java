@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.edu.uner.fcad.ed.mapasdiccionarios.mapas;
+package ar.edu.uner.fcad.ed.mapeosdiccionarios.mapas;
 
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
 import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
-import ar.edu.uner.fcad.ed.mapasdiccionarios.conjuntos.ConjuntoPorEnlaces;
-import ar.edu.uner.fcad.ed.mapasdiccionarios.Entrada;
-import ar.edu.uner.fcad.ed.mapasdiccionarios.conjuntos.ConjuntoInterfaz;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.conjuntos.ConjuntoPorEnlaces;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.Entrada;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.conjuntos.ConjuntoInterfaz;
 
 /**
  *
@@ -17,11 +17,11 @@ import ar.edu.uner.fcad.ed.mapasdiccionarios.conjuntos.ConjuntoInterfaz;
  * @param <K>
  * @param <V>
  */
-public class MapaConLista<K, V> implements MapaInterfaz<K, V> {
+public class MapeoConLista<K, V> implements MapeoInterfaz<K, V> {
 
     protected ListaEnlazadaNoOrdenada<Entrada<K, V>> lista;
 
-    public MapaConLista() {
+    public MapeoConLista() {
         lista = new ListaEnlazadaNoOrdenada();
     }
 

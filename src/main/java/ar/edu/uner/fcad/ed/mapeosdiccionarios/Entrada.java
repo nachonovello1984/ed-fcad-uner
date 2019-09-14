@@ -1,4 +1,4 @@
-package ar.edu.uner.fcad.ed.mapasdiccionarios;
+package ar.edu.uner.fcad.ed.mapeosdiccionarios;
 
 import java.util.Objects;
 

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.edu.uner.fcad.ed.mapasdiccionarios.diccionarios;
+package ar.edu.uner.fcad.ed.mapeosdiccionarios.diccionarios;
 
-import ar.edu.uner.fcad.ed.mapasdiccionarios.Entrada;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.Entrada;
 
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterable;
 

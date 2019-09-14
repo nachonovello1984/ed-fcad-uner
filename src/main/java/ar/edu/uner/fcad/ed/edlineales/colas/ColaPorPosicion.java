@@ -30,7 +30,8 @@ public class ColaPorPosicion<T> implements Cola<T> {
 
     /**
      * Indica si la estructura está vacía
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean isEmpty() {
@@ -39,7 +40,8 @@ public class ColaPorPosicion<T> implements Cola<T> {
 
     /**
      * Indica si la estructura está llena
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean isFull() {
@@ -48,17 +50,16 @@ public class ColaPorPosicion<T> implements Cola<T> {
 
     /**
      * Obtiene el elemento ubicado en el frente
-     * @return 
+     *
+     * @return
      */
     @Override
     public T getFront() {
-        T resultado = null;
-
-        if (!isEmpty()) {
-            resultado = this.arreglo[front];
+        if (isEmpty()) {
+            return null;
         }
 
-        return resultado;
+        return this.arreglo[front];
     }
 
     /**
@@ -72,15 +73,18 @@ public class ColaPorPosicion<T> implements Cola<T> {
 
     /**
      * Agrega un elemento al final de la estructura
-     * @param elemento 
+     *
+     * @param elemento
      */
     @Override
     public void enqueue(T elemento) {
-        if (!isFull()) {
-            this.back = incrementar(back);
-            this.arreglo[back] = elemento;
-            this.tamanioActual++;
+        if (isFull()) {
+            return;
         }
+        
+        this.back = incrementar(back);
+        this.arreglo[back] = elemento;
+        this.tamanioActual++;
     }
 
     /**

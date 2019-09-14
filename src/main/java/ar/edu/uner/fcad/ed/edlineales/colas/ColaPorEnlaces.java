@@ -44,13 +44,11 @@ public class ColaPorEnlaces<T> implements Cola<T>{
      */
     @Override
     public T getFront() {
-        T resultado = null;
-
-        if (!isEmpty()) {
-            resultado = front.getElemento();
+        if (isEmpty()) {
+            return null;
         }
 
-        return resultado;
+        return front.getElemento();
     }
 
     /**

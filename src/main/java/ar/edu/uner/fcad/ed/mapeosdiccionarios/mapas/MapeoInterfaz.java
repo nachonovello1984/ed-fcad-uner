@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.edu.uner.fcad.ed.mapasdiccionarios.mapas;
+package ar.edu.uner.fcad.ed.mapeosdiccionarios.mapas;
 
-import ar.edu.uner.fcad.ed.mapasdiccionarios.Entrada;
-import ar.edu.uner.fcad.ed.mapasdiccionarios.conjuntos.ConjuntoInterfaz;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.Entrada;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.conjuntos.ConjuntoInterfaz;
 
 /**
  *
@@ -14,7 +14,7 @@ import ar.edu.uner.fcad.ed.mapasdiccionarios.conjuntos.ConjuntoInterfaz;
  * @param <K>
  * @param <V>
  */
-public interface MapaInterfaz <K, V>{
+public interface MapeoInterfaz <K, V>{
 
     public int size();
 

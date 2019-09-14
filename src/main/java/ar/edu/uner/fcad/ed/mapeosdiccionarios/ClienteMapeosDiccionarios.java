@@ -3,16 +3,16 @@ package ar.edu.uner.fcad.ed.mapeosdiccionarios;
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
 import ar.edu.uner.fcad.ed.mapeosdiccionarios.diccionarios.DiccionarioConLista;
 import ar.edu.uner.fcad.ed.mapeosdiccionarios.diccionarios.DiccionarioInterfaz;
-import ar.edu.uner.fcad.ed.mapeosdiccionarios.mapas.MapeoConLista;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.mapeos.MapeoConLista;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import ar.edu.uner.fcad.ed.mapeosdiccionarios.mapas.MapeoInterfaz;
+import ar.edu.uner.fcad.ed.mapeosdiccionarios.mapeos.MapeoInterfaz;
 
 /**
  *
  * @author nacho
  */
-public class ClienteMapasDiccionarios {
+public class ClienteMapeosDiccionarios {
     
     private static void mapasTest() {
         try {
@@ -38,7 +38,7 @@ public class ClienteMapasDiccionarios {
             System.out.println("mapa.values() = " + mapa.values());
             System.out.println("mapa.entrySet() = " + mapa.entrySet());
         } catch (Exception ex) {
-            Logger.getLogger(ClienteMapasDiccionarios.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteMapeosDiccionarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -70,7 +70,7 @@ public class ClienteMapasDiccionarios {
             }
             
         } catch (Exception ex) {
-            Logger.getLogger(ClienteMapasDiccionarios.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteMapeosDiccionarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

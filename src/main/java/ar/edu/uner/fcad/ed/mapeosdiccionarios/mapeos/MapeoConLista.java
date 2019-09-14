@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ar.edu.uner.fcad.ed.mapeosdiccionarios.mapas;
+package ar.edu.uner.fcad.ed.mapeosdiccionarios.mapeos;
 
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
 import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;

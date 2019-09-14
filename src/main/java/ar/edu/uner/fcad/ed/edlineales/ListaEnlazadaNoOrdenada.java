@@ -79,18 +79,19 @@ public class ListaEnlazadaNoOrdenada<T>
 
         targetNodo.siguiente = nuevoNodo;
     }
-    
+
     /**
      * Agrega todos los elementos de listaParam al final de la estructura.
-     * @param listaParam 
+     *
+     * @param listaParam
      */
     public void addAll(ListaEnlazadaNoOrdenada<T> listaParam) {
-        if (listaParam == null || listaParam.isEmpty()){
+        if (listaParam == null || listaParam.isEmpty()) {
             return;
         }
-        
+
         Iterador<T> iterador = listaParam.iterador();
-        while(iterador.existeSiguiente()) {
+        while (iterador.existeSiguiente()) {
             this.addToRear(iterador.siguiente());
         }
     }
@@ -102,14 +103,15 @@ public class ListaEnlazadaNoOrdenada<T>
      */
     @Override
     public T removeFirst() {
-        T resultado = null;
 
-        if (!isEmpty()) {
-            NodoLista<T> nodoResultado = this.header.siguiente;
-            resultado = nodoResultado.elemento;
-
-            this.header.siguiente = this.header.siguiente.siguiente;
+        if (isEmpty()) {
+            return null;
         }
+
+        NodoLista<T> nodoResultado = this.header.siguiente;
+        T resultado = nodoResultado.elemento;
+
+        this.header.siguiente = this.header.siguiente.siguiente;
 
         return resultado;
     }
@@ -121,20 +123,20 @@ public class ListaEnlazadaNoOrdenada<T>
      */
     @Override
     public T removeLast() {
-        T resultado = null;
 
-        if (!isEmpty()) {
-            NodoListaBusqueda<T> listaNodos = getUltimos2Nodos();
-
-            if (listaNodos.nodoAnterior != null) {
-                listaNodos.nodoAnterior.siguiente = null;
-            } else {
-                this.header.siguiente = null;
-            }
-            resultado = listaNodos.nodoActual.elemento;
+        if (isEmpty()) {
+            return null;
         }
+        
+        NodoListaBusqueda<T> listaNodos = getUltimos2Nodos();
 
-        return resultado;
+        if (listaNodos.nodoAnterior != null) {
+            listaNodos.nodoAnterior.siguiente = null;
+        } else {
+            this.header.siguiente = null;
+        }
+        
+        return listaNodos.nodoActual.elemento;
     }
 
     /**

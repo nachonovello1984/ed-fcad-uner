@@ -9,6 +9,7 @@ Este proyecto sirve tanto de ejemplo de implementación de las Estructuras de Da
 - [x] Mapas, Diccionarios y conjuntos.
 - [x] Árboles ABB y AVL.
 - [ ] Árboles multivía.
+- [X] Grafos: No dirigido. Implementación: Matriz de adyacencia.
 
 ## Para utilizar en proyectos Maven
 ```xml

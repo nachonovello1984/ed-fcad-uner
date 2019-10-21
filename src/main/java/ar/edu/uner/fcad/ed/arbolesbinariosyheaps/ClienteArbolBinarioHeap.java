@@ -129,7 +129,7 @@ public class ClienteArbolBinarioHeap {
         pruebaArbolBinario();
 
         //Heap
-        pruebaHeap();
+        //pruebaHeap();
     }
 
 }

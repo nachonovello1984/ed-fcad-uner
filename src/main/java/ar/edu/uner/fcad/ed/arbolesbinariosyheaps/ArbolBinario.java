@@ -234,18 +234,18 @@ public class ArbolBinario<T> implements ArbolBinarioInterfaz<T> {
 
         //Caso 2 de Eliminación de Arbol Binario => El nodo a eliminar tiene 1 hijo.
         if (cantidadHijos == 1) {
+            
+            //Me quedo con la referencia al hijo
+            NodoArbolBinario<T> hijo = (nodoABorrar.hijoIzquierdo != null) ? nodoABorrar.hijoIzquierdo : nodoABorrar.hijoDerecho;
+            
             //Si nodoPadre es null => nodoABorrar es raíz del árbol
             if (nodoPadre == null) {
-                if (esHijoIzquierdo) {
-                    raiz = (nodoABorrar.hijoIzquierdo != null) ? nodoABorrar.hijoIzquierdo : nodoABorrar.hijoDerecho;
-                } else {
-                    raiz = (nodoABorrar.hijoIzquierdo != null) ? nodoABorrar.hijoIzquierdo : nodoABorrar.hijoDerecho;
-                }
+                raiz = hijo;
             } else {
-                if (esHijoIzquierdo) {
-                    nodoPadre.hijoIzquierdo = (nodoABorrar.hijoIzquierdo != null) ? nodoABorrar.hijoIzquierdo : nodoABorrar.hijoDerecho;
-                } else {
-                    nodoPadre.hijoDerecho = (nodoABorrar.hijoIzquierdo != null) ? nodoABorrar.hijoIzquierdo : nodoABorrar.hijoDerecho;
+                if (esHijoIzquierdo) { //Si es hijo izquierdo de nodoPadre...
+                    nodoPadre.hijoIzquierdo = hijo;
+                } else { //Si es hijo derecho de nodoPadre...
+                    nodoPadre.hijoDerecho = hijo;
                 }
             }
             return;

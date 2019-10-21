@@ -35,6 +35,10 @@ public class ClienteEDLineales {
             while (iterador.existeSiguiente()) {
                 System.out.println("Posición " + i++ + ": " + iterador.siguiente());
             }
+            
+            for (int j = 0; j < lista.size(); j++) {
+                System.out.println(lista.get(j));                
+            }
         } catch (Exception ex) {
             System.err.println(ex.toString());
         }

@@ -41,11 +41,11 @@ public class ArbolAVL<T> extends ArbolABB<T> {
 
             resComparacion = valorComparable.compareTo(nodoActual.valor);
 
-            if (resComparacion == -1) {
+            if (resComparacion < 0) {
                 nodoActual = (NodoAVL) nodoActual.hijoIzquierdo;
             }
 
-            if (resComparacion == 1) {
+            if (resComparacion > 0) {
                 nodoActual = (NodoAVL) nodoActual.hijoDerecho;
             }
 

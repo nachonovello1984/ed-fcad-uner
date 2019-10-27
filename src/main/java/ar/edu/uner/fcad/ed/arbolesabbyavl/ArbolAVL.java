@@ -78,11 +78,11 @@ public class ArbolAVL<T> extends ArbolABB<T> {
             //Determino a qué lado del nodoPadre debe ir
             int resComparacion = valorComparable.compareTo(nodoPadre.valor);
 
-            if (resComparacion == -1) {
+            if (resComparacion < 0) {
                 nodoPadre.hijoIzquierdo = nuevoNodo;
             }
 
-            if (resComparacion == 1) {
+            if (resComparacion > 0) {
                 nodoPadre.hijoDerecho = nuevoNodo;
             }
 

@@ -4,6 +4,7 @@
  */
 package ar.edu.uner.fcad.ed.arbolesabbyavl;
 
+import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -282,25 +283,25 @@ public class ArbolAVL<T> extends ArbolABB<T> {
         }
     }
 
-    private void actualizarFBs(NodoAVL nodo) {
+    private void actualizarFBs(NodoAVL<T> nodo) {
         try {
             NodoAVL nodoActual;
-            Queue<NodoAVL> cola = new LinkedList<NodoAVL>();
-            cola.offer(nodo);
+            ColaPorEnlaces<NodoAVL<T>> cola = new ColaPorEnlaces<NodoAVL<T>>();
+            cola.enqueue(nodo);
 
             while (!cola.isEmpty()) {
-                nodoActual = cola.peek();
+                nodoActual = cola.getFront();
 
                 if (nodoActual.getTieneHijoIzquierdo()) {
-                    cola.offer((NodoAVL) nodoActual.hijoIzquierdo);
+                    cola.enqueue((NodoAVL<T>) nodoActual.hijoIzquierdo);
                 }
 
                 if (nodoActual.getTieneHijoDerecho()) {
-                    cola.offer((NodoAVL) nodoActual.hijoDerecho);
+                    cola.enqueue((NodoAVL<T>) nodoActual.hijoDerecho);
                 }
 
                 nodoActual.setFactorBalance(getFactorBalance(nodoActual));
-                cola.poll();
+                cola.dequeue();
             }
         } catch (Exception exc) {
             System.out.println("Excepción al actualizar FBs");
@@ -329,7 +330,7 @@ public class ArbolAVL<T> extends ArbolABB<T> {
         return resultado;
     }
 
-    private int getFactorBalance(NodoAVL nodo) {
+    private int getFactorBalance(NodoAVL<T> nodo) {
         int[] subArboles = getAlturaSubArboles(nodo);
 
         return subArboles[1] - subArboles[0];
@@ -363,22 +364,24 @@ public class ArbolAVL<T> extends ArbolABB<T> {
     public String toString() {
         String resultado = "";
         String strSeparador = ((imprimirConFBs)? "\n" : ", ");
-        Queue<NodoABB<T>> cola = new LinkedList();
-        cola.offer(this.raiz);
+        ColaPorEnlaces<NodoABB<T>> cola = new ColaPorEnlaces();
+        cola.enqueue(this.raiz);
         
         while (!cola.isEmpty()) {
-            NodoAVL<T> nodoActual = (NodoAVL<T>)cola.poll();
+            NodoAVL<T> nodoActual = (NodoAVL<T>) cola.getFront();
             T valorActual = nodoActual.getValor();
             
             resultado += strSeparador + valorActual.toString() + ((imprimirConFBs)? " -> " + nodoActual.factorBalance : "");
 
             if (nodoActual.getTieneHijoIzquierdo()) {
-                cola.offer(nodoActual.getHijoIzquierdo());
+                cola.enqueue(nodoActual.getHijoIzquierdo());
             }
             
             if (nodoActual.getTieneHijoDerecho()) {
-                cola.offer(nodoActual.getHijoDerecho());
+                cola.enqueue(nodoActual.getHijoDerecho());
             }
+            
+            cola.dequeue();
         }
         
         if(resultado.length() > 0){

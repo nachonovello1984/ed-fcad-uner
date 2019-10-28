@@ -4,6 +4,7 @@
  */
 package ar.edu.uner.fcad.ed.arbolesabbyavl;
 
+import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 import java.util.ArrayList;
 
 /**
@@ -13,32 +14,38 @@ import java.util.ArrayList;
  */
 public class ListaAVL<T> {
 
-    protected ArrayList<NodoAVL<T>> nodos;
+    protected ListaEnlazadaNoOrdenada<NodoAVL<T>> nodos;
     protected T valorBuscado;
 
     public ListaAVL(T valor) {
-        this.nodos = new ArrayList();
+        this.nodos = new ListaEnlazadaNoOrdenada();
         this.valorBuscado = valor;
     }
 
     /**
      * @return the nodos
      */
-    public ArrayList<NodoAVL<T>> getNodos() {
+    public ListaEnlazadaNoOrdenada<NodoAVL<T>> getNodos() {
         return nodos;
     }
 
     public NodoAVL<T> getPadreNodoPivote() {
         NodoAVL<T> resultado = null;
-        for (int i = nodos.size() - 1; i >= 0; i--) {
-            if (nodos.get(i).factorBalance != 0) {
-                if (i - 1 >= 0) {
-                    resultado = nodos.get(i - 1);
-                } else {
-                    resultado = null;
+
+        try {
+            for (int i = nodos.size() - 1; i >= 0; i--) {
+                if (nodos.get(i).factorBalance != 0) {
+                    if (i - 1 >= 0) {
+                        resultado = nodos.get(i - 1);
+                    } else {
+                        resultado = null;
+                    }
+                    break;
                 }
-                break;
             }
+
+        } catch (Exception exc) {
+
         }
 
         return resultado;
@@ -46,13 +53,16 @@ public class ListaAVL<T> {
 
     public NodoAVL<T> getNodoPivote() {
         NodoAVL<T> resultado = null;
-        for (int i = nodos.size() - 1; i >= 0; i--) {
-            if (nodos.get(i).factorBalance != 0) {
-                resultado = nodos.get(i);
-                break;
+        try {
+            for (int i = nodos.size() - 1; i >= 0; i--) {
+                if (nodos.get(i).factorBalance != 0) {
+                    resultado = nodos.get(i);
+                    break;
+                }
             }
-        }
+        } catch (Exception exc) {
 
+        }
         return resultado;
     }
 
@@ -75,7 +85,7 @@ public class ListaAVL<T> {
 
     public NodoAVL<T> getPadreNodoBuscado() {
         NodoAVL<T> resultado = null;
-        ArrayList<NodoAVL<T>> lista = getNodoPorValor(valorBuscado);
+        ListaEnlazadaNoOrdenada<NodoAVL<T>> lista = getNodoPorValor(valorBuscado);
 
         try {
             resultado = lista.get(0);
@@ -88,7 +98,8 @@ public class ListaAVL<T> {
 
     public NodoAVL<T> getNodoBuscado() {
         NodoAVL<T> resultado = null;
-        ArrayList<NodoAVL<T>> lista = getNodoPorValor(valorBuscado);
+        
+        ListaEnlazadaNoOrdenada<NodoAVL<T>> lista = getNodoPorValor(valorBuscado);
 
         try {
             resultado = lista.get(1);
@@ -99,26 +110,30 @@ public class ListaAVL<T> {
         return resultado;
     }
 
-    protected ArrayList<NodoAVL<T>> getNodoPorValor(T valor) {
-        ArrayList<NodoAVL<T>> resultado = new ArrayList();
-        
+    protected ListaEnlazadaNoOrdenada<NodoAVL<T>> getNodoPorValor(T valor) {
+        ListaEnlazadaNoOrdenada<NodoAVL<T>> resultado = new ListaEnlazadaNoOrdenada();
+
         NodoAVL<T> nodoPadre = null;
         NodoAVL<T> nodoHijo = null;
-        
-        int posicion = nodos.indexOf(new NodoAVL(valor));
-        if(posicion >= 0){
-            nodoHijo = nodos.get(posicion);
-            
-            if(posicion - 1 >= 0){
-                nodoPadre = nodos.get(posicion -1);
-            }
-        } else {
-            nodoPadre = nodos.get(nodos.size() - 1);
-        }
 
-        resultado.add(nodoPadre);
-        resultado.add(nodoHijo);
-        
+        try {
+            int posicion = nodos.indexOf(new NodoAVL(valor));
+            if (posicion >= 0) {
+                nodoHijo = nodos.get(posicion);
+
+                if (posicion - 1 >= 0) {
+                    nodoPadre = nodos.get(posicion - 1);
+                }
+            } else {
+                nodoPadre = nodos.get(nodos.size() - 1);
+            }
+
+            resultado.addToRear(nodoPadre);
+            resultado.addToRear(nodoHijo);
+            
+        } catch (Exception exc) {
+
+        }
         return resultado;
     }
 }

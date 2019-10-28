@@ -5,8 +5,6 @@
 package ar.edu.uner.fcad.ed.arbolesabbyavl;
 
 import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  *
@@ -38,7 +36,7 @@ public class ArbolAVL<T> extends ArbolABB<T> {
         NodoAVL<T> nodoActual = nodoInicio;
 
         while (nodoActual != null) {
-            resultado.getNodos().add(nodoActual);
+            resultado.getNodos().addToRear(nodoActual);
 
             resComparacion = valorComparable.compareTo(nodoActual.valor);
 
@@ -87,7 +85,7 @@ public class ArbolAVL<T> extends ArbolABB<T> {
                 nodoPadre.hijoDerecho = nuevoNodo;
             }
 
-            lista.getNodos().add(nuevoNodo);
+            lista.getNodos().addToRear(nuevoNodo);
 
             //Rebalanceo.
             if (lista.getNodoPivote() != null) {
@@ -285,7 +283,7 @@ public class ArbolAVL<T> extends ArbolABB<T> {
 
     private void actualizarFBs(NodoAVL<T> nodo) {
         NodoAVL nodoActual;
-        ColaPorEnlaces<NodoAVL<T>> cola = new ColaPorEnlaces<NodoAVL<T>>();
+        ColaPorEnlaces<NodoAVL<T>> cola = new ColaPorEnlaces<>();
         cola.enqueue(nodo);
 
         while (!cola.isEmpty()) {

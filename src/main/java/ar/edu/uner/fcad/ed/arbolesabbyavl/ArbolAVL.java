@@ -13,14 +13,14 @@ import java.util.Queue;
  * @author Nacho
  */
 public class ArbolAVL<T> extends ArbolABB<T> {
-    
+
     private boolean imprimirConFBs;
-    
-    public ArbolAVL(){
+
+    public ArbolAVL() {
         this(false);
     }
-        
-    public ArbolAVL(boolean imprimirConFBs){
+
+    public ArbolAVL(boolean imprimirConFBs) {
         super();
         this.imprimirConFBs = imprimirConFBs;
     }
@@ -103,10 +103,10 @@ public class ArbolAVL<T> extends ArbolABB<T> {
     public void remove(T valor) throws Exception {
         ListaAVL<T> lista = buscarNodos(valor);
         NodoAVL<T> nodoB = lista.getPadreNodoBuscado();
-        
+
         int[] bHArboles = getAlturaSubArboles(nodoB);
         NodoAVL<T> nodoABorrar = lista.getNodoBuscado();
-        
+
         boolean entroWhile = false;
         boolean continuar = true;
 
@@ -115,11 +115,11 @@ public class ArbolAVL<T> extends ArbolABB<T> {
         }
 
         super.borrarNodo(nodoB, nodoABorrar);
-        
+
         //Caso 1         
         while (nodoB != null && nodoB.factorBalance != 0) {
             entroWhile = true;
-            
+
             NodoAVL<T> nodoBPadre = lista.getNodoPorValor(nodoB.getValor()).get(0);
 
             //Caso 2. Si la h(subárbol-izquierdo) > h(subárbol-derecho) 
@@ -149,22 +149,22 @@ public class ArbolAVL<T> extends ArbolABB<T> {
                     actualizarFBs(nodoA);
                 }
             }
-            
+
             if (bHArboles[1] == bHArboles[0]) {
                 actualizarFBs(nodoB);
             }
-            
-            if(!continuar){
+
+            if (!continuar) {
                 break;
             }
 
             nodoB = nodoBPadre;
-            if(nodoB != null){
+            if (nodoB != null) {
                 bHArboles = getAlturaSubArboles(nodoB);
             }
         }
-        
-        if(!entroWhile){
+
+        if (!entroWhile) {
             actualizarFBs(nodoB);
         }
     }
@@ -183,19 +183,19 @@ public class ArbolAVL<T> extends ArbolABB<T> {
 
         //Caso 3.1 o Caso 3.2
         if (fbA == 0 || (fbA < 0 && fbB < 0) || (fbA > 0 && fbB > 0)) {
-                        
+
             //Rotación Simple Derecha
             if (aEsHijoIzquierdo) {
                 nodoB.hijoIzquierdo = nodoA.hijoDerecho;
                 nodoA.hijoDerecho = nodoB;
-            } else { 
+            } else {
                 //Rotación Simple Izquierda
                 nodoB.hijoDerecho = nodoA.hijoIzquierdo;
                 nodoA.hijoIzquierdo = nodoB;
             }
 
             conectarPadreB(existePadreB, bEsHijoDerecho, nodoPadreB, nodoA);
-            
+
             //Determino si corresponde seguir chequeando (Caso 3.2)
             hNodoA = getAlturaSubArboles(nodoA);
             fbA = hNodoA[1] - hNodoA[0];
@@ -203,7 +203,7 @@ public class ArbolAVL<T> extends ArbolABB<T> {
         } else {
             //Caso 3.3
             NodoAVL<T> nodoC = (NodoAVL<T>) ((fbA > 0) ? nodoA.hijoDerecho : nodoA.hijoIzquierdo);
-            
+
             if (aEsHijoIzquierdo) {
                 //Rotación Doble Derecha
                 nodoB.hijoIzquierdo = nodoC.hijoDerecho;
@@ -284,27 +284,23 @@ public class ArbolAVL<T> extends ArbolABB<T> {
     }
 
     private void actualizarFBs(NodoAVL<T> nodo) {
-        try {
-            NodoAVL nodoActual;
-            ColaPorEnlaces<NodoAVL<T>> cola = new ColaPorEnlaces<NodoAVL<T>>();
-            cola.enqueue(nodo);
+        NodoAVL nodoActual;
+        ColaPorEnlaces<NodoAVL<T>> cola = new ColaPorEnlaces<NodoAVL<T>>();
+        cola.enqueue(nodo);
 
-            while (!cola.isEmpty()) {
-                nodoActual = cola.getFront();
+        while (!cola.isEmpty()) {
+            nodoActual = cola.getFront();
 
-                if (nodoActual.getTieneHijoIzquierdo()) {
-                    cola.enqueue((NodoAVL<T>) nodoActual.hijoIzquierdo);
-                }
-
-                if (nodoActual.getTieneHijoDerecho()) {
-                    cola.enqueue((NodoAVL<T>) nodoActual.hijoDerecho);
-                }
-
-                nodoActual.setFactorBalance(getFactorBalance(nodoActual));
-                cola.dequeue();
+            if (nodoActual.getTieneHijoIzquierdo()) {
+                cola.enqueue((NodoAVL<T>) nodoActual.hijoIzquierdo);
             }
-        } catch (Exception exc) {
-            System.out.println("Excepción al actualizar FBs");
+
+            if (nodoActual.getTieneHijoDerecho()) {
+                cola.enqueue((NodoAVL<T>) nodoActual.hijoDerecho);
+            }
+
+            nodoActual.setFactorBalance(getFactorBalance(nodoActual));
+            cola.dequeue();
         }
     }
 
@@ -359,32 +355,32 @@ public class ArbolAVL<T> extends ArbolABB<T> {
             raiz = nuevoHijoPadreB;
         }
     }
-    
+
     @Override
     public String toString() {
         String resultado = "";
-        String strSeparador = ((imprimirConFBs)? "\n" : ", ");
+        String strSeparador = ((imprimirConFBs) ? "\n" : ", ");
         ColaPorEnlaces<NodoABB<T>> cola = new ColaPorEnlaces();
         cola.enqueue(this.raiz);
-        
+
         while (!cola.isEmpty()) {
             NodoAVL<T> nodoActual = (NodoAVL<T>) cola.getFront();
             T valorActual = nodoActual.getValor();
-            
-            resultado += strSeparador + valorActual.toString() + ((imprimirConFBs)? " -> " + nodoActual.factorBalance : "");
+
+            resultado += strSeparador + valorActual.toString() + ((imprimirConFBs) ? " -> " + nodoActual.factorBalance : "");
 
             if (nodoActual.getTieneHijoIzquierdo()) {
                 cola.enqueue(nodoActual.getHijoIzquierdo());
             }
-            
+
             if (nodoActual.getTieneHijoDerecho()) {
                 cola.enqueue(nodoActual.getHijoDerecho());
             }
-            
+
             cola.dequeue();
         }
-        
-        if(resultado.length() > 0){
+
+        if (resultado.length() > 0) {
             resultado = resultado.substring(strSeparador.length());
         }
 

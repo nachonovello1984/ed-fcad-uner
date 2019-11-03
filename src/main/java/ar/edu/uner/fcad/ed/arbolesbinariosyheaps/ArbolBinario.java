@@ -62,7 +62,7 @@ public class ArbolBinario<T> implements ArbolBinarioInterfaz<T> {
      * @param valor
      * @return
      */
-    private NodoArbolBinario<T> obtenerNodo(T valor) {
+    protected NodoArbolBinario<T> obtenerNodo(T valor) {
         return obtenerNodo(new NodoArbolBinario(valor), raiz);
     }
 
@@ -75,7 +75,7 @@ public class ArbolBinario<T> implements ArbolBinarioInterfaz<T> {
      * @param nodoOrigen
      * @return
      */
-    private NodoArbolBinario<T> obtenerNodo(NodoArbolBinario<T> nodoParam,
+    protected NodoArbolBinario<T> obtenerNodo(NodoArbolBinario<T> nodoParam,
             NodoArbolBinario<T> nodoOrigen) {
         //Si la clave del elemento del nodo en el que estoy parado coincide 
         //con el de nodoParam => encontré el nodo que estaba buscando

@@ -216,6 +216,12 @@ public class ListaEnlazadaNoOrdenada<T>
         return nodoActual.elemento;
     }
 
+    /**
+     * Establece element como valor del nodo ubicado en position.
+     * @param element
+     * @param position
+     * @throws Exception 
+     */
     @Override
     public void set(T element, int position) throws Exception {
         if (position < 0 || position > size()) {

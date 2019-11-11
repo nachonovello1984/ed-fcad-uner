@@ -1,9 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.uner.fcad.ed.arbolesabbyavl;
-
 
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
 import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
@@ -12,7 +7,7 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
  *
  * @author Nacho
  */
-public class ArbolABBIteratorPreorden<T> implements Iterador<T>{
+public class ArbolABBIteratorPreorden <T extends Comparable<? super T>> implements Iterador<T>{
     private final Iterador <T> iterador;
     
     public ArbolABBIteratorPreorden(ArbolABB<T> arbolAbb){

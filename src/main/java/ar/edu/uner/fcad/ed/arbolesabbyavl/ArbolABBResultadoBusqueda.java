@@ -9,7 +9,7 @@ package ar.edu.uner.fcad.ed.arbolesabbyavl;
  * @author Nacho
  * @param <T>
  */
-public class ArbolABBResultadoBusqueda<T> {
+public class ArbolABBResultadoBusqueda <T extends Comparable<? super T>> {
     protected NodoABB<T> padre;
     protected NodoABB<T> nodoBuscado;
 

@@ -4,7 +4,7 @@ package ar.edu.uner.fcad.ed.arbolesabbyavl;
  *
  * @author Nacho
  */
-public class NodoAVL<T> extends NodoABB<T> {
+public class NodoAVL <T extends Comparable<? super T>> extends NodoABB<T> {
 
     protected int factorBalance;
 

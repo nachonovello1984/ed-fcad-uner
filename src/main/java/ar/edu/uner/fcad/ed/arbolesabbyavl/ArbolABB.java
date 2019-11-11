@@ -11,7 +11,7 @@ import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
  * @author Nacho
  * @param <T>
  */
-public class ArbolABB<T> implements ArbolABBInterfaz<T>, ArbolABBRecorridosInterfaz<T> {
+public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInterfaz<T>, ArbolABBRecorridosInterfaz<T> {
 
     protected NodoABB<T> raiz;
 
@@ -35,16 +35,14 @@ public class ArbolABB<T> implements ArbolABBInterfaz<T>, ArbolABBRecorridosInter
     private ArbolABBResultadoBusqueda<T> buscarNodos(T valor) {
         ArbolABBResultadoBusqueda<T> resultado = new ArbolABBResultadoBusqueda();
 
-        Comparable<T> valorComparable = (Comparable<T>) valor;
-
         NodoABB<T> nodoAuxPadre = null;
         NodoABB<T> nodoAux = raiz;
 
         while (nodoAux != null) {
-            if (valorComparable.compareTo(nodoAux.valor) == 0) {
+            if (valor.compareTo(nodoAux.valor) == 0) {
                 break;
             } else {
-                if (valorComparable.compareTo(nodoAux.valor) < 0) {
+                if (valor.compareTo(nodoAux.valor) < 0) {
                     nodoAuxPadre = nodoAux;
                     nodoAux = nodoAux.hijoIzquierdo;
                 } else {
@@ -99,7 +97,6 @@ public class ArbolABB<T> implements ArbolABBInterfaz<T>, ArbolABBRecorridosInter
      */
     @Override
     public void add(T valor) throws Exception {
-        Comparable<T> valorComparable = (Comparable<T>) valor;
         if (isEmpty()) {
             raiz = new NodoABB(valor);
         } else {
@@ -115,7 +112,7 @@ public class ArbolABB<T> implements ArbolABBInterfaz<T>, ArbolABBRecorridosInter
                 throw new Exception("Ya existe un elemento en el árbol con igual valor");
             }
 
-            if (valorComparable.compareTo(nodoPadre.valor) > 0) {
+            if (valor.compareTo(nodoPadre.valor) > 0) {
                 nodoPadre.hijoDerecho = new NodoABB(valor);
             } else {
                 nodoPadre.hijoIzquierdo = new NodoABB(valor);
@@ -155,10 +152,8 @@ public class ArbolABB<T> implements ArbolABBInterfaz<T>, ArbolABBRecorridosInter
     }
 
     protected void borrarNodo(NodoABB<T> nodoPadre, NodoABB<T> nodoABorrar) throws Exception {
-        Comparable<T> valorComparable = (Comparable<T>) nodoABorrar.valor;
-        
         int cantidadHijos = nodoABorrar.getCantidadHijos();
-        boolean esHijoIzquierdo = (nodoPadre != null) ? valorComparable.compareTo(nodoPadre.valor) < 0 : false;
+        boolean esHijoIzquierdo = (nodoPadre != null) ? nodoABorrar.valor.compareTo(nodoPadre.valor) < 0 : false;
 
         //Caso eliminación ABB 1. El nodo a eliminar es nodo hoja.
         if (cantidadHijos == 0) {

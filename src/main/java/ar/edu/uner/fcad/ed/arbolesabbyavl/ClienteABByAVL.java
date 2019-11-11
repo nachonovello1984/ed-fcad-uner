@@ -5,8 +5,6 @@
 package ar.edu.uner.fcad.ed.arbolesabbyavl;
 
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

@@ -1,11 +1,14 @@
 package ar.edu.uner.fcad.ed.arbolesabbyavl;
 
+import java.util.Objects;
+
 
 /**
  *
  * @author Nacho
+ * @param <T>
  */
-public class NodoABB <T> implements NodoABBInterfaz <T> {
+public class NodoABB <T extends Comparable<? super T>> {
     protected T valor;
     protected NodoABB<T> hijoIzquierdo;
     protected NodoABB<T> hijoDerecho;
@@ -20,27 +23,22 @@ public class NodoABB <T> implements NodoABBInterfaz <T> {
         return this.valor;
     }
 
-    @Override
     public void setValor(T valor) {
         this.valor = valor;
     }
 
-    @Override
     public NodoABB<T> getHijoIzquierdo() {
         return this.hijoIzquierdo;
     }
 
-    @Override
     public void setHijoIzquierdo(NodoABB<T> hijoIzquierdo) {
         this.hijoIzquierdo = hijoIzquierdo;
     }
 
-    @Override
     public NodoABB<T> getHijoDerecho() {
         return hijoDerecho;
     }
 
-    @Override
     public void setHijoDerecho(NodoABB<T> hijoDerecho) {
         this.hijoDerecho = hijoDerecho;
     }
@@ -61,22 +59,32 @@ public class NodoABB <T> implements NodoABBInterfaz <T> {
 
         return resultado;
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.valor);
+        return hash;
+    }
 
     @Override
     public boolean equals(Object obj) {
-        boolean resultado = false;
-
-        if(obj != null && getClass() == obj.getClass()){
-            NodoABB<T> param = (NodoABB<T>) obj;
-            T paramValor = (T) param.getValor();
-            Comparable<T> thisValor = (Comparable<T>) this.getValor();
-
-            resultado = thisValor.compareTo(paramValor) == 0;
+        if (this == obj) {
+            return true;
         }
-
-        return resultado;
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final NodoABB<?> other = (NodoABB<?>) obj;
+        if (!Objects.equals(this.valor, other.valor)) {
+            return false;
+        }
+        return true;
     }
-    
+
     @Override
     public String toString(){
         return valor.toString();

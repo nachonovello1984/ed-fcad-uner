@@ -8,7 +8,7 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
  * @author Nacho
  * @param <T>
  */
-public class ArbolABBIteradorInOrden<T> implements Iterador<T> {
+public class ArbolABBIteradorInOrden <T extends Comparable<? super T>> implements Iterador<T> {
     private final Iterador<T> iterador;
 
     public ArbolABBIteradorInOrden(ArbolABB<T> arbolAbb){

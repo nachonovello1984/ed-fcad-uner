@@ -9,8 +9,9 @@ import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
 /**
  *
  * @author Nacho
+ * @param <T>
  */
-public class ArbolAVL<T> extends ArbolABB<T> {
+public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
 
     private boolean imprimirConFBs;
 
@@ -29,7 +30,6 @@ public class ArbolAVL<T> extends ArbolABB<T> {
 
     private ListaAVL<T> buscarNodos(NodoAVL<T> nodoInicio, T valor) {
         ListaAVL<T> resultado = new ListaAVL(valor);
-        Comparable<T> valorComparable = (Comparable<T>) valor;
 
         int resComparacion = -1;
 
@@ -38,7 +38,7 @@ public class ArbolAVL<T> extends ArbolABB<T> {
         while (nodoActual != null) {
             resultado.getNodos().addToRear(nodoActual);
 
-            resComparacion = valorComparable.compareTo(nodoActual.valor);
+            resComparacion = valor.compareTo(nodoActual.valor);
 
             if (resComparacion < 0) {
                 nodoActual = (NodoAVL) nodoActual.hijoIzquierdo;
@@ -58,7 +58,6 @@ public class ArbolAVL<T> extends ArbolABB<T> {
 
     @Override
     public void add(T valor) throws Exception {
-        Comparable<T> valorComparable = (Comparable<T>) valor;
         if (isEmpty()) {
             raiz = new NodoAVL(valor);
         } else {
@@ -75,7 +74,7 @@ public class ArbolAVL<T> extends ArbolABB<T> {
             NodoAVL<T> nuevoNodo = new NodoAVL(valor);
 
             //Determino a qué lado del nodoPadre debe ir
-            int resComparacion = valorComparable.compareTo(nodoPadre.valor);
+            int resComparacion = valor.compareTo(nodoPadre.valor);
 
             if (resComparacion < 0) {
                 nodoPadre.hijoIzquierdo = nuevoNodo;

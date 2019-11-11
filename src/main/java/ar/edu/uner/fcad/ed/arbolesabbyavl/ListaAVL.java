@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Nacho
  * @param <T>
  */
-public class ListaAVL<T> {
+public class ListaAVL <T extends Comparable<? super T>> {
 
     protected ListaEnlazadaNoOrdenada<NodoAVL<T>> nodos;
     protected T valorBuscado;

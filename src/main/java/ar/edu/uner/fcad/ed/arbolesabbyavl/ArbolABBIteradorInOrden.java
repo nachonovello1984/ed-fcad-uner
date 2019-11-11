@@ -26,13 +26,13 @@ public class ArbolABBIteradorInOrden <T extends Comparable<? super T>> implement
     private ListaEnlazadaNoOrdenada<T> agregarNodos(NodoABB<T> nodo){
         ListaEnlazadaNoOrdenada<T> resultado = new ListaEnlazadaNoOrdenada();
 
-        if(nodo.getTieneHijoIzquierdo()){
+        if(nodo.tieneHijoIzquierdo()){
             resultado.addAll(agregarNodos(nodo.getHijoIzquierdo()));
         }
         
         resultado.addToRear(nodo.getValor());
 
-        if(nodo.getTieneHijoDerecho()){
+        if(nodo.tieneHijoDerecho()){
             resultado.addAll(agregarNodos(nodo.getHijoDerecho()));
         }
 

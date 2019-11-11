@@ -6,6 +6,7 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 /**
  *
  * @author Nacho
+ * @param <T>
  */
 public class ArbolABBIteratorPreorden <T extends Comparable<? super T>> implements Iterador<T>{
     private final Iterador <T> iterador;
@@ -27,21 +28,23 @@ public class ArbolABBIteratorPreorden <T extends Comparable<? super T>> implemen
 
         resultado.addToRear(nodoActual.getValor());
 
-        if(nodoActual.getTieneHijoIzquierdo()){
+        if(nodoActual.tieneHijoIzquierdo()){
             resultado.addAll(agregarSubArbol(nodoActual.getHijoIzquierdo()));
         }
         
-        if(nodoActual.getTieneHijoDerecho()){
+        if(nodoActual.tieneHijoDerecho()){
             resultado.addAll(agregarSubArbol(nodoActual.getHijoDerecho()));
         }
 
         return resultado;
     }
 
+    @Override
     public boolean existeSiguiente() {
         return iterador.existeSiguiente();
     }
 
+    @Override
     public T siguiente() {
         return iterador.siguiente();
     }

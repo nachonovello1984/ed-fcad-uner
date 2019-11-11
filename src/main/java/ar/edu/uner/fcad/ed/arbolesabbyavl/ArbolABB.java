@@ -39,15 +39,15 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
         NodoABB<T> nodoAux = raiz;
 
         while (nodoAux != null) {
-            if (valor.compareTo(nodoAux.valor) == 0) {
+            if (valor.compareTo(nodoAux.getValor()) == 0) {
                 break;
             } else {
-                if (valor.compareTo(nodoAux.valor) < 0) {
+                if (valor.compareTo(nodoAux.getValor()) < 0) {
                     nodoAuxPadre = nodoAux;
-                    nodoAux = nodoAux.hijoIzquierdo;
+                    nodoAux = nodoAux.getHijoIzquierdo();
                 } else {
                     nodoAuxPadre = nodoAux;
-                    nodoAux = nodoAux.hijoDerecho;
+                    nodoAux = nodoAux.getHijoDerecho();
                 }
             }
         }
@@ -82,7 +82,7 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
         ArbolABBResultadoBusqueda<T> nodos = buscarNodos(valor);
 
         if (nodos.getNodoBuscado() != null) {
-            resultado = nodos.getNodoBuscado().valor;
+            resultado = nodos.getNodoBuscado().getValor();
         }
 
         return resultado;
@@ -112,21 +112,21 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
                 throw new Exception("Ya existe un elemento en el árbol con igual valor");
             }
 
-            if (valor.compareTo(nodoPadre.valor) > 0) {
-                nodoPadre.hijoDerecho = new NodoABB(valor);
+            if (valor.compareTo(nodoPadre.getValor()) > 0) {
+                nodoPadre.setHijoDerecho(new NodoABB(valor));
             } else {
-                nodoPadre.hijoIzquierdo = new NodoABB(valor);
+                nodoPadre.setHijoIzquierdo(new NodoABB(valor));
             }
         }
     }
 
     private NodoABB<T> buscarMayorEntreMenores(NodoABB<T> raizSubArbol) {
         NodoABB<T> resultado = null;
-        NodoABB<T> nodoActual = raizSubArbol.hijoIzquierdo;
+        NodoABB<T> nodoActual = raizSubArbol.getHijoIzquierdo();
 
         while (nodoActual != null) {
             resultado = nodoActual;
-            nodoActual = nodoActual.hijoDerecho;
+            nodoActual = nodoActual.getHijoDerecho();
         }
 
         return resultado;
@@ -153,15 +153,15 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
 
     protected void borrarNodo(NodoABB<T> nodoPadre, NodoABB<T> nodoABorrar) throws Exception {
         int cantidadHijos = nodoABorrar.getCantidadHijos();
-        boolean esHijoIzquierdo = (nodoPadre != null) ? nodoABorrar.valor.compareTo(nodoPadre.valor) < 0 : false;
+        boolean esHijoIzquierdo = (nodoPadre != null) ? nodoABorrar.getValor().compareTo(nodoPadre.getValor()) < 0 : false;
 
         //Caso eliminación ABB 1. El nodo a eliminar es nodo hoja.
         if (cantidadHijos == 0) {
             if (nodoPadre != null) {
                 if (esHijoIzquierdo) {
-                    nodoPadre.hijoIzquierdo = null;
+                    nodoPadre.setHijoIzquierdo(null);
                 } else {
-                    nodoPadre.hijoDerecho = null;
+                    nodoPadre.setHijoDerecho(null);
                 }
             } else {
                 raiz = null;
@@ -172,15 +172,15 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
         if (cantidadHijos == 1) {
             if (nodoPadre != null) {
                 if (esHijoIzquierdo) {
-                    nodoPadre.hijoIzquierdo = (nodoABorrar.hijoIzquierdo != null) ? nodoABorrar.hijoIzquierdo : nodoABorrar.hijoDerecho;
+                    nodoPadre.setHijoIzquierdo(((nodoABorrar.getHijoIzquierdo()) != null) ? nodoABorrar.getHijoIzquierdo() : nodoABorrar.getHijoDerecho());
                 } else {
-                    nodoPadre.hijoDerecho = (nodoABorrar.hijoIzquierdo != null) ? nodoABorrar.hijoIzquierdo : nodoABorrar.hijoDerecho;
+                    nodoPadre.setHijoDerecho((nodoABorrar.getHijoIzquierdo() != null) ? nodoABorrar.getHijoIzquierdo() : nodoABorrar.getHijoDerecho());
                 }
             } else {
                 if (esHijoIzquierdo) {
-                    raiz = (nodoABorrar.hijoIzquierdo != null) ? nodoABorrar.hijoIzquierdo : nodoABorrar.hijoDerecho;
+                    raiz = (nodoABorrar.tieneHijoIzquierdo()) ? nodoABorrar.getHijoIzquierdo() : nodoABorrar.getHijoDerecho();
                 } else {
-                    raiz = (nodoABorrar.hijoIzquierdo != null) ? nodoABorrar.hijoIzquierdo : nodoABorrar.hijoDerecho;
+                    raiz = (nodoABorrar.tieneHijoDerecho()) ? nodoABorrar.getHijoIzquierdo() : nodoABorrar.getHijoDerecho();
                 }
             }
         }
@@ -189,9 +189,9 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
         if (cantidadHijos == 2) {
             NodoABB<T> mayorMenores = buscarMayorEntreMenores(nodoABorrar);
 
-            remove(mayorMenores.valor);
+            remove(mayorMenores.getValor());
 
-            nodoABorrar.setValor(mayorMenores.valor);
+            nodoABorrar.setValor(mayorMenores.getValor());
         }
     }
 

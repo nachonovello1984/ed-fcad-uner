@@ -32,11 +32,11 @@ public class ArbolABBIteradorPosOrden <T extends Comparable<? super T>> implemen
     private ListaEnlazadaNoOrdenada<T> agregarSubArbol(NodoABB<T> nodoActual){
         ListaEnlazadaNoOrdenada<T> resultado = new ListaEnlazadaNoOrdenada();
 
-        if(nodoActual.getTieneHijoIzquierdo()){
+        if(nodoActual.tieneHijoIzquierdo()){
             resultado.addAll(agregarSubArbol(nodoActual.getHijoIzquierdo()));
         }
         
-        if(nodoActual.getTieneHijoDerecho()){
+        if(nodoActual.tieneHijoDerecho()){
             resultado.addAll(agregarSubArbol(nodoActual.getHijoDerecho()));
         }
         

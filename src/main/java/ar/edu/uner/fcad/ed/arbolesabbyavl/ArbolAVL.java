@@ -38,14 +38,14 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
         while (nodoActual != null) {
             resultado.getNodos().addToRear(nodoActual);
 
-            resComparacion = valor.compareTo(nodoActual.valor);
+            resComparacion = valor.compareTo(nodoActual.getValor());
 
             if (resComparacion < 0) {
-                nodoActual = (NodoAVL) nodoActual.hijoIzquierdo;
+                nodoActual = (NodoAVL) nodoActual.getHijoIzquierdo();
             }
 
             if (resComparacion > 0) {
-                nodoActual = (NodoAVL) nodoActual.hijoDerecho;
+                nodoActual = (NodoAVL) nodoActual.getHijoDerecho();
             }
 
             if (resComparacion == 0) {
@@ -74,14 +74,14 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
             NodoAVL<T> nuevoNodo = new NodoAVL(valor);
 
             //Determino a qué lado del nodoPadre debe ir
-            int resComparacion = valor.compareTo(nodoPadre.valor);
+            int resComparacion = valor.compareTo(nodoPadre.getValor());
 
             if (resComparacion < 0) {
-                nodoPadre.hijoIzquierdo = nuevoNodo;
+                nodoPadre.setHijoIzquierdo(nuevoNodo);
             }
 
             if (resComparacion > 0) {
-                nodoPadre.hijoDerecho = nuevoNodo;
+                nodoPadre.setHijoDerecho(nuevoNodo);
             }
 
             lista.getNodos().addToRear(nuevoNodo);
@@ -127,7 +127,7 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
                     this.actualizarFBs(nodoB);
                 } else {
                     //Caso 3. 
-                    NodoAVL<T> nodoA = (NodoAVL<T>) nodoB.hijoIzquierdo;
+                    NodoAVL<T> nodoA = (NodoAVL<T>) nodoB.getHijoIzquierdo();
                     continuar = rotacionRemoveAVL(nodoBPadre, nodoB, nodoA, true);
                     actualizarFBs(nodoB);
                 }
@@ -141,7 +141,7 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
                     this.actualizarFBs(nodoB);
                 } else {
                     //Caso 3. 
-                    NodoAVL<T> nodoA = (NodoAVL<T>) nodoB.hijoDerecho;
+                    NodoAVL<T> nodoA = (NodoAVL<T>) nodoB.getHijoDerecho();
                     continuar = rotacionRemoveAVL(nodoBPadre, nodoB, nodoA, false);
                     actualizarFBs(nodoA);
                 }
@@ -183,12 +183,12 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
 
             //Rotación Simple Derecha
             if (aEsHijoIzquierdo) {
-                nodoB.hijoIzquierdo = nodoA.hijoDerecho;
-                nodoA.hijoDerecho = nodoB;
+                nodoB.setHijoIzquierdo(nodoA.getHijoDerecho());
+                nodoA.setHijoDerecho(nodoB);
             } else {
                 //Rotación Simple Izquierda
-                nodoB.hijoDerecho = nodoA.hijoIzquierdo;
-                nodoA.hijoIzquierdo = nodoB;
+                nodoB.setHijoDerecho(nodoA.getHijoIzquierdo());
+                nodoA.setHijoIzquierdo(nodoB);
             }
 
             conectarPadreB(existePadreB, bEsHijoDerecho, nodoPadreB, nodoA);
@@ -199,20 +199,20 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
             continuar = fbA == 0;
         } else {
             //Caso 3.3
-            NodoAVL<T> nodoC = (NodoAVL<T>) ((fbA > 0) ? nodoA.hijoDerecho : nodoA.hijoIzquierdo);
+            NodoAVL<T> nodoC = (NodoAVL<T>) ((fbA > 0) ? nodoA.getHijoDerecho() : nodoA.getHijoIzquierdo());
 
             if (aEsHijoIzquierdo) {
                 //Rotación Doble Derecha
-                nodoB.hijoIzquierdo = nodoC.hijoDerecho;
-                nodoC.hijoDerecho = nodoB;
-                nodoA.hijoDerecho = nodoC.hijoIzquierdo;
-                nodoC.hijoIzquierdo = nodoA;
+                nodoB.setHijoIzquierdo(nodoC.getHijoDerecho());
+                nodoC.setHijoDerecho(nodoB);
+                nodoA.setHijoDerecho(nodoC.getHijoIzquierdo());
+                nodoC.setHijoIzquierdo(nodoA);
             } else {
                 //Rotación Doble Izquierda
-                nodoB.hijoDerecho = nodoC.hijoIzquierdo;
-                nodoC.hijoIzquierdo = nodoB;
-                nodoA.hijoIzquierdo = nodoC.hijoDerecho;
-                nodoC.hijoDerecho = nodoA;
+                nodoB.setHijoDerecho(nodoC.getHijoIzquierdo());
+                nodoC.setHijoIzquierdo(nodoB);
+                nodoA.setHijoIzquierdo(nodoC.getHijoDerecho());
+                nodoC.setHijoDerecho(nodoA);
             }
 
             conectarPadreB(existePadreB, bEsHijoDerecho, nodoPadreB, nodoC);
@@ -236,8 +236,8 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
         if (nodoB.factorBalance == 1 && nodoA.factorBalance == 0
                 && estaALaDerecha(nodoB, nodoA) && estaALaDerecha(nodoA, nuevo)) {
 
-            nodoB.hijoDerecho = nodoA.hijoIzquierdo;
-            nodoA.hijoIzquierdo = nodoB;
+            nodoB.setHijoDerecho(nodoA.getHijoIzquierdo());
+            nodoA.setHijoIzquierdo(nodoB);
 
             conectarPadreB(existePadreB, bEsHijoDerecho, nodoPadreB, nodoA);
             return;
@@ -247,8 +247,8 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
         if (nodoB.factorBalance == -1 && nodoA.factorBalance == 0
                 && !estaALaDerecha(nodoB, nodoA) && !estaALaDerecha(nodoA, nuevo)) {
 
-            nodoB.hijoIzquierdo = nodoA.hijoDerecho;
-            nodoA.hijoDerecho = nodoB;
+            nodoB.setHijoIzquierdo(nodoA.getHijoDerecho());
+            nodoA.setHijoDerecho(nodoB);
 
             conectarPadreB(existePadreB, bEsHijoDerecho, nodoPadreB, nodoA);
         }
@@ -257,11 +257,11 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
         if (nodoB.factorBalance == 1 && nodoA.factorBalance == 0
                 && estaALaDerecha(nodoB, nodoA) && !estaALaDerecha(nodoA, nuevo)) {
 
-            nodoC = (NodoAVL) nodoA.hijoIzquierdo;
-            nodoB.hijoDerecho = nodoC.hijoIzquierdo;
-            nodoC.hijoIzquierdo = nodoB;
-            nodoA.hijoIzquierdo = nodoC.hijoDerecho;
-            nodoC.hijoDerecho = nodoA;
+            nodoC = (NodoAVL) nodoA.getHijoIzquierdo();
+            nodoB.setHijoDerecho(nodoC.getHijoIzquierdo());
+            nodoC.setHijoIzquierdo(nodoB);
+            nodoA.setHijoIzquierdo(nodoC.getHijoDerecho());
+            nodoC.setHijoDerecho(nodoA);
 
             conectarPadreB(existePadreB, bEsHijoDerecho, nodoPadreB, nodoC);
         }
@@ -270,11 +270,11 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
         if (nodoB.factorBalance == -1 && nodoA.factorBalance == 0
                 && !estaALaDerecha(nodoB, nodoA) && estaALaDerecha(nodoA, nuevo)) {
 
-            nodoC = (NodoAVL<T>) nodoA.hijoDerecho;
-            nodoB.hijoIzquierdo = nodoC.hijoDerecho;
-            nodoC.hijoDerecho = nodoB;
-            nodoA.hijoDerecho = nodoC.hijoIzquierdo;
-            nodoC.hijoIzquierdo = nodoA;
+            nodoC = (NodoAVL<T>) nodoA.getHijoDerecho();
+            nodoB.setHijoIzquierdo(nodoC.getHijoDerecho());
+            nodoC.setHijoDerecho(nodoB);
+            nodoA.setHijoDerecho(nodoC.getHijoIzquierdo());
+            nodoC.setHijoIzquierdo(nodoA);
 
             conectarPadreB(existePadreB, bEsHijoDerecho, nodoPadreB, nodoC);
         }
@@ -288,12 +288,12 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
         while (!cola.isEmpty()) {
             nodoActual = cola.getFront();
 
-            if (nodoActual.getTieneHijoIzquierdo()) {
-                cola.enqueue((NodoAVL<T>) nodoActual.hijoIzquierdo);
+            if (nodoActual.tieneHijoIzquierdo()) {
+                cola.enqueue((NodoAVL<T>) nodoActual.getHijoIzquierdo());
             }
 
-            if (nodoActual.getTieneHijoDerecho()) {
-                cola.enqueue((NodoAVL<T>) nodoActual.hijoDerecho);
+            if (nodoActual.tieneHijoDerecho()) {
+                cola.enqueue((NodoAVL<T>) nodoActual.getHijoDerecho());
             }
 
             nodoActual.setFactorBalance(getFactorBalance(nodoActual));
@@ -307,13 +307,13 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
         int resultadoIzq = 0;
         int resultadoDer = 0;
 
-        if (nodo.hijoIzquierdo != null) {
-            int[] izq = getAlturaSubArboles((NodoAVL) nodo.hijoIzquierdo);
+        if (nodo.tieneHijoIzquierdo()) {
+            int[] izq = getAlturaSubArboles((NodoAVL<T>) nodo.getHijoIzquierdo());
             resultadoIzq += 1 + ((izq[0] > 0 || izq[1] > 0) ? Math.max(izq[0], izq[1]) : 0);
         }
 
-        if (nodo.hijoDerecho != null) {
-            int[] der = getAlturaSubArboles((NodoAVL) nodo.hijoDerecho);
+        if (nodo.tieneHijoDerecho()) {
+            int[] der = getAlturaSubArboles((NodoAVL<T>) nodo.getHijoDerecho());
             resultadoDer += 1 + ((der[0] > 0 || der[1] > 0) ? Math.max(der[0], der[1]) : 0);
         }
 
@@ -332,8 +332,8 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
     private boolean estaALaDerecha(NodoAVL<T> nodoPadre, NodoAVL<T> nodoHijo) {
         boolean resultado = false;
 
-        if (nodoPadre != null && nodoPadre.hijoDerecho != null) {
-            ListaAVL<T> lista = buscarNodos((NodoAVL<T>) nodoPadre.hijoDerecho, nodoHijo.valor);
+        if (nodoPadre != null && nodoPadre.tieneHijoDerecho()) {
+            ListaAVL<T> lista = buscarNodos((NodoAVL<T>) nodoPadre.getHijoDerecho(), nodoHijo.getValor());
 
             resultado = lista.getNodos().contains(nodoHijo);
         }
@@ -344,9 +344,9 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
     private void conectarPadreB(boolean existePadreB, boolean bEsHijoDerecho, NodoAVL nodoPadreB, NodoAVL nuevoHijoPadreB) {
         if (existePadreB) {
             if (bEsHijoDerecho) {
-                nodoPadreB.hijoDerecho = nuevoHijoPadreB;
+                nodoPadreB.setHijoDerecho(nuevoHijoPadreB);
             } else {
-                nodoPadreB.hijoIzquierdo = nuevoHijoPadreB;
+                nodoPadreB.setHijoIzquierdo(nuevoHijoPadreB);
             }
         } else {
             raiz = nuevoHijoPadreB;
@@ -366,11 +366,11 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
 
             resultado += strSeparador + valorActual.toString() + ((imprimirConFBs) ? " -> " + nodoActual.factorBalance : "");
 
-            if (nodoActual.getTieneHijoIzquierdo()) {
+            if (nodoActual.tieneHijoIzquierdo()) {
                 cola.enqueue(nodoActual.getHijoIzquierdo());
             }
 
-            if (nodoActual.getTieneHijoDerecho()) {
+            if (nodoActual.tieneHijoDerecho()) {
                 cola.enqueue(nodoActual.getHijoDerecho());
             }
 

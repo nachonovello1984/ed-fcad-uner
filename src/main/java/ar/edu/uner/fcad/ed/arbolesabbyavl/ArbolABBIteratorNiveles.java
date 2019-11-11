@@ -33,11 +33,11 @@ public class ArbolABBIteratorNiveles <T extends Comparable<? super T>> implement
 
             resultado.addToRear(valorActual);
 
-            if (nodoActual.getTieneHijoIzquierdo()) {
+            if (nodoActual.tieneHijoIzquierdo()) {
                 cola.enqueue(nodoActual.getHijoIzquierdo());
             }
             
-            if (nodoActual.getTieneHijoDerecho()) {
+            if (nodoActual.tieneHijoDerecho()) {
                 cola.enqueue(nodoActual.getHijoDerecho());
             }
         }

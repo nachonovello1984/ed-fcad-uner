@@ -51,7 +51,7 @@ public class Heap<T extends Comparable<? super T>>
     }
 
     /**
-     * Dado un valor de clave busca el nodo en todo el árbol haciendo un recorrido
+     * Dado un valor de clave busca el nodo en el árbol haciendo un recorrido
      * en anchura
      * @param valor
      * @return 

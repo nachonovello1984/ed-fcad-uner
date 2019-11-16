@@ -50,7 +50,7 @@ public class IteradorEnPreorden <T> implements Iterador<T> {
     }
 
     /**
-     * Encapsula el método existeSiguiente() del Iterador de lista.
+     * Encapsula existeSiguiente() del Iterador de lista.
      * @return 
      */
     @Override
@@ -59,7 +59,7 @@ public class IteradorEnPreorden <T> implements Iterador<T> {
     }
 
     /**
-     * Encapsula el método siguiente() del Iterador de lista.
+     * Encapsula siguiente() del Iterador de lista.
      * @return 
      */
     @Override

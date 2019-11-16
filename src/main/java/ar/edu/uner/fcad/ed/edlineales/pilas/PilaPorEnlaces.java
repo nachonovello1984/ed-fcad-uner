@@ -43,6 +43,10 @@ public class PilaPorEnlaces<T> implements Pila<T> {
      */
     @Override
     public T top() {
+        if (isEmpty()) {
+            return null;
+        }
+        
         return tope.getElemento();
     }
 

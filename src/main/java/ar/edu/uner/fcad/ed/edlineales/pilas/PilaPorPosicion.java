@@ -11,27 +11,32 @@ import java.lang.reflect.Array;
  * @author Nacho
  * @param <T>
  */
-public class PilaPorPosicion <T> implements Pila<T>{
+public class PilaPorPosicion<T> implements Pila<T> {
 
     private static final int CAPACIDAD = 10;
-    
+
     protected T[] arreglo;
     protected int tope;
     protected int capacidad;
-    
-    public PilaPorPosicion(Class<T> clazz){
-        this.capacidad = CAPACIDAD;
+
+    public PilaPorPosicion(Class<T> clazz) {
+        this(clazz, CAPACIDAD);
+    }
+
+    public PilaPorPosicion(Class<T> clazz, int capacidad) {
+        this.capacidad = capacidad;
         this.arreglo = nuevoArreglo(clazz, capacidad);
         makeEmpty();
     }
-    
+
     private T[] nuevoArreglo(Class<T> clazz, int capacidad) {
         return (T[]) Array.newInstance(clazz, capacidad);
     }
 
     /**
      * Indica si la estructura está vacía
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean isEmpty() {
@@ -40,23 +45,25 @@ public class PilaPorPosicion <T> implements Pila<T>{
 
     /**
      * Indica si la estructura está llena
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean isFull() {
-        return tope == CAPACIDAD - 1;
+        return tope == capacidad - 1;
     }
 
     /**
      * Retorna el elemento ubicado en la posición tope de la pila.
-     * @return 
+     *
+     * @return
      */
     @Override
     public T top() {
         if (isEmpty()) {
             return null;
         }
-        
+
         return arreglo[tope];
     }
 
@@ -70,13 +77,15 @@ public class PilaPorPosicion <T> implements Pila<T>{
 
     /**
      * Agrega el elemento pasado por parámetro en el tope de la pila.
-     * @param elemento 
+     *
+     * @param elemento
      */
     @Override
     public void push(T elemento) {
-        if(!isFull()){
-            this.arreglo[++tope] = elemento;
+        if (isFull()) {
+            return;
         }
+        this.arreglo[++tope] = elemento;
     }
 
     /**
@@ -86,21 +95,20 @@ public class PilaPorPosicion <T> implements Pila<T>{
     public final void makeEmpty() {
         this.tope = -1;
     }
-    
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         String resultado = "";
-        
-        for(int i = tope; i >= 0; i--){
-            resultado += ", " + arreglo[i].toString();
+
+        for (int i = tope; i >= 0; i--) {
+            resultado += ", [" + arreglo[i].toString() + "]";
         }
-        
-        if(resultado.length() > 0){
+
+        if (resultado.length() > 0) {
             resultado = resultado.substring(2);
         }
-        
+
         return resultado;
     }
-    
+
 }

@@ -71,10 +71,10 @@ public class MapeoConLista<K, V> implements MapeoInterfaz<K, V> {
     }
 
     @Override
-    public V remove(K key) throws Exception {
+    public V remove(K key) {
         
         if (isEmpty()) {
-            throw new Exception ("El mapa está vacío. No se puede llevar a cabo esta acción");
+            throw new IllegalStateException ("El mapa está vacío. No se puede llevar a cabo esta acción");
         }
                 
         Iterador<Entrada<K, V>> iterador = lista.iterador();
@@ -90,7 +90,7 @@ public class MapeoConLista<K, V> implements MapeoInterfaz<K, V> {
             }
         }
         
-        throw new Exception ("No se encontró ninguna entrada con la clave especificada.");
+        throw new IllegalArgumentException ("No se encontró ninguna entrada con la clave especificada.");
     }
 
     @Override

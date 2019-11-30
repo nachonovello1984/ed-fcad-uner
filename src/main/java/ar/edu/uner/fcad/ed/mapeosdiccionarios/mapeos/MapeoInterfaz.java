@@ -52,9 +52,8 @@ public interface MapeoInterfaz<K, V> {
      *
      * @param key
      * @return
-     * @throws Exception
      */
-    public V remove(K key) throws Exception;
+    public V remove(K key);
 
     /**
      * Devuelve un conjunto con todas las claves del mapeo.

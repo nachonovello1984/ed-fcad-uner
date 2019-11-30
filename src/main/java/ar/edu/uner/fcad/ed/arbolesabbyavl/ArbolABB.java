@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.uner.fcad.ed.arbolesabbyavl;
 
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
@@ -11,7 +7,7 @@ import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
  * @author Nacho
  * @param <T>
  */
-public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInterfaz<T>, ArbolABBRecorridosInterfaz<T> {
+public class ArbolABB<T extends Comparable<? super T>> implements ArbolABBInterfaz<T>, ArbolABBRecorridosInterfaz<T> {
 
     protected NodoABB<T> raiz;
 
@@ -25,6 +21,7 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
 
     /**
      * Indica si el árbol está vacío.
+     *
      * @return
      */
     @Override
@@ -59,8 +56,9 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
     }
 
     /**
-     * Indica si existe en el árbol un nodo con igual valor que el
-     * que se indica por parámetro.
+     * Indica si existe en el árbol un nodo con igual valor que el que se indica
+     * por parámetro.
+     *
      * @param valor
      * @return
      */
@@ -71,8 +69,8 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
     }
 
     /**
-     * Devuelve el valor del nodo cuya clave se especifica por
-     * parámetro.
+     * Devuelve el valor del nodo cuya clave se especifica por parámetro.
+     *
      * @param valor
      * @return
      */
@@ -89,14 +87,13 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
     }
 
     /**
-     * Agrega un nuevo nodo al árbol cumpliendo las reglas de árbol
-     * binario y de búsqueda.
+     * Agrega un nuevo nodo al árbol cumpliendo las reglas de árbol binario y de
+     * búsqueda.
+     *
      * @param valor
-     * @throws java.lang.Exception arroja excepción cuando ya existe un
-     * nodo con igual valor al que se quiere agregar.
      */
     @Override
-    public void add(T valor) throws Exception {
+    public void add(T valor) {
         if (isEmpty()) {
             raiz = new NodoABB(valor);
         } else {
@@ -105,11 +102,11 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
             NodoABB<T> nodoBuscado = nodos.getNodoBuscado();
 
             if (nodoPadre == null) {
-                throw new Exception("Error! No existe nodo padre");
+                throw new IllegalArgumentException("No existe nodo padre");
             }
 
             if (nodoBuscado != null) {
-                throw new Exception("Ya existe un elemento en el árbol con igual valor");
+                throw new IllegalArgumentException("Ya existe un elemento en el árbol con igual valor");
             }
 
             if (valor.compareTo(nodoPadre.getValor()) > 0) {
@@ -134,24 +131,25 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
 
     /**
      * Elimina un nodo del árbol.
+     *
      * @param valor
      * @throws java.lang.Exception arroja excepción cuando el árbol está vacío o
      * el nodo que se quiere borrar no existe.
      */
     @Override
-    public void remove(T valor) throws Exception {
+    public void remove(T valor) {
         ArbolABBResultadoBusqueda<T> nodos = buscarNodos(valor);
         NodoABB<T> nodoPadre = nodos.getPadre();
         NodoABB<T> nodoABorrar = nodos.getNodoBuscado();
 
         if (nodoABorrar == null) {
-            throw new Exception("No existe en el árbol un nodo con valor igual al especificado");
+            throw new IllegalArgumentException("No existe en el árbol un nodo con valor igual al especificado");
         }
 
         borrarNodo(nodoPadre, nodoABorrar);
     }
 
-    protected void borrarNodo(NodoABB<T> nodoPadre, NodoABB<T> nodoABorrar) throws Exception {
+    protected void borrarNodo(NodoABB<T> nodoPadre, NodoABB<T> nodoABorrar) {
         int cantidadHijos = nodoABorrar.getCantidadHijos();
         boolean esHijoIzquierdo = (nodoPadre != null) ? nodoABorrar.getValor().compareTo(nodoPadre.getValor()) < 0 : false;
 
@@ -198,32 +196,29 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
     /**
      * Transforma el árbol en un String disponiendo los nodos de cada nivel en
      * una línea
+     *
      * @return
      */
     @Override
     public String toString() {
         String resultado = "";
 
-        try {
-            Iterador<T> iterador = iteradorPorNiveles();
-            while (iterador.existeSiguiente()) {
-                resultado += ", " + iterador.siguiente().toString();
-            }
+        Iterador<T> iterador = iteradorPorNiveles();
+        while (iterador.existeSiguiente()) {
+            resultado += ", " + iterador.siguiente().toString();
+        }
 
-            if (resultado.length() > 0) {
-                resultado = resultado.substring(2);
-            }
-        } catch (Exception exc) {
-            resultado = "";
+        if (resultado.length() > 0) {
+            resultado = resultado.substring(2);
         }
 
         return resultado;
     }
 
     @Override
-    public Iterador<T> iteradorPorNiveles() throws Exception {
+    public Iterador<T> iteradorPorNiveles() {
         if (isEmpty()) {
-            throw new Exception("Arbol vacío");
+            throw new IllegalStateException("Arbol vacío");
         }
 
         Iterador<T> resultado = new ArbolABBIteratorNiveles(this);
@@ -231,9 +226,9 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
     }
 
     @Override
-    public Iterador<T> iteradorEnPreOrden() throws Exception {
+    public Iterador<T> iteradorEnPreOrden() {
         if (isEmpty()) {
-            throw new Exception("Arbol vacío");
+            throw new IllegalStateException("Arbol vacío");
         }
 
         Iterador<T> resultado = new ArbolABBIteratorPreorden(this);
@@ -241,9 +236,9 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
     }
 
     @Override
-    public Iterador<T> iteradorEnInOrden() throws Exception {
+    public Iterador<T> iteradorEnInOrden() {
         if (isEmpty()) {
-            throw new Exception("Arbol vacío");
+            throw new IllegalStateException("Arbol vacío");
         }
 
         Iterador<T> resultado = new ArbolABBIteradorInOrden(this);
@@ -251,11 +246,11 @@ public class ArbolABB <T extends Comparable<? super T>> implements ArbolABBInter
     }
 
     @Override
-    public Iterador<T> iteradorEnPosOrden() throws Exception {
+    public Iterador<T> iteradorEnPosOrden() {
         if (isEmpty()) {
-            throw new Exception("Arbol vacío");
+            throw new IllegalStateException("Arbol vacío");
         }
-        
+
         Iterador<T> resultado = new ArbolABBIteradorPosOrden(this);
         return resultado;
     }

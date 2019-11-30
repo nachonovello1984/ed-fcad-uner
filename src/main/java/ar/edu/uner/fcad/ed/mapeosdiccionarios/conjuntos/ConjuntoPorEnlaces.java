@@ -39,10 +39,10 @@ public class ConjuntoPorEnlaces<T> implements ConjuntoInterfaz<T> {
     }
 
     @Override
-    public void delete(T element) throws Exception {
+    public void delete(T element) {
 
         if (isEmpty()) {
-            throw new Exception("El conjunto es vacío.");
+            throw new IllegalStateException("El conjunto es vacío.");
         }
 
         boolean encontrado = false;
@@ -62,7 +62,7 @@ public class ConjuntoPorEnlaces<T> implements ConjuntoInterfaz<T> {
         }
 
         if (!encontrado) {
-            throw new Exception("El elemento especificado no pertenece al conjunto");
+            throw new IllegalArgumentException("El elemento especificado no pertenece al conjunto");
         }
 
         if (nodoAnterior != null) {

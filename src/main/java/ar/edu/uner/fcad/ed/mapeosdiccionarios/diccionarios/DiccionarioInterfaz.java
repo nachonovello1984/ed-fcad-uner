@@ -26,7 +26,7 @@ public interface DiccionarioInterfaz <K, V>{
     
     public Entrada<K, V> insert(K key, V value);
     
-    public Entrada<K, V> remove(K key) throws Exception;
+    public Entrada<K, V> remove(K key);
     
     public Iterable<Entrada<K, V>> entries();
     

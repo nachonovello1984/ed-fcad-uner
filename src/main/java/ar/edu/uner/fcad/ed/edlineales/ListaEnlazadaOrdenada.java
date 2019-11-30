@@ -27,10 +27,9 @@ public class ListaEnlazadaOrdenada
      * Agrega un elemento en su posición
      *
      * @param element
-     * @throws Exception
      */
     @Override
-    public void add(T element) throws Exception {
+    public void add(T element) {
         NodoLista<T> nuevoNodo = new NodoLista(element);
 
         if (isEmpty()) {
@@ -91,16 +90,15 @@ public class ListaEnlazadaOrdenada
      *
      * @param element
      * @return
-     * @throws Exception
      */
     @Override
-    public T remove(T element) throws Exception {
+    public T remove(T element) {
         NodoListaBusqueda<T> nodosLista = getNodoPorElemento(element);
         NodoLista<T> nodoPrevio = nodosLista.nodoAnterior;
         NodoLista<T> nodoBuscado = nodosLista.nodoActual;
 
         if (nodoBuscado == null) {
-            throw new Exception("El elemento especificado no forma parte de la estructura");
+            throw new IllegalArgumentException("El elemento especificado no forma parte de la estructura");
         }
 
         if (nodoPrevio != null) {
@@ -129,16 +127,15 @@ public class ListaEnlazadaOrdenada
 
     /**
      * Devuelve el elemento ubicado en el nodo ubicado en la posición indicada
-     * por el parámetro position. Arroja excepción cuando position es inválido.
+     * por el parámetro position.
      *
      * @param position
      * @return
-     * @throws java.lang.Exception
      */
     @Override
     public T get(int position) throws Exception {
         if (position < 0 || position > size()) {
-            throw new Exception("Parámetro position es inválido. ");
+            throw new IllegalArgumentException("Parámetro position es inválido. ");
         }
 
         NodoLista<T> nodoActual = header.siguiente;
@@ -150,9 +147,9 @@ public class ListaEnlazadaOrdenada
     }
 
     @Override
-    public void set(T element, int position) throws Exception {
+    public void set(T element, int position) {
         if (position < 0 || position > size()) {
-            throw new Exception("Parámetro position es inválido.");
+            throw new IllegalArgumentException("Parámetro position es inválido.");
         }
 
         NodoLista<T> nodoActual = header.siguiente;

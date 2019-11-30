@@ -26,7 +26,7 @@ public class Heap<T extends Comparable<? super T>>
     }
 
     @Override
-    public void remove(T valor) throws Exception {
+    public void remove(T valor) {
         throw new UnsupportedOperationException("Operación no soportada");
     }
 
@@ -154,10 +154,9 @@ public class Heap<T extends Comparable<? super T>>
      * Se hacen las actualizaciones de referencias para preservar la condición
      * de Heap Mínimo
      * @param valor
-     * @throws Exception 
      */
     @Override
-    public void addElement(T valor) throws Exception {
+    public void addElement(T valor) {
         NodoHeap<T> nuevoNodo = new NodoHeap(valor);
 
         if (this.isEmpty()) {
@@ -262,13 +261,12 @@ public class Heap<T extends Comparable<? super T>>
      * Quita el nodo ubicado en la raíz del árbol buscando su reemplazo para
      * que prevalezca la condición de Heap Mínimo.
      * @return
-     * @throws Exception 
      */
     @Override
-    public T removeMin() throws Exception {
+    public T removeMin() {
 
         if (isEmpty()) {
-            throw new Exception("El montículo/cúmulo está vacío");
+            throw new IllegalStateException("El montículo/cúmulo está vacío");
         }
 
         T resultado = findMin();

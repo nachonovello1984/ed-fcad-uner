@@ -57,7 +57,7 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
     }
 
     @Override
-    public void add(T valor) throws Exception {
+    public void add(T valor) {
         if (isEmpty()) {
             raiz = new NodoAVL(valor);
         } else {
@@ -67,7 +67,7 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
             NodoAVL<T> nodoActual = lista.getNodoBuscado();
 
             if (nodoActual != null) {
-                throw new Exception("Ya existe en el árbol un nodo con igual valor");
+                throw new IllegalArgumentException("Ya existe en el árbol un nodo con igual valor");
             }
 
             //Creo el nuevo nodo.
@@ -97,7 +97,7 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
     }
 
     @Override
-    public void remove(T valor) throws Exception {
+    public void remove(T valor) {
         ListaAVL<T> lista = buscarNodos(valor);
         NodoAVL<T> nodoB = lista.getPadreNodoBuscado();
 
@@ -108,7 +108,7 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
         boolean continuar = true;
 
         if (nodoABorrar == null) {
-            throw new Exception("No existe en el árbol un nodo con valor igual al especificado");
+            throw new IllegalArgumentException("No existe en el árbol un nodo con valor igual al especificado");
         }
 
         super.borrarNodo(nodoB, nodoABorrar);

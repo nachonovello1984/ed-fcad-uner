@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package ar.edu.uner.fcad.ed.arbolesabbyavl;
 
 /**
@@ -37,23 +32,20 @@ public interface ArbolABBInterfaz <T>{
      * Agrega un nuevo nodo al árbol cumpliendo las reglas de árbol
      * binario y de búsqueda.
      * @param valor
-     * @throws java.lang.Exception arroja excepción cuando ya existe un
-     * nodo con igual valor al que se quiere agregar.
      */
-    public void add(T valor) throws Exception;
+    public void add(T valor);
 
     /**
      * Elimina un nodo del árbol.
      * @param valor
-     * @throws java.lang.Exception arroja excepción cuando el árbol está vacío o
-     * el nodo que se quiere borrar no existe.
      */
-    public void remove(T valor) throws Exception;
+    public void remove(T valor);
 
     /**
      * Transforma el árbol en un String disponiendo los nodos de cada nivel en
      * una línea
      * @return
      */
+    @Override
     public String toString();
 }

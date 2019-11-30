@@ -124,37 +124,36 @@ public class ArbolBinario<T> implements ArbolBinarioInterfaz<T> {
      *
      * @param padre
      * @param hijo
-     * @throws Exception
      */
     private void agregarHijo(NodoArbolBinario<T> padre,
             NodoArbolBinario<T> hijo,
-            boolean esHijoIzquierdo) throws Exception {
+            boolean esHijoIzquierdo) {
         boolean vacio = vacio();
 
         if (vacio && padre != null) {
-            throw new Exception("Árbol vacío y padre != null");
+            throw new IllegalArgumentException("Árbol vacío y padre != null");
         }
 
         if (!vacio) {
             if (padre == null) {
-                throw new Exception("Árbol no vacío y padre == null");
+                throw new IllegalArgumentException("Árbol no vacío y padre == null");
             }
 
             //Verifico si nodoPadre existe en el árbol
             NodoArbolBinario<T> nodoPadre = obtenerNodo(padre.getValor());
             if (nodoPadre == null) {
-                throw new Exception("Árbol no vacío y padre no existe");
+                throw new IllegalArgumentException("Árbol no vacío y padre no existe");
             }
 
             //Verifico si el nodo padre ya tiene un hijo izquierdo
             if ((esHijoIzquierdo && nodoPadre.tieneHijoIzquierdo())
                     || (!esHijoIzquierdo && nodoPadre.tieneHijoDerecho())) {
-                throw new Exception("El nodo padre ya tiene un hijo");
+                throw new IllegalArgumentException("El nodo padre ya tiene un hijo");
             }
 
             //Si el nodo a insertar ya existe en el árbol
             if (existe(hijo)) {
-                throw new Exception("El nodo a insertar ya existe en el árbol");
+                throw new IllegalArgumentException("El nodo a insertar ya existe en el árbol");
             }
 
             if (esHijoIzquierdo) {
@@ -195,15 +194,13 @@ public class ArbolBinario<T> implements ArbolBinarioInterfaz<T> {
      * Elimina un nodo del árbol.
      *
      * @param valor
-     * @throws java.lang.Exception arroja excepción cuando el árbol está vacío o
-     * el nodo que se quiere borrar no existe.
      */
     @Override
-    public void remove(T valor) throws Exception {
+    public void remove(T valor) {
         NodoArbolBinario<T> nodoABorrar = obtenerNodo(valor);
 
         if (nodoABorrar == null) {
-            throw new Exception("No existe en el árbol un nodo con valor igual al especificado");
+            throw new IllegalArgumentException("No existe en el árbol un nodo con valor igual al especificado");
         }
 
         NodoArbolBinario<T> nodoPadre = padre(nodoABorrar);
@@ -211,7 +208,7 @@ public class ArbolBinario<T> implements ArbolBinarioInterfaz<T> {
         borrarNodo(nodoPadre, nodoABorrar);
     }
 
-    protected void borrarNodo(NodoArbolBinario<T> nodoPadre, NodoArbolBinario<T> nodoABorrar) throws Exception {
+    protected void borrarNodo(NodoArbolBinario<T> nodoPadre, NodoArbolBinario<T> nodoABorrar) {
         int cantidadHijos = nodoABorrar.getCantidadHijos();
         boolean esHijoIzquierdo = nodoPadre != null && nodoPadre.esHijoIzquierdo(nodoABorrar);
 

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.uner.fcad.ed.edlineales;
 
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterable;
@@ -62,15 +58,14 @@ public class ListaEnlazadaNoOrdenada<T>
      *
      * @param element
      * @param target
-     * @throws Exception
      */
     @Override
-    public void addAfter(T element, T target) throws Exception {
+    public void addAfter(T element, T target) {
         NodoLista<T> nuevoNodo = new NodoLista(element);
         NodoLista<T> targetNodo = ((NodoListaBusqueda<T>) getNodoPorElemento(target)).nodoActual;
 
         if (targetNodo == null) {
-            throw new Exception("La operación no se puede realizar. El elemento especificado no existe");
+            throw new IllegalArgumentException("La operación no se puede realizar. El elemento especificado no existe");
         }
 
         if (targetNodo.siguiente != null) {
@@ -144,17 +139,16 @@ public class ListaEnlazadaNoOrdenada<T>
      *
      * @param element
      * @return
-     * @throws Exception
      */
     @Override
-    public T remove(T element) throws Exception {
+    public T remove(T element) {
         NodoListaBusqueda<T> nodosBusqueda = getNodoPorElemento(element);
 
         NodoLista<T> previo = nodosBusqueda.nodoAnterior;
         NodoLista<T> buscado = nodosBusqueda.nodoActual;
 
         if (buscado == null) {
-            throw new Exception("El elemento especificado no se encuentra en la lista");
+            throw new IllegalArgumentException("El elemento especificado no se encuentra en la lista");
         }
 
         if (previo != null) {
@@ -166,10 +160,10 @@ public class ListaEnlazadaNoOrdenada<T>
         return buscado.elemento;
     }
 
-    public T remove(int indice) throws Exception {
+    public T remove(int indice) {
 
         if (indice < 0 || indice > size()) {
-            throw new Exception("Índice fuera de intervalo");
+            throw new IllegalArgumentException("Índice fuera de intervalo");
         }
 
         NodoLista<T> nodoActual = header.siguiente;
@@ -200,12 +194,11 @@ public class ListaEnlazadaNoOrdenada<T>
      *
      * @param position
      * @return
-     * @throws java.lang.Exception
      */
     @Override
-    public T get(int position) throws Exception {
+    public T get(int position) {
         if (position < 0 || position > size()) {
-            throw new Exception("Parámetro position es inválido. ");
+            throw new IllegalArgumentException("Parámetro position es inválido. ");
         }
 
         NodoLista<T> nodoActual = header.siguiente;
@@ -218,14 +211,14 @@ public class ListaEnlazadaNoOrdenada<T>
 
     /**
      * Establece element como valor del nodo ubicado en position.
+     * 
      * @param element
      * @param position
-     * @throws Exception 
      */
     @Override
-    public void set(T element, int position) throws Exception {
+    public void set(T element, int position) {
         if (position < 0 || position > size()) {
-            throw new Exception("Parámetro position es inválido.");
+            throw new IllegalArgumentException("Parámetro position es inválido.");
         }
 
         NodoLista<T> nodoActual = header.siguiente;

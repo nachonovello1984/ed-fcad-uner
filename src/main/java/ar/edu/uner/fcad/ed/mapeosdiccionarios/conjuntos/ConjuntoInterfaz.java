@@ -16,7 +16,7 @@ public interface ConjuntoInterfaz <T> extends Iterable<T>{
     
     public void insert(T element);
     
-    public void delete(T element) throws Exception;
+    public void delete(T element);
     
     public boolean isEmpty();
     

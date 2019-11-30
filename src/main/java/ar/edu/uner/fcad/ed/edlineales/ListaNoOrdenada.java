@@ -20,9 +20,9 @@ public interface ListaNoOrdenada <T> extends Lista <T>{
 
     /**
      * Añade el elemento especificado después del elemento especificado como objetivo
+     * 
      * @param element
      * @param target
-     * @throws Exception 
      */
-    public void addAfter(T element, T target) throws Exception;
+    public void addAfter(T element, T target);
 }

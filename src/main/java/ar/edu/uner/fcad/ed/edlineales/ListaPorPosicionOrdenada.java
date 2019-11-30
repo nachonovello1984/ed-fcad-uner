@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.uner.fcad.ed.edlineales;
 
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterable;
@@ -32,12 +28,11 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
      * Añade un elemento especificado a la lista en la ubicación adecuada.
      *
      * @param element
-     * @throws Exception
      */
     @Override
-    public void add(T element) throws Exception {
+    public void add(T element) {
         if (ultimaPosicion + 1 > CAPACIDAD) {
-            throw new Exception("La estructura está llena. La operación solicitada no se llevará a cabo.");
+            throw new IllegalStateException("La estructura está llena. La operación solicitada no se llevará a cabo.");
         }
 
         int indiceInsercion = determinarIndiceInsercion(element);
@@ -102,20 +97,19 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
      *
      * @param element
      * @return
-     * @throws Exception
      */
     @Override
-    public T remove(T element) throws Exception {
+    public T remove(T element) {
         T resultado = null;
 
         if (isEmpty()) {
-            throw new Exception("La estructura está vacía. La operación no se puede llevar a cabo.");
+            throw new IllegalStateException("La estructura está vacía. La operación no se puede llevar a cabo.");
         }
 
         int indiceElemento = indexOf(element);
 
         if (indiceElemento < 0) {
-            throw new Exception("El elemento especificado no forma parte de la estructura. La operación no se puede llevar a cabo.");
+            throw new IllegalArgumentException("El elemento especificado no forma parte de la estructura. La operación no se puede llevar a cabo.");
         }
 
         excluirPosicion(indiceElemento);
@@ -136,25 +130,24 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
 
     /**
      * Devuelve el elemento ubicado en el nodo ubicado en la posición indicada
-     * por el parámetro position. Arroja excepción cuando position es inválido.
+     * por el parámetro position. 
      *
      * @param position
      * @return
-     * @throws java.lang.Exception
      */
     @Override
-    public T get(int position) throws Exception {
+    public T get(int position) {
         if (position < 0 || position > size()) {
-            throw new Exception("Parámetro position es inválido. ");
+            throw new IllegalArgumentException("Parámetro position es inválido. ");
         }
 
         return arreglo[position];
     }
 
     @Override
-    public void set(T element, int position) throws Exception {
+    public void set(T element, int position) {
         if (position < 0 || position > size()) {
-            throw new Exception("Parámetro position es inválido.");
+            throw new IllegalArgumentException("Parámetro position es inválido.");
         }
 
         arreglo[position] = element;

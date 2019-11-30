@@ -40,7 +40,6 @@ public interface Lista<T> {
     /**
      * Devuelve el elemento del nodo ubicado en la posición indicada
      * por el parámetro position.
-     * Arroja excepción cuando position es inválido.
      * 
      * @param position
      * @return 

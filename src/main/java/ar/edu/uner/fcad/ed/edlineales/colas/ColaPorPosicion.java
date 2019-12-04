@@ -13,14 +13,21 @@ import java.lang.reflect.Array;
  */
 public class ColaPorPosicion<T> implements Cola<T> {
 
-    protected static final int CAPACIDAD = 10;
+    protected static final int CAPACIDAD_DEFAULT = 10;
+    
     protected T[] arreglo;
     protected int tamanioActual;
+    protected int capacidad;
     protected int front;
     protected int back;
 
     public ColaPorPosicion(Class<T> clazz) {
-        this.arreglo = nuevoArreglo(clazz, CAPACIDAD);
+        this(clazz, CAPACIDAD_DEFAULT);
+    }
+    
+    public ColaPorPosicion(Class<T> clazz, int capacidad) {
+        this.capacidad = capacidad;
+        this.arreglo = nuevoArreglo(clazz, this.capacidad);
         makeEmpty();
     }
 
@@ -35,7 +42,7 @@ public class ColaPorPosicion<T> implements Cola<T> {
      */
     @Override
     public boolean isEmpty() {
-        return tamanioActual == 0;
+        return this.tamanioActual == 0;
     }
 
     /**
@@ -45,7 +52,7 @@ public class ColaPorPosicion<T> implements Cola<T> {
      */
     @Override
     public boolean isFull() {
-        return tamanioActual == CAPACIDAD;
+        return this.tamanioActual == this.capacidad;
     }
 
     /**
@@ -95,6 +102,24 @@ public class ColaPorPosicion<T> implements Cola<T> {
         this.tamanioActual = 0;
         this.front = 0;
         this.back = -1;
+    }
+    
+    @Override
+    public String toString() {
+        String resultado = "";
+                
+        if (isEmpty()) {
+            return resultado;
+        }
+        
+        for (int i = front, j = 0; j < tamanioActual; i = incrementar(i), j++) {
+            resultado += ", [" + arreglo[i].toString() + "]";
+        }
+        
+        resultado = resultado.substring(2);
+        
+        return resultado;
+        
     }
 
     private int incrementar(int x) {

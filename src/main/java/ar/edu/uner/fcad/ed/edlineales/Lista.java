@@ -27,9 +27,8 @@ public interface Lista<T> {
      * Elimina y devuelve el elemento especificado de la lista
      * @param element
      * @return
-     * @throws Exception 
      */
-    public T remove(T element) throws Exception;
+    public T remove(T element);
 
     /**
      * Devuelve una referencia al primer elemento de la lista
@@ -43,9 +42,8 @@ public interface Lista<T> {
      * 
      * @param position
      * @return 
-     * @throws java.lang.Exception 
      */
-    public T get(int position) throws Exception;
+    public T get(int position);
     
     /**
      * Establece element como nuevo valor del nodo ubicado en position.
@@ -53,10 +51,8 @@ public interface Lista<T> {
      * 
      * @param element
      * @param position 
-     * @throws java.lang.Exception 
-     * 
      */
-    public void set(T element, int position) throws Exception;
+    public void set(T element, int position);
 
     /**
      * Devuelve una referencia al último elemento de la lista

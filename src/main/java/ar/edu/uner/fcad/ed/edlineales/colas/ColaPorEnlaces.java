@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.uner.fcad.ed.edlineales.colas;
 
 import ar.edu.uner.fcad.ed.edlineales.NodoLista;
@@ -11,7 +7,7 @@ import ar.edu.uner.fcad.ed.edlineales.NodoLista;
  * @author Nacho
  * @param <T>
  */
-public class ColaPorEnlaces<T> implements Cola<T>{
+public class ColaPorEnlaces<T> implements Cola<T> {
 
     protected NodoLista<T> front;
     protected NodoLista<T> back;
@@ -22,7 +18,8 @@ public class ColaPorEnlaces<T> implements Cola<T>{
 
     /**
      * Indica si la estructura está vacía
-     * @return 
+     *
+     * @return
      */
     @Override
     public boolean isEmpty() {
@@ -31,6 +28,7 @@ public class ColaPorEnlaces<T> implements Cola<T>{
 
     /**
      * Indica si la estructura está llena
+     *
      * @return siempre retorna false.
      */
     @Override
@@ -40,7 +38,8 @@ public class ColaPorEnlaces<T> implements Cola<T>{
 
     /**
      * Obtiene el elemento ubicado en el frente
-     * @return 
+     *
+     * @return
      */
     @Override
     public T getFront() {
@@ -56,14 +55,18 @@ public class ColaPorEnlaces<T> implements Cola<T>{
      */
     @Override
     public void dequeue() {
-        if (!isEmpty()) {
-            this.front = this.front.getSiguiente();
+        if (isEmpty()) {
+            return;
         }
+        
+        this.front = this.front.getSiguiente();
+
     }
 
     /**
      * Agrega un elemento al final de la estructura
-     * @param elemento 
+     *
+     * @param elemento
      */
     @Override
     public void enqueue(T elemento) {
@@ -82,24 +85,27 @@ public class ColaPorEnlaces<T> implements Cola<T>{
      */
     @Override
     public final void makeEmpty() {
-        this.front  = this.back = null;
+        this.front = this.back = null;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
+        
         String resultado = "";
         
+        if (isEmpty()) {
+            return resultado;
+        }
+
         NodoLista<T> nodoActual = this.front;
-        
-        while(nodoActual != null){
+
+        while (nodoActual != null) {
             resultado += ", " + nodoActual.toString();
             nodoActual = nodoActual.getSiguiente();
         }
-        
-        if(resultado.length() > 0){
-            resultado = resultado.substring(2);
-        }
-        
+
+        resultado = resultado.substring(2);
+
         return resultado;
     }
 }

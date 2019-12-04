@@ -100,19 +100,18 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
      */
     @Override
     public T remove(T element) {
-        T resultado = null;
-
         if (isEmpty()) {
             throw new IllegalStateException("La estructura está vacía. La operación no se puede llevar a cabo.");
         }
 
-        int indiceElemento = indexOf(element);
-
-        if (indiceElemento < 0) {
+        int posicion = indexOf(element);
+        if (posicion < 0) {
             throw new IllegalArgumentException("El elemento especificado no forma parte de la estructura. La operación no se puede llevar a cabo.");
         }
+        
+        T resultado = this.arreglo[posicion];
 
-        excluirPosicion(indiceElemento);
+        excluirPosicion(posicion);
         ultimaPosicion--;
 
         return resultado;

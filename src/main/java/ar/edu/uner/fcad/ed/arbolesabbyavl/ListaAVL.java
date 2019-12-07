@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.uner.fcad.ed.arbolesabbyavl;
 
 import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
-import java.util.ArrayList;
 
 /**
  *

@@ -122,7 +122,7 @@ public class ListaEnlazadaNoOrdenada<T>
         if (isEmpty()) {
             return null;
         }
-        
+
         NodoListaBusqueda<T> listaNodos = getUltimos2Nodos();
 
         if (listaNodos.nodoAnterior != null) {
@@ -130,7 +130,7 @@ public class ListaEnlazadaNoOrdenada<T>
         } else {
             this.header.siguiente = null;
         }
-        
+
         return listaNodos.nodoActual.elemento;
     }
 
@@ -211,7 +211,7 @@ public class ListaEnlazadaNoOrdenada<T>
 
     /**
      * Establece element como valor del nodo ubicado en position.
-     * 
+     *
      * @param element
      * @param position
      */
@@ -375,16 +375,18 @@ public class ListaEnlazadaNoOrdenada<T>
     public String toString() {
         String resultado = "";
 
-        if (!isEmpty()) {
-            NodoLista<T> nodoActual = this.header.siguiente;
-            while (nodoActual != null) {
-                resultado += ", " + nodoActual.toString();
-                nodoActual = nodoActual.siguiente;
-            }
+        if (isEmpty()) {
+            return resultado;
+        }
 
-            if (resultado.length() > 0) {
-                resultado = resultado.substring(2);
-            }
+        NodoLista<T> nodoActual = this.header.siguiente;
+        while (nodoActual != null) {
+            resultado += ", " + nodoActual.toString();
+            nodoActual = nodoActual.siguiente;
+        }
+
+        if (resultado.length() > 0) {
+            resultado = resultado.substring(2);
         }
 
         return resultado;

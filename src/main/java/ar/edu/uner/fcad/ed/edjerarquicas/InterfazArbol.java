@@ -34,9 +34,8 @@ public interface InterfazArbol<T> {
      * 
      * @param nodo
      * @return 
-     * @throws ar.edu.uner.fcad.ed.edjerarquicas.EDJerarquicasException
      */
-    public NodoArbol<T> padre(NodoArbol<T> nodo) throws EDJerarquicasException; 
+    public NodoArbol<T> padre(NodoArbol<T> nodo); 
     
     /**
      * Devuelve el nodo hijo más a la izquierda de "nodo". 
@@ -45,9 +44,8 @@ public interface InterfazArbol<T> {
      * 
      * @param nodo
      * @return 
-     * @throws ar.edu.uner.fcad.ed.edjerarquicas.EDJerarquicasException
      */
-    public NodoArbol<T> hijoIzquierdo(NodoArbol<T> nodo)throws EDJerarquicasException;
+    public NodoArbol<T> hijoIzquierdo(NodoArbol<T> nodo);
     
     /**
      * Devuelve el nodo hermano derecho de "nodo". 
@@ -56,9 +54,8 @@ public interface InterfazArbol<T> {
      * Requerimientos: El árbol está vacío. "nodo" existe.
      * @param nodo
      * @return 
-     * @throws ar.edu.uner.fcad.ed.edjerarquicas.EDJerarquicasException
      */
-    public NodoArbol<T> hermanoDerecho(NodoArbol<T> nodo) throws EDJerarquicasException; 
+    public NodoArbol<T> hermanoDerecho(NodoArbol<T> nodo); 
 
     /**
      * Devuelve un objeto de tipo Object con el contenido del nodo en "nodo".
@@ -66,18 +63,16 @@ public interface InterfazArbol<T> {
      * 
      * @param nodo
      * @return 
-     * @throws ar.edu.uner.fcad.ed.edjerarquicas.EDJerarquicasException
      */
-    public T info(NodoArbol<T> nodo) throws EDJerarquicasException;
+    public T info(NodoArbol<T> nodo);
 
     /**
      * Añade "nodo" como hijo más a la izquierda de "padre".
      * Si el árbol está vacío, entonces "nodo" es la raíz del árbol.
      * @param padre
      * @param nodo
-     * @throws ar.edu.uner.fcad.ed.edjerarquicas.EDJerarquicasException
      */
-    public void insertaHijo(NodoArbol<T> padre, NodoArbol<T> nodo)throws EDJerarquicasException;
+    public void insertaHijo(NodoArbol<T> padre, NodoArbol<T> nodo);
 
     /**
      * Añade "nodo" como hermano derecho de "nodoIzquierdo".
@@ -85,9 +80,8 @@ public interface InterfazArbol<T> {
      * 
      * @param nodoIzquierdo
      * @param nodo
-     * @throws ar.edu.uner.fcad.ed.edjerarquicas.EDJerarquicasException
      */
-    public void insertaHermano(NodoArbol<T> nodoIzquierdo, NodoArbol<T> nodo) throws EDJerarquicasException;
+    public void insertaHermano(NodoArbol<T> nodoIzquierdo, NodoArbol<T> nodo);
     
     /**
      * Suprime el hijo más a la izquierda de "nodo" y todos sus descendientes.
@@ -95,9 +89,8 @@ public interface InterfazArbol<T> {
      * Requerimientos: El árbol no es vacío. "nodo" existe.
      * 
      * @param nodo
-     * @throws ar.edu.uner.fcad.ed.edjerarquicas.EDJerarquicasException
      */
-    public void suprimeHijoIzquierdo(NodoArbol<T> nodo) throws EDJerarquicasException;
+    public void suprimeHijoIzquierdo(NodoArbol<T> nodo);
   
     /**
      * Suprime el hermano a la derecha de "nodo" y todos sus descendientes.
@@ -105,9 +98,8 @@ public interface InterfazArbol<T> {
      * Requerimientos: El árbol no es vacío. "nodo" existe.
      * 
      * @param nodo
-     * @throws ar.edu.uner.fcad.ed.edjerarquicas.EDJerarquicasException
      */
-    public void suprimeHermanoDerecho(NodoArbol<T> nodo) throws EDJerarquicasException;
+    public void suprimeHermanoDerecho(NodoArbol<T> nodo);
     
     /**
      * El árbol es no vacío. "nodo" existe.
@@ -116,9 +108,8 @@ public interface InterfazArbol<T> {
      * 
      * @param nodo
      * @param valor
-     * @throws ar.edu.uner.fcad.ed.edjerarquicas.EDJerarquicasException
      */
-    public void modifica(NodoArbol<T> nodo, T valor) throws EDJerarquicasException;
+    public void modifica(NodoArbol<T> nodo, T valor);
                 
     /**
      * Devuelve cierto si "nodo" existe, y falso en caso contrario.

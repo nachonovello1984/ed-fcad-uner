@@ -1,17 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.uner.fcad.ed.edjerarquicas;
 
 /**
  *
- * @author ignnov
+ * @author nacho
+ * @param <T>
  */
 public interface ArbolHiHdIterador <T> {
     
     public boolean existeSiguiente();
     
-    public T siguiente() throws EDJerarquicasException;
+    public T siguiente();
     
 }

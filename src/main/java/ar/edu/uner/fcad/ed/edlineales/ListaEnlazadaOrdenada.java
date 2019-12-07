@@ -133,7 +133,7 @@ public class ListaEnlazadaOrdenada
      * @return
      */
     @Override
-    public T get(int position) throws Exception {
+    public T get(int position) {
         if (position < 0 || position > size()) {
             throw new IllegalArgumentException("Parámetro position es inválido. ");
         }

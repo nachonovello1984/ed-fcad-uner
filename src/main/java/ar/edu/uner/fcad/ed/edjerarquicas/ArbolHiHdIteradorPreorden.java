@@ -9,7 +9,7 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 
 /**
  *
- * @author ignnov
+ * @author Nacho
  * @param <T>
  */
 public class ArbolHiHdIteradorPreorden <T> implements ArbolHiHdIterador <T> {
@@ -34,10 +34,10 @@ public class ArbolHiHdIteradorPreorden <T> implements ArbolHiHdIterador <T> {
     }
 
     @Override
-    public T siguiente() throws EDJerarquicasException {
+    public T siguiente() {
         
         if(!iterador.existeSiguiente()){
-            throw new EDJerarquicasException("No existen más elementos.");
+            throw new IllegalStateException("No existen más elementos.");
         }
         
         return iterador.siguiente();

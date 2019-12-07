@@ -4,10 +4,9 @@
  */
 package ar.edu.uner.fcad.ed.edjerarquicas;
 
+import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
 
 /**
  *
@@ -16,47 +15,43 @@ import java.util.List;
  */
 public class ArbolHiHdIteradorPorNiveles<T> implements ArbolHiHdIterador<T> {
 
-    private final Iterator<T> iterador;
+    private final Iterador<T> iterador;
 
     public ArbolHiHdIteradorPorNiveles(NodoArbolHiHd<T> raiz) {
-        this.iterador = armarRecorrido(raiz).iterator();
+        this.iterador = armarRecorrido(raiz).iterador();
     }
 
     @Override
     public boolean existeSiguiente() {
-        return iterador.hasNext();
+        return iterador.existeSiguiente();
     }
 
     @Override
-    public T siguiente() throws EDJerarquicasException {
-        if(!iterador.hasNext()){
-            throw new EDJerarquicasException("No existen más elementos.");
+    public T siguiente() {
+        if (!iterador.existeSiguiente()) {
+            throw new IllegalStateException("No existen más elementos.");
         }
-        
-        return iterador.next();
+
+        return iterador.siguiente();
     }
 
-    private List<T> armarRecorrido(NodoArbolHiHd<T> raiz) {
-        List<T> resultado = new ArrayList();
+    private ListaEnlazadaNoOrdenada<T> armarRecorrido(NodoArbolHiHd<T> raiz) {
+        ListaEnlazadaNoOrdenada<T> resultado = new ListaEnlazadaNoOrdenada();
 
-        try {
-            ColaPorEnlaces<NodoArbolHiHd<T>> cola = new ColaPorEnlaces();
-            cola.enqueue(raiz);
-            while (!cola.isEmpty()) {
-                NodoArbolHiHd<T> nodoActual = cola.getFront();
-                resultado.add(nodoActual.getValor());
+        ColaPorEnlaces<NodoArbolHiHd<T>> cola = new ColaPorEnlaces();
+        cola.enqueue(raiz);
+        while (!cola.isEmpty()) {
+            NodoArbolHiHd<T> nodoActual = cola.getFront();
+            resultado.addToRear(nodoActual.getValor());
 
-                if (nodoActual.hijoIzquierdo != null) {
-                    NodoArbolHiHd<T> nodoHijo = nodoActual.hijoIzquierdo;
-                    while (nodoHijo != null) {
-                        cola.enqueue(nodoHijo);
-                        nodoHijo = nodoHijo.hnoDerecho;
-                    }
+            if (nodoActual.hijoIzquierdo != null) {
+                NodoArbolHiHd<T> nodoHijo = nodoActual.hijoIzquierdo;
+                while (nodoHijo != null) {
+                    cola.enqueue(nodoHijo);
+                    nodoHijo = nodoHijo.hnoDerecho;
                 }
-                cola.dequeue();
             }
-        } catch (Exception ex) {
-            resultado = new ArrayList();
+            cola.dequeue();
         }
 
         return resultado;

@@ -5,7 +5,7 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 
 /**
  *
- * @author Admin
+ * @author nacho
  * @param <T>
  */
 public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
@@ -75,23 +75,22 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      *
      * @param nodo
      * @return
-     * @throws EDJerarquicasException
      */
     @Override
-    public NodoArbol<T> padre(NodoArbol<T> nodo) throws EDJerarquicasException {
+    public NodoArbol<T> padre(NodoArbol<T> nodo) {
         NodoArbolApuntadorPadre<T> resultado = null;
         NodoArbolApuntadorPadre<T> nodoAp = getAsNodoArbolApuntadorPadre(nodo);
         int etiquetaResultado = -1;
 
         //Si el árbol es vacío no se puede llevar a cabo la operación
         if (vacio()) {
-            throw new EDJerarquicasException("Árbol vacío");
+            throw new IllegalStateException("Árbol vacío");
         }
 
         //Si no existe el nodo del que se quiere buscar el padre no se puede
         //llevar a cabo la operación.
         if (!existe(nodoAp)) {
-            throw new EDJerarquicasException("Nodo no existe en el Árbol");
+            throw new IllegalArgumentException("Nodo no existe en el Árbol");
         }
 
         //Busco el nodo en el arreglo.
@@ -119,21 +118,20 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      *
      * @param nodo
      * @return
-     * @throws EDJerarquicasException
      */
     @Override
-    public NodoArbol<T> hijoIzquierdo(NodoArbol<T> nodo) throws EDJerarquicasException {
+    public NodoArbol<T> hijoIzquierdo(NodoArbol<T> nodo) {
         NodoArbol<T> resultado = null;
         NodoArbolApuntadorPadre<T> nodoAp = getAsNodoArbolApuntadorPadre(nodo);
 
         //Si el árbol está vacío no se puede llevar a cabo la operación.
         if (vacio()) {
-            throw new EDJerarquicasException("Árbol vacío");
+            throw new IllegalStateException("Árbol vacío");
         }
 
         //Si no existe el nodo del que quiero conocer el hijo izquierdo => no se puede llevar a cabo la operación.
         if (!existe(nodoAp)) {
-            throw new EDJerarquicasException("Nodo no existe en el Árbol");
+            throw new IllegalArgumentException("Nodo no existe en el Árbol");
         }
 
         //De todos los nodos del arreglo busco aquel que tenga como etiquetaPadre
@@ -154,21 +152,20 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      *
      * @param nodo
      * @return
-     * @throws EDJerarquicasException
      */
     @Override
-    public NodoArbol<T> hermanoDerecho(NodoArbol<T> nodo) throws EDJerarquicasException {
+    public NodoArbol<T> hermanoDerecho(NodoArbol<T> nodo) {
         NodoArbol<T> resultado = null;
         NodoArbolApuntadorPadre<T> nodoAp = getAsNodoArbolApuntadorPadre(nodo);
 
         //Si el árbol está vacío no se puede llevar a cabo la operación.
         if (vacio()) {
-            throw new EDJerarquicasException("Árbol vacío");
+            throw new IllegalStateException("Árbol vacío");
         }
 
         //Si no existe el nodo no se puede llevar a cabo la operación.
         if (!existe(nodoAp)) {
-            throw new EDJerarquicasException("Nodo no existe en el Árbol");
+            throw new IllegalArgumentException("Nodo no existe en el Árbol");
         }
 
         //Busco el nodo que tenga el mismo padre que el nodo pasasdo por parámetro
@@ -192,21 +189,20 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      *
      * @param nodo
      * @return
-     * @throws EDJerarquicasException
      */
     @Override
-    public T info(NodoArbol<T> nodo) throws EDJerarquicasException {
+    public T info(NodoArbol<T> nodo) {
         T resultado = null;
         NodoArbolApuntadorPadre<T> nodoAp = getAsNodoArbolApuntadorPadre(nodo);
 
         //Si el nodo está vacío no se puede llevar a cabo la operación.
         if (vacio()) {
-            throw new EDJerarquicasException("Árbol vacío");
+            throw new IllegalStateException("Árbol vacío");
         }
 
         //Si no existe el nodo no se puede llevar a cabo la operación.
         if (!existe(nodoAp)) {
-            throw new EDJerarquicasException("Nodo no existe en el Árbol");
+            throw new IllegalArgumentException("Nodo no existe en el Árbol");
         }
 
         //Busco en el arreglo el nodo que tenga igual etiqueta a la del nodo pasado por parámetro.
@@ -226,17 +222,16 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      *
      * @param padre
      * @param nodo
-     * @throws EDJerarquicasException
      */
     @Override
-    public void insertaHijo(NodoArbol<T> padre, NodoArbol<T> nodo) throws EDJerarquicasException {
+    public void insertaHijo(NodoArbol<T> padre, NodoArbol<T> nodo) {
         NodoArbolApuntadorPadre<T> nodoAp = getAsNodoArbolApuntadorPadre(nodo);
         boolean vacio = vacio();
 
         //Si no tiene padre tiene que ser la raíz
         if (padre == null) {
             if (!vacio) {
-                throw new EDJerarquicasException("Árbol no vacío. La operación no se puede llevar a cabo");
+                throw new IllegalStateException("Árbol no vacío. La operación no se puede llevar a cabo");
             }
             nodoAp.etiquetaPadre = 0;
             arreglo[0] = nodoAp;
@@ -247,17 +242,17 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
 
             //Si el árbol está vacío no se puede llevar a cabo la operación.
             if (vacio) {
-                throw new EDJerarquicasException("Árbol vacío. La operación no se puede llevar a cabo");
+                throw new IllegalStateException("Árbol vacío. La operación no se puede llevar a cabo");
             }
 
             //Si el árbol está lleno no se puede llevar a cabo la operación.
             if (lleno()) {
-                throw new EDJerarquicasException("Árbol lleno. La operación no se puede llevar a cabo");
+                throw new IllegalStateException("Árbol lleno. La operación no se puede llevar a cabo");
             }
 
             //Si el padre especificado no existe en el árbol no se puede llevar a cabo la operación.
             if (!existe(padreAp)) {
-                throw new EDJerarquicasException("El Nodo Padre no existe en el Árbol");
+                throw new IllegalArgumentException("El Nodo Padre no existe en el Árbol");
             }
 
             //Asigno como etiquetaPadre la etiqueta del padre especificado.
@@ -276,33 +271,32 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      *
      * @param nodoIzquierdo
      * @param nodo
-     * @throws EDJerarquicasException
      */
     @Override
-    public void insertaHermano(NodoArbol<T> nodoIzquierdo, NodoArbol<T> nodo) throws EDJerarquicasException {
+    public void insertaHermano(NodoArbol<T> nodoIzquierdo, NodoArbol<T> nodo) {
         NodoArbolApuntadorPadre<T> izqAp = getAsNodoArbolApuntadorPadre(nodoIzquierdo);
         NodoArbolApuntadorPadre<T> nodoAp = getAsNodoArbolApuntadorPadre(nodo);
 
         //Si el árbol está vacío no se puede llevar a cabo la operación.
         if (vacio()) {
-            throw new EDJerarquicasException("Árbol vacío");
+            throw new IllegalStateException("Árbol vacío");
         }
 
         //Si el árbol está lleno no se puede llevar a cabo la operación.
         if (lleno()) {
-            throw new EDJerarquicasException("Árbol lleno. La operación no se puede llevar a cabo");
+            throw new IllegalStateException("Árbol lleno. La operación no se puede llevar a cabo");
         }
 
         //Si no existe el hermano izquierdo no se puede llevar a cabo la operación.
         if (!existe(izqAp)) {
-            throw new EDJerarquicasException("Nodo Izquierdo no existe en el Árbol");
+            throw new IllegalArgumentException("Nodo Izquierdo no existe en el Árbol");
         }
 
         //Si nodoIzquierdo es la raíz no puedo insertar un hermano.
         for (int i = 0; i < arreglo.length; i++) {
             if (arreglo[i] != null && arreglo[i].equals(izqAp)) {
                 if (arreglo[i].etiquetaPadre == 0) {
-                    throw new EDJerarquicasException("Nodo no existe en el Árbol");
+                    throw new IllegalArgumentException("Nodo no existe en el Árbol");
                 }
             }
         }
@@ -324,48 +318,42 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      * no debe estar vacío y raiz debe existir.
      *
      * @param raiz
-     * @throws EDJerarquicasException
      */
-    private void suprimeArbol(NodoArbol<T> raiz) throws EDJerarquicasException {
+    private void suprimeArbol(NodoArbol<T> raiz) {
 
         if (vacio()) {
-            throw new EDJerarquicasException("Árbol vacío");
+            throw new IllegalStateException("Árbol vacío");
         }
 
         if (!existe(raiz)) {
-            throw new EDJerarquicasException("Nodo que se intenta eliminar no existe en el Árbol");
+            throw new IllegalArgumentException("Nodo que se intenta eliminar no existe en el Árbol");
         }
 
         ListaEnlazadaNoOrdenada<NodoArbolApuntadorPadre<T>> eliminar = new ListaEnlazadaNoOrdenada();
         ColaPorEnlaces<NodoArbolApuntadorPadre<T>> cola = new ColaPorEnlaces();
         NodoArbolApuntadorPadre<T> nodoAp = (NodoArbolApuntadorPadre<T>) raiz;
 
-        try {
-            cola.enqueue(nodoAp);
-            NodoArbolApuntadorPadre<T> nodoActual = (NodoArbolApuntadorPadre<T>) cola.getFront();
-            while (nodoActual != null) {
-                eliminar.addToRear(nodoActual);
+        cola.enqueue(nodoAp);
+        NodoArbolApuntadorPadre<T> nodoActual = (NodoArbolApuntadorPadre<T>) cola.getFront();
+        while (nodoActual != null) {
+            eliminar.addToRear(nodoActual);
 
-                NodoArbolApuntadorPadre<T> hijoNodoActual = (NodoArbolApuntadorPadre<T>) this.hijoIzquierdo(nodoActual);
-                while (hijoNodoActual != null) {
-                    cola.enqueue(hijoNodoActual);
-                    hijoNodoActual = (NodoArbolApuntadorPadre<T>) this.hermanoDerecho(hijoNodoActual);
-                }
-                cola.dequeue();
-                nodoActual = (NodoArbolApuntadorPadre<T>) cola.getFront();
+            NodoArbolApuntadorPadre<T> hijoNodoActual = (NodoArbolApuntadorPadre<T>) this.hijoIzquierdo(nodoActual);
+            while (hijoNodoActual != null) {
+                cola.enqueue(hijoNodoActual);
+                hijoNodoActual = (NodoArbolApuntadorPadre<T>) this.hermanoDerecho(hijoNodoActual);
             }
+            cola.dequeue();
+            nodoActual = (NodoArbolApuntadorPadre<T>) cola.getFront();
+        }
 
-            for (int i = 0; i < eliminar.size(); i++) {
-                for (int j = 0; j < arreglo.length; j++) {
-                    if (((NodoArbolApuntadorPadre<T>) eliminar.get(i)).equals(arreglo[j])) {
-                        arreglo[j] = null;
-                        this.cantidadNodos--;
-                    }
+        for (int i = 0; i < eliminar.size(); i++) {
+            for (int j = 0; j < arreglo.length; j++) {
+                if (((NodoArbolApuntadorPadre<T>) eliminar.get(i)).equals(arreglo[j])) {
+                    arreglo[j] = null;
+                    this.cantidadNodos--;
                 }
             }
-
-        } catch (Exception ex) {
-            throw new EDJerarquicasException(ex.getMessage());
         }
     }
 
@@ -374,10 +362,9 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      * Requerimientos: El árbol no es vacío. nodo existe.
      *
      * @param nodo
-     * @throws EDJerarquicasException
      */
     @Override
-    public void suprimeHijoIzquierdo(NodoArbol<T> nodo) throws EDJerarquicasException {
+    public void suprimeHijoIzquierdo(NodoArbol<T> nodo) {
         suprimeArbol(hijoIzquierdo(nodo));
     }
 
@@ -386,10 +373,9 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      * Requerimientos: El árbol no es vacío. "nodo" existe.
      *
      * @param nodo
-     * @throws EDJerarquicasException
      */
     @Override
-    public void suprimeHermanoDerecho(NodoArbol<T> nodo) throws EDJerarquicasException {
+    public void suprimeHermanoDerecho(NodoArbol<T> nodo) {
         suprimeArbol(hermanoDerecho(nodo));
     }
 
@@ -399,13 +385,12 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      *
      * @param nodo
      * @param valor
-     * @throws EDJerarquicasException
      */
     @Override
-    public void modifica(NodoArbol<T> nodo, T valor) throws EDJerarquicasException {
+    public void modifica(NodoArbol<T> nodo, T valor) {
         NodoArbolApuntadorPadre<T> nodoAp = getAsNodoArbolApuntadorPadre(nodo);
         if (!existe(nodoAp)) {
-            throw new EDJerarquicasException("Nodo Izquierdo no existe en el Árbol");
+            throw new IllegalArgumentException("Nodo Izquierdo no existe en el Árbol");
         }
 
         //Busco nodoAp en el array
@@ -422,23 +407,20 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      */
     @Override
     public boolean existe(NodoArbol<T> nodo) {
-        try {
-            NodoArbolApuntadorPadre<T> nodoAp = getAsNodoArbolApuntadorPadre(nodo);
+        NodoArbolApuntadorPadre<T> nodoAp = getAsNodoArbolApuntadorPadre(nodo);
 
-            //Si el árbol no está vacío...
-            if (vacio()) {
-                return false;
-            }
-
-            //Busco el nodo en el array.
-            for (int i = 0; i < arreglo.length; i++) {
-                if (arreglo[i] != null && arreglo[i].equals(nodoAp)) {
-                    return true;
-                }
-            }
-        } catch (EDJerarquicasException exc) {
+        //Si el árbol no está vacío...
+        if (vacio()) {
             return false;
         }
+
+        //Busco el nodo en el array.
+        for (int i = 0; i < arreglo.length; i++) {
+            if (arreglo[i] != null && arreglo[i].equals(nodoAp)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -452,25 +434,21 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
 
         ColaPorEnlaces<NodoArbol<T>> cola = new ColaPorEnlaces();
 
-        try {
-            cola.enqueue(this.raiz());
-            NodoArbolApuntadorPadre<T> nodoActual = (NodoArbolApuntadorPadre<T>) cola.getFront();
-            while (nodoActual != null) {
-                NodoArbolApuntadorPadre<T> hijoNodoActual = (NodoArbolApuntadorPadre<T>) this.hijoIzquierdo(nodoActual);
+        cola.enqueue(this.raiz());
+        NodoArbolApuntadorPadre<T> nodoActual = (NodoArbolApuntadorPadre<T>) cola.getFront();
+        while (nodoActual != null) {
+            NodoArbolApuntadorPadre<T> hijoNodoActual = (NodoArbolApuntadorPadre<T>) this.hijoIzquierdo(nodoActual);
 
-                while (hijoNodoActual != null) {
-                    cola.enqueue(hijoNodoActual);
-                    hijoNodoActual = (NodoArbolApuntadorPadre<T>) this.hermanoDerecho(hijoNodoActual);
-                }
-
-                resultado += "[" + nodoActual.getValor() + "] ";
-                cola.dequeue();
-                nodoActual = (NodoArbolApuntadorPadre<T>) cola.getFront();
+            while (hijoNodoActual != null) {
+                cola.enqueue(hijoNodoActual);
+                hijoNodoActual = (NodoArbolApuntadorPadre<T>) this.hermanoDerecho(hijoNodoActual);
             }
-        } catch (EDJerarquicasException ex) {
-            resultado = "";
+
+            resultado += "[" + nodoActual.getValor() + "] ";
+            cola.dequeue();
+            nodoActual = (NodoArbolApuntadorPadre<T>) cola.getFront();
         }
-        
+
         return resultado;
     }
 
@@ -511,17 +489,8 @@ public class ArbolApuntadoresPadre<T> implements InterfazArbol<T> {
      *
      * @param nodo
      * @return
-     * @throws EDJerarquicasException
      */
-    private NodoArbolApuntadorPadre<T> getAsNodoArbolApuntadorPadre(NodoArbol<T> nodo) throws EDJerarquicasException {
-        NodoArbolApuntadorPadre<T> resultado = null;
-
-        try {
-            resultado = (NodoArbolApuntadorPadre<T>) nodo;
-        } catch (Exception exc) {
-            throw new EDJerarquicasException("El nodo no es de tipo NodoHiHd");
-        }
-
-        return resultado;
+    private NodoArbolApuntadorPadre<T> getAsNodoArbolApuntadorPadre(NodoArbol<T> nodo) {
+        return (NodoArbolApuntadorPadre<T>) nodo;
     }
 }

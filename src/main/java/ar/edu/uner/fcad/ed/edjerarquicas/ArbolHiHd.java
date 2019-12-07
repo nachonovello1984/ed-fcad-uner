@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.uner.fcad.ed.edjerarquicas;
 
 import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
@@ -41,11 +37,11 @@ public class ArbolHiHd<T> implements InterfazArbol<T> {
     }
 
     @Override
-    public NodoArbol<T> padre(NodoArbol<T> nodo) throws EDJerarquicasException {
+    public NodoArbol<T> padre(NodoArbol<T> nodo) {
         NodoArbol<T> resultado;
 
         if (vacio()) {
-            throw new EDJerarquicasException("Árbol vacío");
+            throw new IllegalStateException("Árbol vacío");
         }
 
         NodoArbol<T>[] nodoResultado = getNodo(nodo.valor);
@@ -56,207 +52,164 @@ public class ArbolHiHd<T> implements InterfazArbol<T> {
     }
 
     @Override
-    public NodoArbol<T> hijoIzquierdo(NodoArbol<T> nodo) throws EDJerarquicasException {
-        NodoArbol<T> resultado = null;
-
-        try {
-            if (vacio()) {
-                throw new EDJerarquicasException("Árbol vacío");
-            }
-
-            NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
-            if (!existe(nodoHiHd)) {
-                throw new EDJerarquicasException("El nodo no pertenece a la estructura");
-            }
-
-            resultado = nodoHiHd.getHijoIzquierdo();
-
-        } catch (Exception exc) {
-            throw new EDJerarquicasException(exc.getMessage());
-        }
-
-        return resultado;
-    }
-
-    @Override
-    public NodoArbol<T> hermanoDerecho(NodoArbol<T> nodo) throws EDJerarquicasException {
-        NodoArbol<T> resultado = null;
-
-        try {
-            if (vacio()) {
-                throw new EDJerarquicasException("Árbol vacío");
-            }
-
-            NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
-            if (!existe(nodoHiHd)) {
-                throw new EDJerarquicasException("El nodo no pertenece en la estructura");
-            }
-
-            resultado = nodoHiHd.getHnoDerecho();
-
-        } catch (Exception exc) {
-            throw new EDJerarquicasException(exc.getMessage());
-        }
-
-        return resultado;
-    }
-
-    @Override
-    public T info(NodoArbol<T> nodo) throws EDJerarquicasException {
-        T resultado = null;
-
+    public NodoArbol<T> hijoIzquierdo(NodoArbol<T> nodo) {
         if (vacio()) {
-            throw new EDJerarquicasException("Árbol vacío");
+            throw new IllegalStateException("Árbol vacío");
         }
 
         NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
         if (!existe(nodoHiHd)) {
-            throw new EDJerarquicasException("El nodo no pertenece en la estructura");
+            throw new IllegalArgumentException("El nodo no pertenece a la estructura");
         }
 
-        resultado = nodoHiHd.getValor();
-
-        return resultado;
+        return nodoHiHd.getHijoIzquierdo();
     }
 
     @Override
-    public void insertaHijo(NodoArbol<T> padre, NodoArbol<T> nodo) throws EDJerarquicasException {
+    public NodoArbol<T> hermanoDerecho(NodoArbol<T> nodo) {
+        if (vacio()) {
+            throw new IllegalStateException("Árbol vacío");
+        }
+
+        NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
+        if (!existe(nodoHiHd)) {
+            throw new IllegalArgumentException("El nodo no pertenece en la estructura");
+        }
+
+        return nodoHiHd.getHnoDerecho();
+    }
+
+    @Override
+    public T info(NodoArbol<T> nodo) {
+        if (vacio()) {
+            throw new IllegalStateException("Árbol vacío");
+        }
+
+        NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
+        if (!existe(nodoHiHd)) {
+            throw new IllegalArgumentException("El nodo no pertenece en la estructura");
+        }
+
+        return nodoHiHd.getValor();
+    }
+
+    @Override
+    public void insertaHijo(NodoArbol<T> padre, NodoArbol<T> nodo) {
         if (vacio() && padre != null) {
-            throw new EDJerarquicasException("Si el árbol está vacío no puede especificarse un nodo padre");
+            throw new IllegalArgumentException("Si el árbol está vacío no puede especificarse un nodo padre");
         }
 
         if (!vacio() && padre == null) {
-            throw new EDJerarquicasException("Si el árbol no está vacío debe especificarse un nodo padre");
+            throw new IllegalArgumentException("Si el árbol no está vacío debe especificarse un nodo padre");
         }
 
         if (padre != null && !existe(padre)) {
-            throw new EDJerarquicasException("El nodo especificado como padre no forma parte del árbol");
+            throw new IllegalArgumentException("El nodo especificado como padre no forma parte del árbol");
         }
 
-        try {
-            NodoArbolHiHd<T> padreHiHd = getAsNodoHiHd(padre);
-            NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
+        NodoArbolHiHd<T> padreHiHd = getAsNodoHiHd(padre);
+        NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
 
-            if (padre == null) {
-                raiz = nodoHiHd;
-            } else {
-                NodoArbolHiHd<T> hnoAnterior = null;
-                NodoArbolHiHd<T> hijoHiHd = padreHiHd.getHijoIzquierdo();
+        if (padre == null) {
+            raiz = nodoHiHd;
+        } else {
+            NodoArbolHiHd<T> hnoAnterior = null;
+            NodoArbolHiHd<T> hijoHiHd = padreHiHd.getHijoIzquierdo();
 
-                while (hijoHiHd != null) {
-                    hnoAnterior = hijoHiHd;
-                    hijoHiHd = hijoHiHd.getHnoDerecho();
-                }
-
-                //Si hnoAnterior es distinto de null entonces padre tenía hijos. 
-                if (hnoAnterior != null) {
-                    //Inserto el nodo como hijo más a la derecha
-                    hnoAnterior.hnoDerecho = nodoHiHd;
-                } else {
-                    //El nodo es el primer hijo de padre.
-                    padreHiHd.hijoIzquierdo = nodoHiHd;
-                }
+            while (hijoHiHd != null) {
+                hnoAnterior = hijoHiHd;
+                hijoHiHd = hijoHiHd.getHnoDerecho();
             }
-        } catch (Exception exc) {
-            throw new EDJerarquicasException("No se pudo convertir alguno de los nodos especificados en un NodoHiHd");
+
+            //Si hnoAnterior es distinto de null entonces padre tenía hijos. 
+            if (hnoAnterior != null) {
+                //Inserto el nodo como hijo más a la derecha
+                hnoAnterior.hnoDerecho = nodoHiHd;
+            } else {
+                //El nodo es el primer hijo de padre.
+                padreHiHd.hijoIzquierdo = nodoHiHd;
+            }
         }
     }
 
     @Override
-    public void insertaHermano(NodoArbol<T> nodoIzquierdo, NodoArbol<T> nodo) throws EDJerarquicasException {
+    public void insertaHermano(NodoArbol<T> nodoIzquierdo, NodoArbol<T> nodo) {
         if (vacio() && nodoIzquierdo != null) {
-            throw new EDJerarquicasException("Si el árbol está vacío no puede especificarse un nodo hermano izquierdo");
+            throw new IllegalArgumentException("Si el árbol está vacío no puede especificarse un nodo hermano izquierdo");
         }
 
         if (!vacio() && nodoIzquierdo == null) {
-            throw new EDJerarquicasException("Si el árbol no está vacío debe especificarse un nodo hermano izquierdo");
+            throw new IllegalArgumentException("Si el árbol no está vacío debe especificarse un nodo hermano izquierdo");
         }
 
         if (!existe(nodoIzquierdo)) {
-            throw new EDJerarquicasException("El nodo especificado como hermano izquierdo no forma parte del árbol");
+            throw new IllegalArgumentException("El nodo especificado como hermano izquierdo no forma parte del árbol");
         }
 
-        try {
-            NodoArbolHiHd<T> nodoHnoIzq = getAsNodoHiHd(nodoIzquierdo);
-            NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
+        NodoArbolHiHd<T> nodoHnoIzq = getAsNodoHiHd(nodoIzquierdo);
+        NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
 
-            nodoHnoIzq.hnoDerecho = nodoHiHd;
-
-        } catch (Exception exc) {
-            throw new EDJerarquicasException("No se pudo convertir alguno de los nodos especificados en un NodoHiHd");
-        }
+        nodoHnoIzq.hnoDerecho = nodoHiHd;
     }
 
     @Override
-    public void suprimeHijoIzquierdo(NodoArbol<T> nodo) throws EDJerarquicasException {
+    public void suprimeHijoIzquierdo(NodoArbol<T> nodo) {
         if (vacio()) {
-            throw new EDJerarquicasException("El árbol está vacío. No hay nodos por eliminar");
+            throw new IllegalStateException("El árbol está vacío. No hay nodos por eliminar");
         }
 
         if (nodo == null) {
-            throw new EDJerarquicasException("El nodo especificado no puede ser null");
+            throw new IllegalArgumentException("El nodo especificado no puede ser null");
         }
 
         if (!existe(nodo)) {
-            throw new EDJerarquicasException("El nodo no existe en la estructura");
+            throw new IllegalArgumentException("El nodo no existe en la estructura");
         }
 
-        try {
-            NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
-            NodoArbolHiHd<T> nodoHijo = getAsNodoHiHd(nodo);
+        NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
+        NodoArbolHiHd<T> nodoHijo = getAsNodoHiHd(nodo);
 
-            if (nodoHijo != null) {
-                nodoHiHd.hijoIzquierdo = nodoHijo.getHnoDerecho();
-            }
-        } catch (Exception exc) {
-            throw new EDJerarquicasException("No se pudo convertir alguno de los nodos especificados en un NodoHiHd");
+        if (nodoHijo != null) {
+            nodoHiHd.hijoIzquierdo = nodoHijo.getHnoDerecho();
         }
     }
 
     @Override
-    public void suprimeHermanoDerecho(NodoArbol<T> nodo) throws EDJerarquicasException {
+    public void suprimeHermanoDerecho(NodoArbol<T> nodo) {
         if (vacio()) {
-            throw new EDJerarquicasException("El árbol está vacío. No hay nodos por eliminar");
+            throw new IllegalStateException("El árbol está vacío. No hay nodos por eliminar");
         }
 
         if (nodo == null) {
-            throw new EDJerarquicasException("El nodo especificado no puede ser null");
+            throw new IllegalArgumentException("El nodo especificado no puede ser null");
         }
 
         if (!existe(nodo)) {
-            throw new EDJerarquicasException("El nodo no existe en la estructura");
+            throw new IllegalArgumentException("El nodo no existe en la estructura");
         }
 
-        try {
-            NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
-            NodoArbolHiHd<T> nodoHno = nodoHiHd.getHnoDerecho();
+        NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
+        NodoArbolHiHd<T> nodoHno = nodoHiHd.getHnoDerecho();
 
-            if (nodoHno != null) {
-                nodoHiHd.hnoDerecho = nodoHno.getHnoDerecho();
-            }
-        } catch (Exception exc) {
-            throw new EDJerarquicasException("No se pudo convertir alguno de los nodos especificados en un NodoHiHd");
+        if (nodoHno != null) {
+            nodoHiHd.hnoDerecho = nodoHno.getHnoDerecho();
         }
     }
 
     @Override
-    public void modifica(NodoArbol<T> nodo, T valor) throws EDJerarquicasException {
-        try {
-            NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
+    public void modifica(NodoArbol<T> nodo, T valor) {
+        NodoArbolHiHd<T> nodoHiHd = getAsNodoHiHd(nodo);
 
-            if (vacio()) {
-                throw new EDJerarquicasException("Árbol vacío");
-            }
-
-            if (!existe(nodoHiHd)) {
-                throw new EDJerarquicasException("El nodo no pertenece en la estructura");
-            }
-
-            nodoHiHd.valor = valor;
-
-        } catch (Exception exc) {
-            throw new EDJerarquicasException(exc.getMessage());
+        if (vacio()) {
+            throw new IllegalStateException("Árbol vacío");
         }
+
+        if (!existe(nodoHiHd)) {
+            throw new IllegalArgumentException("El nodo no pertenece en la estructura");
+        }
+
+        nodoHiHd.valor = valor;
+
     }
 
     @Override
@@ -272,16 +225,8 @@ public class ArbolHiHd<T> implements InterfazArbol<T> {
         return resultado;
     }
 
-    private NodoArbolHiHd<T> getAsNodoHiHd(NodoArbol<T> nodo) throws EDJerarquicasException {
-        NodoArbolHiHd<T> resultado = null;
-
-        try {
-            resultado = (NodoArbolHiHd<T>) nodo;
-        } catch (Exception exc) {
-            throw new EDJerarquicasException("El nodo no es de tipo NodoHiHd");
-        }
-
-        return resultado;
+    private NodoArbolHiHd<T> getAsNodoHiHd(NodoArbol<T> nodo) {
+        return (NodoArbolHiHd<T>) nodo;
     }
 
     private NodoArbol<T>[] getNodo(T valor) {
@@ -289,89 +234,84 @@ public class ArbolHiHd<T> implements InterfazArbol<T> {
 
         busquedaValor:
         {
-            try {
-                if (!vacio()) {
-                    ColaPorEnlaces<NodoArbolHiHd<T>> filaCompleta = new ColaPorEnlaces();
-                    ColaPorEnlaces<NodoArbolHiHd<T>> filaParcial = null;
+            if (!vacio()) {
+                ColaPorEnlaces<NodoArbolHiHd<T>> filaCompleta = new ColaPorEnlaces();
+                ColaPorEnlaces<NodoArbolHiHd<T>> filaParcial = null;
 
-                    filaCompleta.enqueue(raiz);
+                filaCompleta.enqueue(raiz);
 
-                    while (!filaCompleta.isEmpty()) {
-                        filaParcial = new ColaPorEnlaces();
-                        NodoArbolHiHd<T> nodoActual = filaCompleta.getFront();
+                while (!filaCompleta.isEmpty()) {
+                    filaParcial = new ColaPorEnlaces();
+                    NodoArbolHiHd<T> nodoActual = filaCompleta.getFront();
 
-                        if (nodoActual.getHijoIzquierdo() != null) {
-                            nodoActual = nodoActual.getHijoIzquierdo();
+                    if (nodoActual.getHijoIzquierdo() != null) {
+                        nodoActual = nodoActual.getHijoIzquierdo();
 
-                            while (nodoActual != null) {
-                                filaParcial.enqueue(nodoActual);
-                                nodoActual = nodoActual.getHnoDerecho();
-                            }
+                        while (nodoActual != null) {
+                            filaParcial.enqueue(nodoActual);
+                            nodoActual = nodoActual.getHnoDerecho();
                         }
+                    }
 
-                        //Si la fila parcial no tiene valores y nodoActual es el tiene por valor 
-                        //el valor pasado por parámetro entonces se trataba de la raíz
-                        if (filaParcial.isEmpty() && nodoActual.getValor().equals(valor)) {
+                    //Si la fila parcial no tiene valores y nodoActual es el tiene por valor 
+                    //el valor pasado por parámetro entonces se trataba de la raíz
+                    if (filaParcial.isEmpty() && nodoActual.getValor().equals(valor)) {
+                        resultado = (NodoArbolHiHd[]) Array.newInstance(NodoArbolHiHd.class, 2);
+                        resultado[0] = null;
+                        resultado[1] = nodoActual;
+
+                        break busquedaValor;
+                    }
+
+                    while (!filaParcial.isEmpty()) {
+                        NodoArbolHiHd<T> compActual = filaParcial.getFront();
+
+                        if (compActual.getValor().equals(valor)) {
                             resultado = (NodoArbolHiHd[]) Array.newInstance(NodoArbolHiHd.class, 2);
-                            resultado[0] = null;
-                            resultado[1] = nodoActual;
+                            resultado[0] = nodoActual;
+                            resultado[1] = compActual;
 
                             break busquedaValor;
                         }
 
-                        while (!filaParcial.isEmpty()) {
-                            NodoArbolHiHd<T> compActual = filaParcial.getFront();
-
-                            if (compActual.getValor().equals(valor)) {
-                                resultado = (NodoArbolHiHd[]) Array.newInstance(NodoArbolHiHd.class, 2);
-                                resultado[0] = nodoActual;
-                                resultado[1] = compActual;
-
-                                break busquedaValor;
-                            }
-
-                            filaCompleta.enqueue(compActual);
-                            filaParcial.dequeue();
-                        }
-
-                        filaCompleta.dequeue();
+                        filaCompleta.enqueue(compActual);
+                        filaParcial.dequeue();
                     }
-                }
-            } catch (Exception exc) {
 
-                resultado = null;
+                    filaCompleta.dequeue();
+                }
             }
         }
 
         return resultado;
     }
 
-    public ArbolHiHdIterador<T> iteradorPreorden() throws EDJerarquicasException {
+    public ArbolHiHdIterador<T> iteradorPreorden() {
         if (this.vacio()) {
-            throw new EDJerarquicasException("Árbol vacío. La operación no se puede llevar a cabo.");
+            throw new IllegalStateException("Árbol vacío. La operación no se puede llevar a cabo.");
         }
 
         return new ArbolHiHdIteradorPreorden(raiz);
     }
 
-    public ArbolHiHdIterador<T> iteradorPosorden() throws EDJerarquicasException {
+    public ArbolHiHdIterador<T> iteradorPosorden() {
         if (this.vacio()) {
-            throw new EDJerarquicasException("Árbol vacío. La operación no se puede llevar a cabo.");
+            throw new IllegalStateException("Árbol vacío. La operación no se puede llevar a cabo.");
         }
 
         return new ArbolHiHdIteradorPosorden(raiz);
     }
 
-    public ArbolHiHdIterador<T> iteradorPorNiveles() throws EDJerarquicasException {
+    public ArbolHiHdIterador<T> iteradorPorNiveles() {
         if (this.vacio()) {
-            throw new EDJerarquicasException("Árbol vacío. La operación no se puede llevar a cabo.");
+            throw new IllegalStateException("Árbol vacío. La operación no se puede llevar a cabo.");
         }
         return new ArbolHiHdIteradorPorNiveles(raiz);
     }
 
-    public ArbolHiHdIterador<T> iteradorInorden() throws EDJerarquicasException {
+    public ArbolHiHdIterador<T> iteradorInorden() {
         if (this.vacio()) {
-            throw new EDJerarquicasException("Árbol vacío. La operación no se puede llevar a cabo.");
+            throw new IllegalStateException("Árbol vacío. La operación no se puede llevar a cabo.");
         }
 
         return new ArbolHiHdIteradorInorden(raiz);
@@ -381,32 +321,27 @@ public class ArbolHiHd<T> implements InterfazArbol<T> {
     public String toString() {
         String resultado = "";
 
-        try {
-            if (vacio()) {
-                return resultado;
-            }
-
-            ColaPorEnlaces<NodoArbolHiHd<T>> cola = new ColaPorEnlaces();
-            cola.enqueue(raiz);
-            while (!cola.isEmpty()) {
-                NodoArbolHiHd<T> nodoActual = cola.getFront();
-                resultado += ", [" + nodoActual.valor + "]";
-
-                if (nodoActual.tieneHijos()) {
-                    NodoArbolHiHd<T> nodoHijo = nodoActual.hijoIzquierdo;
-                    while (nodoHijo != null) {
-                        cola.enqueue(nodoHijo);
-                        nodoHijo = nodoHijo.hnoDerecho;
-                    }
-                }
-                cola.dequeue();
-            }
-            
-            resultado = resultado.substring(2);
-        } catch (Exception exc) {
-            return "";
+        if (vacio()) {
+            return resultado;
         }
-        return resultado;
+
+        ColaPorEnlaces<NodoArbolHiHd<T>> cola = new ColaPorEnlaces();
+        cola.enqueue(raiz);
+        while (!cola.isEmpty()) {
+            NodoArbolHiHd<T> nodoActual = cola.getFront();
+            resultado += ", [" + nodoActual.valor + "]";
+
+            if (nodoActual.tieneHijos()) {
+                NodoArbolHiHd<T> nodoHijo = nodoActual.hijoIzquierdo;
+                while (nodoHijo != null) {
+                    cola.enqueue(nodoHijo);
+                    nodoHijo = nodoHijo.hnoDerecho;
+                }
+            }
+            cola.dequeue();
+        }
+
+        return resultado.substring(2);
     }
 
     public ListaEnlazadaNoOrdenada<NodoArbolHiHd<T>> buscarCaminoANodo(T valor) {

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.uner.fcad.ed.edjerarquicas;
 
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
@@ -34,10 +30,10 @@ public class ArbolHiHdIteradorInorden<T> implements ArbolHiHdIterador<T> {
     }
 
     @Override
-    public T siguiente() throws EDJerarquicasException {
+    public T siguiente() {
 
         if (!iterador.existeSiguiente()) {
-            throw new EDJerarquicasException("No existen más elementos.");
+            throw new IllegalStateException("No existen más elementos.");
         }
 
         return iterador.siguiente();

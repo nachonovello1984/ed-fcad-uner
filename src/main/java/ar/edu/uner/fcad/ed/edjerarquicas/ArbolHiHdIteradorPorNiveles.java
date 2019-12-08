@@ -13,7 +13,7 @@ import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
  * @author Usuario
  * @param <T>
  */
-public class ArbolHiHdIteradorPorNiveles<T> implements ArbolHiHdIterador<T> {
+public class ArbolHiHdIteradorPorNiveles<T> implements Iterador<T> {
 
     private final Iterador<T> iterador;
 

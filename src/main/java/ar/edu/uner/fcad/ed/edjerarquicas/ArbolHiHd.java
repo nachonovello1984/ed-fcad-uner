@@ -2,7 +2,9 @@ package ar.edu.uner.fcad.ed.edjerarquicas;
 
 import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
 import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
+import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
 import java.lang.reflect.Array;
+import java.util.Objects;
 
 /**
  *
@@ -286,7 +288,7 @@ public class ArbolHiHd<T> implements InterfazArbol<T> {
         return resultado;
     }
 
-    public ArbolHiHdIterador<T> iteradorPreorden() {
+    public Iterador<T> iteradorPreorden() {
         if (this.vacio()) {
             throw new IllegalStateException("Árbol vacío. La operación no se puede llevar a cabo.");
         }
@@ -294,7 +296,7 @@ public class ArbolHiHd<T> implements InterfazArbol<T> {
         return new ArbolHiHdIteradorPreorden(raiz);
     }
 
-    public ArbolHiHdIterador<T> iteradorPosorden() {
+    public Iterador<T> iteradorPosorden() {
         if (this.vacio()) {
             throw new IllegalStateException("Árbol vacío. La operación no se puede llevar a cabo.");
         }
@@ -302,20 +304,55 @@ public class ArbolHiHd<T> implements InterfazArbol<T> {
         return new ArbolHiHdIteradorPosorden(raiz);
     }
 
-    public ArbolHiHdIterador<T> iteradorPorNiveles() {
+    public Iterador<T> iteradorPorNiveles() {
         if (this.vacio()) {
             throw new IllegalStateException("Árbol vacío. La operación no se puede llevar a cabo.");
         }
         return new ArbolHiHdIteradorPorNiveles(raiz);
     }
 
-    public ArbolHiHdIterador<T> iteradorInorden() {
+    public Iterador<T> iteradorInorden() {
         if (this.vacio()) {
             throw new IllegalStateException("Árbol vacío. La operación no se puede llevar a cabo.");
         }
 
         return new ArbolHiHdIteradorInorden(raiz);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ArbolHiHd<T> other = (ArbolHiHd<T>) obj;
+        Iterador<T> thisIterador = this.iteradorPreorden();
+        Iterador<T> otherIterador = other.iteradorPreorden();
+                
+        while(thisIterador.existeSiguiente() || otherIterador.existeSiguiente()) {
+            //Controlo si los árboles no tienen la misma cantidad de nodos => no son iguales
+            if ( (thisIterador.existeSiguiente() && !otherIterador.existeSiguiente()) ||
+                 (!thisIterador.existeSiguiente() && otherIterador.existeSiguiente())) {
+                return false;
+            }
+            
+            T thisElement = thisIterador.siguiente();
+            T otherElement = otherIterador.siguiente();
+            
+            if (!Objects.equals(thisElement, otherElement)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    
 
     @Override
     public String toString() {

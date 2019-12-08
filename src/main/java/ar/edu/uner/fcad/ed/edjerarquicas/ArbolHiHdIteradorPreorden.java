@@ -12,9 +12,9 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
  * @author Nacho
  * @param <T>
  */
-public class ArbolHiHdIteradorPreorden <T> implements ArbolHiHdIterador <T> {
+public class ArbolHiHdIteradorPreorden <T> implements Iterador <T> {
     
-    private Iterador<T> iterador;
+    private final Iterador<T> iterador;
     
     public ArbolHiHdIteradorPreorden(NodoArbolHiHd<T> raiz){
         this.iterador = armarRecorrido(raiz).iterador();

@@ -8,7 +8,7 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
  * @author ignnov
  * @param <T>
  */
-public class ArbolHiHdIteradorInorden<T> implements ArbolHiHdIterador<T> {
+public class ArbolHiHdIteradorInorden<T> implements Iterador<T> {
 
     private final Iterador<T> iterador;
 

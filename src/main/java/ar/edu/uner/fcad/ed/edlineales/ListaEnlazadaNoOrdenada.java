@@ -160,18 +160,13 @@ public class ListaEnlazadaNoOrdenada<T>
         return buscado.elemento;
     }
 
+    /**
+     * Quita un elemento de la lista según la ubicación especificada por indice.
+     * @param indice
+     * @return 
+     */
     public T remove(int indice) {
-
-        if (indice < 0 || indice > size()) {
-            throw new IllegalArgumentException("Índice fuera de intervalo");
-        }
-
-        NodoLista<T> nodoActual = header.siguiente;
-        for (int i = 0; i < indice; i++) {
-            nodoActual = nodoActual.siguiente;
-        }
-
-        return remove(nodoActual.elemento);
+        return remove(get(indice));
     }
 
     /**
@@ -385,11 +380,7 @@ public class ListaEnlazadaNoOrdenada<T>
             nodoActual = nodoActual.siguiente;
         }
 
-        if (resultado.length() > 0) {
-            resultado = resultado.substring(2);
-        }
-
-        return resultado;
+        return resultado.substring(2);
     }
 
     @Override

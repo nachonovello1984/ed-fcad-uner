@@ -10,180 +10,28 @@ import org.junit.jupiter.api.Test;
  *
  * @author nacho
  */
-public class ListaEnlazadaNoOrdenadaTest {
+public class ListaEnlazadaOrdenadaTest {
 
     //*********
     //*********
-    //addToFront()
+    //add()
     //*********
     //*********
     @Test
-    public void testAddToFront_shouldAddElementFirst() {
-        System.out.println("testAddToFront_shouldAddElement1");
-        String expected = "[2], [1]";
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(1);
-        instance.addToFront(2);
-        assertEquals(expected, instance.toString(), "addToFront() no funciona correctamente.");
-    }
-
-    @Test
-    public void testAddToFront_shouldNotBeEmpty() {
-        System.out.println("testAddToFront_shouldNotBeEmpty");
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToFront(1);
-        assertFalse(instance.isEmpty(), "addToFront() debería dejar NO vacía la estructura.");
-    }
-
-    //*********
-    //*********
-    //addToRear()
-    //*********
-    //*********
-    @Test
-    public void testAddToRear_shouldAddElementLast() {
-        System.out.println("testAddToRear_shouldAddElementLast");
-        Integer expected = 100;
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(10);
-        instance.addToRear(100);
-        assertEquals(expected, instance.last(), "addToRear() debería agregar el elemento al final de la estructura.");
-    }
-
-    @Test
-    public void testAddToRear_shouldNotBeEmpty() {
-        System.out.println("testAddToRear_shouldNotBeEmpty");
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(10);
-        assertFalse(instance.isEmpty(), "addToRear() debería dejar NO vacía la estructura.");
-    }
-
-    //*********
-    //*********
-    //addAfter()
-    //*********
-    //*********
-    @Test
-    public void testAddAfter_shouldAddElementAt() {
-        System.out.println("testAddAfter_shouldAddElementAt");
-
-        Integer expected = 5;
-
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        for (int i = 1; i <= 10; i++) {
-            instance.addToRear(i * 2);
+    public void testAdd_shouldAddElementInOrder() {
+        System.out.println("testAdd_shouldAddElementInOrder");
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
+        for (int i = 10; i >= 0; i--) {
+            instance.add(i);
         }
-
-        instance.addAfter(5, 4);
-
-        int indexOf = instance.indexOf(4);
-
-        assertEquals(expected, instance.get(indexOf + 1), "El elemento no es el esperado");
-    }
-
-    @Test
-    public void testAddAfter_shouldAddElementAtLast() {
-        System.out.println("testAddAfter_shouldAddElementAtLast");
-
-        Integer expected = 5;
-
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        for (int i = 1; i <= 10; i++) {
-            instance.addToRear(i * 2);
-        }
-
-        instance.addAfter(5, 20);
-
-        assertEquals(expected, instance.last(), "El elemento ubicado al final de la lista no es el esperado.");
-    }
-
-    @Test
-    public void testAddAfter_shouldGenerateException() {
-        System.out.println("testAddAfter_shouldGenerateException");
-
-        boolean ingreso = false;
-        try {
-            ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-            for (int i = 1; i <= 10; i++) {
-                instance.addToRear(i * 2);
-            }
-            //Intento insertar un elemento después de uno que no existe en la estructura.
-            instance.addAfter(5, 7);
-
-        } catch (Exception exc) {
-            ingreso = true;
-        }
-
-        assertTrue(ingreso, "Debería haberse generado una excepción");
-    }
-
-    //*********
-    //*********
-    //addAll()
-    //*********
-    @Test
-    public void testAddAll_shouldAddAllElements() {
-        System.out.println("testAddAll_shouldAddAllElements");
-
-        //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> todos = new ListaEnlazadaNoOrdenada();
-        for (int i = 0; i <= 10; i += 2) {
-            todos.addToRear(i);
-        }
-
-        //Inserto elementos impares
-        ListaEnlazadaNoOrdenada<Integer> impares = new ListaEnlazadaNoOrdenada();
-        for (int i = 1; i <= 10; i += 2) {
-            impares.addToRear(i);
-        }
-
-        todos.addAll(impares);
-
-        Iterador<Integer> iterador = impares.iterador();
+        
+        Integer expected = 0;
+        Iterador<Integer> iterador = instance.iterador();
         while (iterador.existeSiguiente()) {
-            Integer elementoActual = iterador.siguiente();
-            assertFalse(!todos.contains(elementoActual), "La lista debería contener todos los elementos de impares");
+            assertEquals(expected++, iterador.siguiente(), "El método add() no funciona como se esperaba");
         }
     }
-
-    @Test
-    public void testAddAll_shouldAddNone1() {
-        System.out.println("testAddAll_shouldAddNone1");
-
-        //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> todos = new ListaEnlazadaNoOrdenada();
-        for (int i = 0; i <= 10; i += 2) {
-            todos.addToRear(i);
-        }
-
-        int expected = todos.size();
-
-        ListaEnlazadaNoOrdenada<Integer> param = null;
-
-        todos.addAll(param);
-
-        assertEquals(expected, todos.size(), "La lista vacía no agrega elementos");
-    }
-
-    @Test
-    public void testAddAll_shouldAddNone2() {
-        System.out.println("testAddAll_shouldAddNone2");
-
-        //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> todos = new ListaEnlazadaNoOrdenada();
-        for (int i = 0; i <= 10; i += 2) {
-            todos.addToRear(i);
-        }
-
-        int expected = todos.size();
-
-        ListaEnlazadaNoOrdenada<Integer> param = new ListaEnlazadaNoOrdenada();
-
-        todos.addAll(param);
-
-        assertEquals(expected, todos.size(), "La lista vacía no agrega elementos");
-    }
-
+    
     //*********
     //*********
     //removeFirst()
@@ -194,9 +42,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testRemoveFirst_shouldRemoveFirstElement1");
 
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
 
         Integer expected = instance.first();
@@ -210,9 +58,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testRemoveFirst_shouldRemoveFirstElement2");
 
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
 
         //Tomo el segundo elemento
@@ -228,7 +76,7 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testRemoveFirst_shouldReturnNull");
 
         //Creo una lista vacía
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
 
         //Elimino el primero
         Integer resultado = instance.removeFirst();
@@ -246,9 +94,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testRemoveLast_shouldRemoveLastElement1");
 
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
 
         //Obtengo el último elemento
@@ -266,9 +114,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testRemoveLast_shouldRemoveLastElement2");
 
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
 
         //Obtengo el ante último elemento
@@ -285,8 +133,8 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testRemoveLast_shouldRemoveOnlyElement");
 
         //Creo una lista vacía
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(100);
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
+        instance.add(100);
 
         //Obtengo el último elemento
         Integer expected = instance.last();
@@ -301,7 +149,7 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testRemoveFirst_shouldReturnNull");
 
         //Creo una lista vacía
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
 
         //Elimino el primero
         Integer resultado = instance.removeLast();
@@ -319,9 +167,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testRemoveByElement_shouldRemoveElement1");
 
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
 
         Integer expected = 6;
@@ -336,8 +184,8 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testRemoveByElement_shouldRemoveElement2");
 
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(100);
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
+        instance.add(100);
 
         Integer expected = 100;
         Integer actual = instance.remove(new Integer(100));
@@ -352,8 +200,8 @@ public class ListaEnlazadaNoOrdenadaTest {
         boolean ingreso = false;
 
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(100);
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
+        instance.add(100);
         try {
             instance.remove(new Integer(1000));
         } catch (Exception exc) {
@@ -369,9 +217,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testRemoveByPosition_shouldRemoveNone");
 
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
         
         Integer expected = 0;
@@ -391,9 +239,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testFirst_shouldReturnFirst");
 
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
         
         Integer expected = 0;
@@ -407,7 +255,7 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testFirst_shouldReturnNull");
 
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         
         Integer expected = null;
         Integer actual = instance.first();
@@ -425,9 +273,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testGet_shouldReturnElement");
         
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
         
         Integer expected = 20;
@@ -441,9 +289,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         boolean ingreso = false;
         
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
         
         try {
@@ -474,9 +322,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         System.out.println("testSet_shouldUpdateNode");
         
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
         Integer expected = 5;
         instance.set(expected, 2);
@@ -491,9 +339,9 @@ public class ListaEnlazadaNoOrdenadaTest {
         boolean ingreso = false;
         
         //Inserto solo elementos pares
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 0; i <= 10; i += 2) {
-            instance.addToRear(i);
+            instance.add(i);
         }
         
         try {
@@ -523,7 +371,7 @@ public class ListaEnlazadaNoOrdenadaTest {
     public void testLast_shouldReturnNull() {
         System.out.println("testLast_shouldReturnNull");
         Integer expected = null;
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         assertEquals(expected, instance.last(), "last() debería devolver null.");
     }
 
@@ -533,9 +381,9 @@ public class ListaEnlazadaNoOrdenadaTest {
 
         Integer expected = 100;
 
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(10);
-        instance.addToRear(100);
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
+        instance.add(10);
+        instance.add(100);
 
         assertEquals(expected, instance.last(), "last() debería devolver 100.");
     }
@@ -549,8 +397,8 @@ public class ListaEnlazadaNoOrdenadaTest {
     public void testContains_shouldReturnFalse() {
         System.out.println("testContains_shouldReturnFalse");
 
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(10);
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
+        instance.add(10);
 
         assertFalse(instance.contains(100), "contains() debería devolver false.");
     }
@@ -559,9 +407,9 @@ public class ListaEnlazadaNoOrdenadaTest {
     public void testContains_shouldReturnTrue() {
         System.out.println("testContains_shouldReturnTrue");
 
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(10);
-        instance.addToRear(100);
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
+        instance.add(10);
+        instance.add(100);
 
         assertTrue(instance.contains(100), "contains() debería devolver true.");
     }
@@ -575,8 +423,8 @@ public class ListaEnlazadaNoOrdenadaTest {
     public void testIndexOf_shouldReturnNegativeValue1() {
         System.out.println("testIndexOf_shouldReturnNegativeValue1");
         Integer expected = -1;
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(10);
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
+        instance.add(10);
         assertEquals(expected, instance.indexOf(100), "indexOf() debería devolver -1.");
     }
 
@@ -584,7 +432,7 @@ public class ListaEnlazadaNoOrdenadaTest {
     public void testIndexOf_shouldReturnNegativeValue2() {
         System.out.println("testIndexOf_shouldReturnNegativeValue2");
         Integer expected = -1;
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         assertEquals(expected, instance.indexOf(100), "indexOf() debería devolver -1.");
     }
 
@@ -592,9 +440,9 @@ public class ListaEnlazadaNoOrdenadaTest {
     public void testIndexOf_shouldReturnGraterThanZero() {
         System.out.println("testIndexOf_shouldReturnGraterThanZero");
         Integer expected = 1;
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(10);
-        instance.addToRear(100);
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
+        instance.add(10);
+        instance.add(100);
         assertEquals(expected, instance.indexOf(100), "indexOf() debería devolver 1.");
     }
 
@@ -606,15 +454,15 @@ public class ListaEnlazadaNoOrdenadaTest {
     @Test
     public void testIsEmpty_shouldReturnFalse() {
         System.out.println("testIsEmpty_shouldReturnFalse");
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
-        instance.addToRear(10);
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
+        instance.add(10);
         assertFalse(instance.isEmpty(), "isEmpty() debería devolver false.");
     }
 
     @Test
     public void testIsEmpty_shouldReturnTrue() {
         System.out.println("testIsEmpty_shouldReturnTrue");
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         assertTrue(instance.isEmpty(), "isEmpty() debería devolver true.");
     }
 
@@ -627,7 +475,7 @@ public class ListaEnlazadaNoOrdenadaTest {
     public void testSize_shouldReturnZero() {
         System.out.println("testSize_shouldReturnZero");
         Integer expected = 0;
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         assertEquals(expected, instance.size(), "size() debe ser 0.");
     }
 
@@ -635,9 +483,9 @@ public class ListaEnlazadaNoOrdenadaTest {
     public void testSize_shouldReturnGreaterThanZero() {
         System.out.println("testSize_shouldReturnGreaterThanZero");
         Integer expected = 10;
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 1; i <= 10; i++) {
-            instance.addToRear(i);
+            instance.add(i);
         }
         assertEquals(expected, instance.size(), "size() debe ser 0.");
     }
@@ -651,7 +499,7 @@ public class ListaEnlazadaNoOrdenadaTest {
     public void testToString_shouldReturnEmptyString() {
         System.out.println("testToString_shouldReturnEmptyString");
         String expected = "";
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         assertEquals(expected, instance.toString(), "Debería retornar el String vacío.");
     }
 
@@ -659,9 +507,9 @@ public class ListaEnlazadaNoOrdenadaTest {
     public void testToString_shouldReturnNotEmptyString() {
         System.out.println("testToString_shouldReturnNotEmptyString");
         String expected = "[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]";
-        ListaEnlazadaNoOrdenada<Integer> instance = new ListaEnlazadaNoOrdenada();
+        ListaEnlazadaOrdenada<Integer> instance = new ListaEnlazadaOrdenada();
         for (int i = 1; i <= 10; i++) {
-            instance.addToRear(i);
+            instance.add(i);
         }
         assertEquals(expected, instance.toString(), "toString() no funciona como debería.");
     }

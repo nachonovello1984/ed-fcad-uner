@@ -48,7 +48,7 @@ public class NodoLista <T>{
      */
     public void setSiguiente(NodoLista<T> siguiente) {
         this.siguiente = siguiente;
-    }
+    }  
 
     @Override
     public String toString() {

@@ -16,10 +16,19 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
     private static final int CAPACIDAD = 10;
     protected T[] arreglo;
     protected Class<T> clase;
+    protected int capacidad;
     protected int ultimaPosicion;
 
     public ListaPorPosicionOrdenada(Class<T> clase) {
-        this.arreglo = nuevoArreglo(clase, CAPACIDAD);
+        this.capacidad = CAPACIDAD;
+        this.arreglo = nuevoArreglo(clase, capacidad);
+        this.clase = clase;
+        this.ultimaPosicion = -1;
+    }
+
+    public ListaPorPosicionOrdenada(Class<T> clase, int capacidad) {
+        this.capacidad = capacidad;
+        this.arreglo = nuevoArreglo(clase, capacidad);
         this.clase = clase;
         this.ultimaPosicion = -1;
     }
@@ -31,7 +40,7 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
      */
     @Override
     public void add(T element) {
-        if (ultimaPosicion + 1 > CAPACIDAD) {
+        if (ultimaPosicion + 1 >= capacidad) {
             throw new IllegalStateException("La estructura está llena. La operación solicitada no se llevará a cabo.");
         }
 
@@ -80,14 +89,9 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
             return null;
         }
 
-        T resultado = null;
-
-        try {
-            resultado = this.arreglo[ultimaPosicion];
-            excluirPosicion(ultimaPosicion);
-            ultimaPosicion--;
-        } catch (Exception exc) {
-        }
+        T resultado = this.arreglo[ultimaPosicion];
+        excluirPosicion(ultimaPosicion);
+        ultimaPosicion--;
 
         return resultado;
     }
@@ -100,15 +104,11 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
      */
     @Override
     public T remove(T element) {
-        if (isEmpty()) {
-            throw new IllegalStateException("La estructura está vacía. La operación no se puede llevar a cabo.");
-        }
-
         int posicion = indexOf(element);
         if (posicion < 0) {
             throw new IllegalArgumentException("El elemento especificado no forma parte de la estructura. La operación no se puede llevar a cabo.");
         }
-        
+
         T resultado = this.arreglo[posicion];
 
         excluirPosicion(posicion);
@@ -124,12 +124,15 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
      */
     @Override
     public T first() {
+        if (isEmpty()) {
+            return null;
+        }
         return arreglo[0];
     }
 
     /**
      * Devuelve el elemento ubicado en el nodo ubicado en la posición indicada
-     * por el parámetro position. 
+     * por el parámetro position.
      *
      * @param position
      * @return
@@ -159,6 +162,10 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
      */
     @Override
     public T last() {
+        if (isEmpty()) {
+            return null;
+        }
+
         return arreglo[ultimaPosicion];
     }
 
@@ -181,18 +188,13 @@ public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
      */
     @Override
     public int indexOf(T target) {
-        int resultado = -1;
-
-        if (target != null) {
-            for (int i = 0; i <= ultimaPosicion; i++) {
-                if (target.equals(arreglo[i])) {
-                    resultado = i;
-                    break;
-                }
+        for (int i = 0; i <= ultimaPosicion; i++) {
+            if (target.equals(arreglo[i])) {
+                return i;
             }
         }
 
-        return resultado;
+        return -1;
     }
 
     /**

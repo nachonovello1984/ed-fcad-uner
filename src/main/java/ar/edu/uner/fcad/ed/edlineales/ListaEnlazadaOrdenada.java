@@ -72,6 +72,10 @@ public class ListaEnlazadaOrdenada
      */
     @Override
     public T removeLast() {
+        if (isEmpty()) {
+            return null;
+        }
+        
         NodoListaBusqueda<T> nodosLista = getUltimos2Nodos();
         NodoLista<T> anteUltimoNodo = nodosLista.nodoAnterior;
         NodoLista<T> ultimoNodo = nodosLista.nodoActual;
@@ -316,11 +320,7 @@ public class ListaEnlazadaOrdenada
             nodoActual = nodoActual.siguiente;
         }
 
-        if (resultado.length() > 0) {
-            resultado = resultado.substring(2);
-        }
-
-        return resultado;
+        return resultado.substring(2);
     }
 
     @Override

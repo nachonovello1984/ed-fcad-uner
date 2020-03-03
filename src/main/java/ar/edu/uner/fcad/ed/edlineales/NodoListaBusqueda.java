@@ -24,16 +24,8 @@ public class NodoListaBusqueda<T> {
         this.nodoActual = nodoActual;
     }
 
-    public NodoLista<T> getNodoAnterior() {
-        return nodoAnterior;
-    }
-
     public void setNodoAnterior(NodoLista<T> nodoAnterior) {
         this.nodoAnterior = nodoAnterior;
-    }
-
-    public NodoLista<T> getNodoActual() {
-        return nodoActual;
     }
 
     public void setNodoActual(NodoLista<T> nodoActual) {

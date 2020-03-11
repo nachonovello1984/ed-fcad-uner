@@ -10,11 +10,13 @@ import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorPosicion;
 import ar.edu.uner.fcad.ed.edlineales.pilas.PilaPorEnlaces;
 import ar.edu.uner.fcad.ed.edlineales.pilas.PilaPorPosicion;
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
+import javax.annotation.Generated;
 
 /**
  *
  * @author nacho
  */
+@Generated("ClienteEDLineales")
 public class ClienteEDLineales {
 
     public static void testListaEnlazadaOrdenadaIterador() {

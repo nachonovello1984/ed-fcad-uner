@@ -71,7 +71,7 @@ public class DiccionarioConLista<K, V> implements DiccionarioInterfaz<K, V> {
 
     @Override
     public Entrada<K, V> insert(K key, V value) {
-        Entrada<K, V> entrada = new Entrada<K, V>(key, value);
+        Entrada<K, V> entrada = new Entrada(key, value);
         lista.addToRear(entrada);
         return entrada;
     }
@@ -114,6 +114,10 @@ public class DiccionarioConLista<K, V> implements DiccionarioInterfaz<K, V> {
     @Override
     public String toString() {
         String resultado = "";
+        
+        if (isEmpty()) {
+            return resultado;
+        }
 
         Iterador<Entrada<K, V>> iterador = lista.iterador();
 

@@ -171,10 +171,9 @@ public class ArbolBinario<T> implements ArbolBinarioInterfaz<T> {
      *
      * @param padre
      * @param hijo
-     * @throws Exception
      */
     @Override
-    public void agregarHijoIzquierdo(NodoArbolBinario<T> padre, NodoArbolBinario<T> hijo) throws Exception {
+    public void agregarHijoIzquierdo(NodoArbolBinario<T> padre, NodoArbolBinario<T> hijo) {
         agregarHijo(padre, hijo, true);
     }
 
@@ -183,10 +182,9 @@ public class ArbolBinario<T> implements ArbolBinarioInterfaz<T> {
      *
      * @param padre
      * @param hijo
-     * @throws Exception
      */
     @Override
-    public void agregarHijoDerecho(NodoArbolBinario<T> padre, NodoArbolBinario<T> hijo) throws Exception {
+    public void agregarHijoDerecho(NodoArbolBinario<T> padre, NodoArbolBinario<T> hijo) {
         agregarHijo(padre, hijo, false);
     }
 

@@ -31,12 +31,12 @@ public class Heap<T extends Comparable<? super T>>
     }
 
     @Override
-    public void agregarHijoDerecho(NodoArbolBinario<T> padre, NodoArbolBinario<T> hijo) throws Exception {
+    public void agregarHijoDerecho(NodoArbolBinario<T> padre, NodoArbolBinario<T> hijo) {
         throw new UnsupportedOperationException("Operación no soportada");
     }
 
     @Override
-    public void agregarHijoIzquierdo(NodoArbolBinario<T> padre, NodoArbolBinario<T> hijo) throws Exception {
+    public void agregarHijoIzquierdo(NodoArbolBinario<T> padre, NodoArbolBinario<T> hijo) {
         throw new UnsupportedOperationException("Operación no soportada");
     }
 

@@ -63,7 +63,7 @@ public class DiccionarioConListaTest {
     //*********
     @Test
     public void testIsEmpty_shouldReturnTrue() {
-        System.out.println("testSize_shouldReturnZero");
+        System.out.println("testIsEmpty_shouldReturnTrue");
 
         DiccionarioConLista<Integer, Integer> instance = new DiccionarioConLista();
         Boolean resultado = instance.isEmpty();
@@ -78,7 +78,7 @@ public class DiccionarioConListaTest {
     //*********
     @Test
     public void testIsEmpty_shouldReturnFalse() {
-        System.out.println("testSize_shouldReturnGreaterThanZero");
+        System.out.println("testIsEmpty_shouldReturnFalse");
 
         DiccionarioConLista<Integer, Integer> instance = new DiccionarioConLista();
         Integer expected = new Random().nextInt(10);
@@ -96,6 +96,8 @@ public class DiccionarioConListaTest {
     //*************
     @Test
     public void testFind_shouldReturnNull() {
+        System.out.println("testFind_shouldReturnNull");
+        
         DiccionarioConLista<Integer, Integer> instance = new DiccionarioConLista();
         for (int i = 0; i < 5; i++) {
             instance.insert(i, i);

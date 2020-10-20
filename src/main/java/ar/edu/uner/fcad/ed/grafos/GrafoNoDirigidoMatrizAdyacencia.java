@@ -118,7 +118,7 @@ public class GrafoNoDirigidoMatrizAdyacencia <T> implements GrafoNoDirigidoInter
         return this.cantidadVertices;
     }
     
-    private int indice(T vertice) {
+    protected int indice(T vertice) {
         for (int i = 0; i < this.vertices.length; i++) {
             if (this.vertices[i] != null && this.vertices[i].equals(vertice)) {
                 return i;

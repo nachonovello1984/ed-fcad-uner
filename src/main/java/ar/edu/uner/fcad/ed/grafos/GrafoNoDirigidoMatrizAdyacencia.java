@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ar.edu.uner.fcad.ed.grafos;
 
 import java.lang.reflect.Array;
@@ -10,6 +5,7 @@ import java.lang.reflect.Array;
 /**
  *
  * @author nacho
+ * @param <T>
  */
 public class GrafoNoDirigidoMatrizAdyacencia <T> implements GrafoNoDirigidoInterfaz <T>{
     
@@ -17,11 +13,17 @@ public class GrafoNoDirigidoMatrizAdyacencia <T> implements GrafoNoDirigidoInter
     protected int cantidadVertices;
     protected boolean [][] matrizAdyacencia;
     protected T [] vertices;
+    protected int capacidad;
     
     public GrafoNoDirigidoMatrizAdyacencia(Class<T> clase) {
+        this (clase, CAPACIDAD_DEFAULT);
+    }
+    
+    public GrafoNoDirigidoMatrizAdyacencia(Class<T> clase, int capacidad) {
         this.cantidadVertices = 0;
-        this.matrizAdyacencia = new boolean[CAPACIDAD_DEFAULT][CAPACIDAD_DEFAULT];
-        this.vertices = nuevoArreglo(clase, CAPACIDAD_DEFAULT);
+        this.capacidad = capacidad;
+        this.matrizAdyacencia = new boolean[capacidad][capacidad];
+        this.vertices = nuevoArreglo(clase, capacidad);
     }
     
     private T[] nuevoArreglo(Class<T> clazz, int capacidad) {
@@ -34,7 +36,7 @@ public class GrafoNoDirigidoMatrizAdyacencia <T> implements GrafoNoDirigidoInter
             return;
         }
         
-        if (this.cantidadVertices == CAPACIDAD_DEFAULT) {
+        if (this.cantidadVertices == capacidad) {
             return;
         }
                 

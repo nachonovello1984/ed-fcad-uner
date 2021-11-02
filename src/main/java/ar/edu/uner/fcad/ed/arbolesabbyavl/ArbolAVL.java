@@ -11,7 +11,7 @@ import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
  * @author Nacho
  * @param <T>
  */
-public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
+public class ArbolAVL<T extends Comparable<? super T>> extends ArbolABB<T> {
 
     private boolean imprimirConFBs;
 
@@ -31,14 +31,12 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
     private ListaAVL<T> buscarNodos(NodoAVL<T> nodoInicio, T valor) {
         ListaAVL<T> resultado = new ListaAVL(valor);
 
-        int resComparacion = -1;
-
         NodoAVL<T> nodoActual = nodoInicio;
 
         while (nodoActual != null) {
             resultado.getNodos().addToRear(nodoActual);
 
-            resComparacion = valor.compareTo(nodoActual.getValor());
+            int resComparacion = valor.compareTo(nodoActual.getValor());
 
             if (resComparacion < 0) {
                 nodoActual = (NodoAVL) nodoActual.getHijoIzquierdo();
@@ -60,40 +58,40 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
     public void add(T valor) {
         if (isEmpty()) {
             raiz = new NodoAVL(valor);
-        } else {
-            ListaAVL<T> lista = buscarNodos(valor);
-
-            NodoAVL<T> nodoPadre = lista.getPadreNodoBuscado();
-            NodoAVL<T> nodoActual = lista.getNodoBuscado();
-
-            if (nodoActual != null) {
-                throw new IllegalArgumentException("Ya existe en el árbol un nodo con igual valor");
-            }
-
-            //Creo el nuevo nodo.
-            NodoAVL<T> nuevoNodo = new NodoAVL(valor);
-
-            //Determino a qué lado del nodoPadre debe ir
-            int resComparacion = valor.compareTo(nodoPadre.getValor());
-
-            if (resComparacion < 0) {
-                nodoPadre.setHijoIzquierdo(nuevoNodo);
-            }
-
-            if (resComparacion > 0) {
-                nodoPadre.setHijoDerecho(nuevoNodo);
-            }
-
-            lista.getNodos().addToRear(nuevoNodo);
-
-            //Rebalanceo.
-            if (lista.getNodoPivote() != null) {
-                insercionRebalanceo(lista, nuevoNodo);
-            }
-
-            //Actualizar Factores de Balance
-            actualizarFBs((NodoAVL) getRaiz());
+            return;
         }
+        
+        ListaAVL<T> lista = buscarNodos(valor);
+        NodoAVL<T> nodoPadre = lista.getPadreNodoBuscado();
+        NodoAVL<T> nodoActual = lista.getNodoBuscado();
+
+        if (nodoActual != null) {
+            throw new IllegalArgumentException("Ya existe en el árbol un nodo con igual valor");
+        }
+
+        //Creo el nuevo nodo.
+        NodoAVL<T> nuevoNodo = new NodoAVL(valor);
+
+        //Determino a qué lado del nodoPadre debe ir
+        int resComparacion = valor.compareTo(nodoPadre.getValor());
+
+        if (resComparacion < 0) {
+            nodoPadre.setHijoIzquierdo(nuevoNodo);
+        }
+
+        if (resComparacion > 0) {
+            nodoPadre.setHijoDerecho(nuevoNodo);
+        }
+
+        lista.getNodos().addToRear(nuevoNodo);
+
+        //Rebalanceo.
+        if (lista.getNodoPivote() != null) {
+            insercionRebalanceo(lista, nuevoNodo);
+        }
+
+        //Actualizar Factores de Balance
+        actualizarFBs((NodoAVL) getRaiz());
     }
 
     @Override
@@ -281,7 +279,7 @@ public class ArbolAVL <T extends Comparable<? super T>> extends ArbolABB<T> {
     }
 
     private void actualizarFBs(NodoAVL<T> nodo) {
-        NodoAVL nodoActual;
+        NodoAVL<T> nodoActual;
         ColaPorEnlaces<NodoAVL<T>> cola = new ColaPorEnlaces<>();
         cola.enqueue(nodo);
 

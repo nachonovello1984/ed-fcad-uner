@@ -17,14 +17,14 @@ public class ArbolABBIteradorPosOrden <T extends Comparable<? super T>> implemen
     
     private final Iterador <T> iterador;
     
-    public ArbolABBIteradorPosOrden(ArbolABB<T> arbolAbb){
-        this.iterador = generarRecorrido(arbolAbb).iterador();
+    public ArbolABBIteradorPosOrden(NodoABB<T> raiz){
+        this.iterador = generarRecorrido(raiz).iterador();
     }
 
-    private ListaEnlazadaNoOrdenada<T> generarRecorrido(ArbolABB<T> arbolAbb) {
+    private ListaEnlazadaNoOrdenada<T> generarRecorrido(NodoABB<T> raiz) {
         ListaEnlazadaNoOrdenada<T> resultado = new ListaEnlazadaNoOrdenada();
 
-        resultado.addAll(agregarSubArbol(arbolAbb.getRaiz()));
+        resultado.addAll(agregarSubArbol(raiz));
 
         return resultado;
     }

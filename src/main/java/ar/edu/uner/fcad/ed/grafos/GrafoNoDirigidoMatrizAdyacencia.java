@@ -127,6 +127,7 @@ public class GrafoNoDirigidoMatrizAdyacencia <T> implements GrafoNoDirigidoInter
         return -1;
     }
     
+    @Override
     public String toString() {
         String resultado = "";
         

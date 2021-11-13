@@ -16,15 +16,15 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 public class ArbolABBIteratorNiveles <T extends Comparable<? super T>> implements Iterador<T> {
     private final Iterador<T> iterador;
 
-    public ArbolABBIteratorNiveles(ArbolABB<T> arbolAbb) {
-        this.iterador = generarRecorrido(arbolAbb).iterador();
+    public ArbolABBIteratorNiveles(NodoABB<T> raiz) {
+        this.iterador = generarRecorrido(raiz).iterador();
     }
 
-    private ListaEnlazadaNoOrdenada<T> generarRecorrido(ArbolABB<T> arbolAbb) {
+    private ListaEnlazadaNoOrdenada<T> generarRecorrido(NodoABB<T> raiz) {
         ListaEnlazadaNoOrdenada<T> resultado = new ListaEnlazadaNoOrdenada();
         
         ColaPorEnlaces<NodoABB<T>> cola = new ColaPorEnlaces();
-        cola.enqueue(arbolAbb.getRaiz());
+        cola.enqueue(raiz);
         
         while (!cola.isEmpty()) {
             NodoABB<T> nodoActual = cola.getFront();

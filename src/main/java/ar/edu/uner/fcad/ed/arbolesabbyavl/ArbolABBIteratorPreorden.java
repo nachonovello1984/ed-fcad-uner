@@ -11,14 +11,14 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
 public class ArbolABBIteratorPreorden <T extends Comparable<? super T>> implements Iterador<T>{
     private final Iterador <T> iterador;
     
-    public ArbolABBIteratorPreorden(ArbolABB<T> arbolAbb){
-        this.iterador = generarRecorrido(arbolAbb).iterador();
+    public ArbolABBIteratorPreorden(NodoABB<T> raiz){
+        this.iterador = generarRecorrido(raiz).iterador();
     }
 
-    private ListaEnlazadaNoOrdenada<T> generarRecorrido(ArbolABB<T> arbolAbb) {
+    private ListaEnlazadaNoOrdenada<T> generarRecorrido(NodoABB<T> raiz) {
         ListaEnlazadaNoOrdenada<T> resultado = new ListaEnlazadaNoOrdenada();
 
-        resultado.addAll(agregarSubArbol(arbolAbb.getRaiz()));
+        resultado.addAll(agregarSubArbol(raiz));
 
         return resultado;
     }

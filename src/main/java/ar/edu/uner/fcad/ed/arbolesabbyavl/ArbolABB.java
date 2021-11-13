@@ -221,7 +221,7 @@ public class ArbolABB<T extends Comparable<? super T>> implements ArbolABBInterf
             throw new IllegalStateException("Arbol vacío");
         }
 
-        Iterador<T> resultado = new ArbolABBIteratorNiveles(this);
+        Iterador<T> resultado = new ArbolABBIteratorNiveles(this.raiz);
         return resultado;
     }
 
@@ -231,7 +231,7 @@ public class ArbolABB<T extends Comparable<? super T>> implements ArbolABBInterf
             throw new IllegalStateException("Arbol vacío");
         }
 
-        Iterador<T> resultado = new ArbolABBIteratorPreorden(this);
+        Iterador<T> resultado = new ArbolABBIteratorPreorden(this.raiz);
         return resultado;
     }
 
@@ -241,7 +241,7 @@ public class ArbolABB<T extends Comparable<? super T>> implements ArbolABBInterf
             throw new IllegalStateException("Arbol vacío");
         }
 
-        Iterador<T> resultado = new ArbolABBIteradorInOrden(this);
+        Iterador<T> resultado = new ArbolABBIteradorInOrden(this.raiz);
         return resultado;
     }
 
@@ -251,7 +251,7 @@ public class ArbolABB<T extends Comparable<? super T>> implements ArbolABBInterf
             throw new IllegalStateException("Arbol vacío");
         }
 
-        Iterador<T> resultado = new ArbolABBIteradorPosOrden(this);
+        Iterador<T> resultado = new ArbolABBIteradorPosOrden(this.raiz);
         return resultado;
     }
 }

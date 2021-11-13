@@ -74,7 +74,7 @@ public class MapeoConLista<K, V> implements MapeoInterfaz<K, V> {
     public V remove(K key) {
         
         if (isEmpty()) {
-            throw new IllegalStateException ("El mapa está vacío. No se puede llevar a cabo esta acción");
+            throw new IllegalStateException ("El mapeo está vacío. No se puede llevar a cabo esta acción");
         }
                 
         Iterador<Entrada<K, V>> iterador = lista.iterador();

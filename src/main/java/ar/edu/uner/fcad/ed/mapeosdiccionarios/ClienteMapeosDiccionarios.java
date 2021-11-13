@@ -14,29 +14,29 @@ import ar.edu.uner.fcad.ed.mapeosdiccionarios.mapeos.MapeoInterfaz;
  */
 public class ClienteMapeosDiccionarios {
     
-    private static void mapasTest() {
+    private static void mapeosTest() {
         try {
-            System.out.println("Mapa");
+            System.out.println("Mapeo");
             System.out.println("====================================");
-            MapeoInterfaz<String, Integer> mapa = new MapeoConLista();
+            MapeoInterfaz<String, Integer> mapeo = new MapeoConLista();
             
-            mapa.put("Chelsea", 34);
-            mapa.put("Liverpool", 37);
-            mapa.put("Manchester City", 70);
-            mapa.put("Arsenal", 50);
-            mapa.put("Aston Villa", 15);
+            mapeo.put("Chelsea", 34);
+            mapeo.put("Liverpool", 37);
+            mapeo.put("Manchester City", 70);
+            mapeo.put("Arsenal", 50);
+            mapeo.put("Aston Villa", 15);
             
-            System.out.println("mapa = " + mapa);
-            mapa.remove("Aston Villa");
+            System.out.println("mapeo = " + mapeo);
+            mapeo.remove("Aston Villa");
             
-            System.out.println("mapa.remove('Aston Villa') = " + mapa);
+            System.out.println("mapeo.remove('Aston Villa') = " + mapeo);
             
-            mapa.put("Arsenal", 76);
-            System.out.println("mapa = " + mapa);
+            mapeo.put("Arsenal", 76);
+            System.out.println("mapeo = " + mapeo);
             
-            System.out.println("mapa.keySet() = " + mapa.keySet());
-            System.out.println("mapa.values() = " + mapa.values());
-            System.out.println("mapa.entrySet() = " + mapa.entrySet());
+            System.out.println("mapeo.keySet() = " + mapeo.keySet());
+            System.out.println("mapeo.values() = " + mapeo.values());
+            System.out.println("mapeo.entrySet() = " + mapeo.entrySet());
         } catch (Exception ex) {
             Logger.getLogger(ClienteMapeosDiccionarios.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,7 +78,7 @@ public class ClienteMapeosDiccionarios {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        mapasTest();
+        mapeosTest();
         
         diccionariosTest();
     }

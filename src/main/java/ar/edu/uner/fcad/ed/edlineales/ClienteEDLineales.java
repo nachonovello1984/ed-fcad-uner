@@ -17,7 +17,7 @@ import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
  */
 public class ClienteEDLineales {
 
-    public static void testListaEnlazadaOrdenadaIterador() {
+    private static void testListaEnlazadaOrdenadaIterador() {
         try {
             ListaEnlazadaOrdenada<Integer> lista = new ListaEnlazadaOrdenada<>();
             lista.add(5);
@@ -43,8 +43,35 @@ public class ClienteEDLineales {
             System.err.println(ex.toString());
         }
     }
+    
+    private static void testListaEnlazadaNoOrdenadaIterador() {
+        try {
+            ListaEnlazadaNoOrdenada<Integer> lista = new ListaEnlazadaNoOrdenada<>();
+            lista.addToRear(5);
+            lista.addToRear(4);
+            lista.addToRear(3);
+            lista.addToRear(2);
+            lista.addToRear(1);
+            lista.addToRear(6);
 
-    public static void testListaEnlazadaOrdenada() {
+            System.out.println("Lista:" + lista);
+
+            System.out.println("Lista - Utilizando iterador():");
+            int i = 1;
+            Iterador<Integer> iterador = lista.iterador();
+            while (iterador.existeSiguiente()) {
+                System.out.println("Posición " + i++ + ": " + iterador.siguiente());
+            }
+            
+            for (int j = 0; j < lista.size(); j++) {
+                System.out.println(lista.get(j));                
+            }
+        } catch (Exception ex) {
+            System.err.println(ex.toString());
+        }
+    }
+
+    private static void testListaEnlazadaOrdenada() {
         try {
             ListaEnlazadaOrdenada<Integer> lista = new ListaEnlazadaOrdenada();
             lista.add(5);
@@ -66,7 +93,7 @@ public class ClienteEDLineales {
         }
     }
 
-    public static void testListaEnlazadaNoOrdenada() {
+    private static void testListaEnlazadaNoOrdenada() {
         try {
             ListaEnlazadaNoOrdenada<Integer> lista = new ListaEnlazadaNoOrdenada();
             lista.addToRear(5);
@@ -88,9 +115,10 @@ public class ClienteEDLineales {
         }
     }
 
-    public static void testListaPorPosicionOrdenada() {
+    private static void testListaPorPosicionOrdenada() {
         try {
-            ListaPorPosicionOrdenada<Integer> lista = new ListaPorPosicionOrdenada(Integer.class);
+            ListaPorPosicionOrdenada<Integer> lista = 
+                    new ListaPorPosicionOrdenada(Integer.class);
             lista.add(5);
             lista.add(4);
             lista.add(3);
@@ -113,7 +141,7 @@ public class ClienteEDLineales {
         }
     }
 
-    public static void testPilaPorEnlaces() {
+    private static void testPilaPorEnlaces() {
         PilaPorEnlaces<Integer> pila = new PilaPorEnlaces();
         pila.push(1);
         pila.push(2);
@@ -131,7 +159,7 @@ public class ClienteEDLineales {
 
     }
 
-    public static void testPilaPorPosicion() {
+    private static void testPilaPorPosicion() {
         PilaPorPosicion<Integer> pila = new PilaPorPosicion(Integer.class);
         pila.push(1);
         pila.push(2);
@@ -148,7 +176,7 @@ public class ClienteEDLineales {
         }
     }
 
-    public static void testColaPorEnlaces() {
+    private static void testColaPorEnlaces() {
         ColaPorEnlaces<Integer> cola = new ColaPorEnlaces();
         cola.enqueue(1);
         cola.enqueue(2);
@@ -169,7 +197,7 @@ public class ClienteEDLineales {
         System.out.println(cola.getFront().toString());
     }
 
-    public static void testColaPorPosicion() {
+    private static void testColaPorPosicion() {
         ColaPorPosicion<Integer> cola = new ColaPorPosicion(Integer.class);
         cola.enqueue(1);
         cola.enqueue(2);
@@ -222,9 +250,9 @@ public class ClienteEDLineales {
         System.out.println("====================================");
         testColaPorPosicion();
         
-        System.out.println("Lista Enlazada Ordenada");
+        System.out.println("Iterador - Lista Enlazada No Ordenada");
         System.out.println("====================================");
-        testListaEnlazadaOrdenadaIterador();
+        testListaEnlazadaNoOrdenadaIterador();
         
         System.out.println("Iterador - Lista Enlazada Ordenada");
         System.out.println("====================================");

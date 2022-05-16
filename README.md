@@ -22,9 +22,11 @@ Este proyecto sirve tanto de ejemplo de implementación de las Estructuras de Da
 ```
 Y en la sección dependencies:
 ```xml
-<dependency>
-  <groupId>com.github.nachonovello1984</groupId>
-  <artifactId>ed-fcad-uner</artifactId>
-  <version>-SNAPSHOT</version>
-</dependency>
+<dependencies>
+  <dependency>
+    <groupId>com.github.nachonovello1984</groupId>
+    <artifactId>ed-fcad-uner</artifactId>
+    <version>-SNAPSHOT</version>
+  </dependency>
+</dependencies>  
 ```

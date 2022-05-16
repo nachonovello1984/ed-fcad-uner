@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Nacho
  * @param <T>
  */
-public class NodoABB <T extends Comparable<? super T>> extends NodoArbolBinario <T>{
+public class NodoABB <T extends Comparable<T>> extends NodoArbolBinario <T>{
     public NodoABB(T valor){
         super(valor);
     }

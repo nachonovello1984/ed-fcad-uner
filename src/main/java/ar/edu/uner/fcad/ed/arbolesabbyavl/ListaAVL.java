@@ -7,7 +7,7 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
  * @author Nacho
  * @param <T>
  */
-public class ListaAVL <T extends Comparable<? super T>> {
+public class ListaAVL <T extends Comparable<T>> {
 
     protected ListaEnlazadaNoOrdenada<NodoAVL<T>> nodos;
     protected T valorBuscado;

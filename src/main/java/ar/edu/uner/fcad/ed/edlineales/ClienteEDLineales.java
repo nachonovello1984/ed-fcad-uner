@@ -10,6 +10,7 @@ import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorPosicion;
 import ar.edu.uner.fcad.ed.edlineales.pilas.PilaPorEnlaces;
 import ar.edu.uner.fcad.ed.edlineales.pilas.PilaPorPosicion;
 import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
+import java.util.Random;
 
 /**
  *
@@ -222,41 +223,73 @@ public class ClienteEDLineales {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Lista Por Posición Ordenada");
-        System.out.println("====================================");
-        testListaPorPosicionOrdenada();
-
-        System.out.println("Lista Enlazada No Ordenada");
-        System.out.println("====================================");
-        testListaEnlazadaNoOrdenada();
-
-        System.out.println("Lista Enlazada Ordenada");
-        System.out.println("====================================");
-        testListaEnlazadaOrdenada();
-
-        System.out.println("Pila - Implementación por enlaces");
-        System.out.println("====================================");
-        testPilaPorEnlaces();
+//        System.out.println("Lista Por Posición Ordenada");
+//        System.out.println("====================================");
+//        testListaPorPosicionOrdenada();
+//
+//        System.out.println("Lista Enlazada No Ordenada");
+//        System.out.println("====================================");
+//        testListaEnlazadaNoOrdenada();
+//
+//        System.out.println("Lista Enlazada Ordenada");
+//        System.out.println("====================================");
+//        testListaEnlazadaOrdenada();
+//
+//        System.out.println("Pila - Implementación por enlaces");
+//        System.out.println("====================================");
+//        testPilaPorEnlaces();
+//        
+//        System.out.println("Pila - Implementación por posición");
+//        System.out.println("====================================");
+//        testPilaPorPosicion();
+//        
+//        System.out.println("Cola - Implementación por enlaces");
+//        System.out.println("====================================");
+//        testColaPorEnlaces();
+//        
+//        System.out.println("Cola - Implementación por posición");
+//        System.out.println("====================================");
+//        testColaPorPosicion();
+//        
+//        System.out.println("Iterador - Lista Enlazada No Ordenada");
+//        System.out.println("====================================");
+//        testListaEnlazadaNoOrdenadaIterador();
         
-        System.out.println("Pila - Implementación por posición");
-        System.out.println("====================================");
-        testPilaPorPosicion();
+//        System.out.println("Iterador - Lista Enlazada Ordenada");
+//        System.out.println("====================================");
+//        testListaEnlazadaOrdenadaIterador();
+            test();
+    }
+    
+    public static void test() {
+        ListaEnlazadaNoOrdenada<String> lista = new ListaEnlazadaNoOrdenada();
+        Random random = new Random();
+        for (int i = 0; i < 100; i++) {
+            lista.addToRear(Integer.toString(random.nextInt()));
+        }
         
-        System.out.println("Cola - Implementación por enlaces");
-        System.out.println("====================================");
-        testColaPorEnlaces();
+        lista.set("test", 51);
         
-        System.out.println("Cola - Implementación por posición");
-        System.out.println("====================================");
-        testColaPorPosicion();
         
-        System.out.println("Iterador - Lista Enlazada No Ordenada");
-        System.out.println("====================================");
-        testListaEnlazadaNoOrdenadaIterador();
+        ////Busqueda
         
-        System.out.println("Iterador - Lista Enlazada Ordenada");
-        System.out.println("====================================");
-        testListaEnlazadaOrdenadaIterador();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).equals("test")){
+                System.out.println("lo encontré!!!");
+                break;
+            }
+            System.out.println("");
+        }
+        
+        int j = 0;
+        Iterador<String> iterador = lista.iterador();
+        while(iterador.existeSiguiente()) {
+            System.out.print(j++ + ", ");
+            if (iterador.siguiente().equals("test")){
+                System.out.println("lo encontré");
+                break;
+            }
+        }
     }
 
 }

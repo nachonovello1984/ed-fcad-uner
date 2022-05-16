@@ -1,7 +1,6 @@
 package ar.edu.uner.fcad.ed.arbolesmultivia;
 
 import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
-import static com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM.indent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

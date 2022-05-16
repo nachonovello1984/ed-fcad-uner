@@ -10,7 +10,7 @@ import java.lang.reflect.Array;
  * @author Nacho
  * @param <T>
  */
-public class ListaPorPosicionOrdenada<T extends Comparable<? super T>>
+public class ListaPorPosicionOrdenada <T extends Comparable<T>> 
         implements ListaOrdenada<T>, Iterable<T> {
 
     private static final int CAPACIDAD = 10;

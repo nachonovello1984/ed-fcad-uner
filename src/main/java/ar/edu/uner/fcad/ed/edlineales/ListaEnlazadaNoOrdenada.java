@@ -198,6 +198,7 @@ public class ListaEnlazadaNoOrdenada<T>
 
         NodoLista<T> nodoActual = header.siguiente;
         for (int i = 0; i < position; i++) {
+            System.out.print(i + ", ");
             nodoActual = nodoActual.siguiente;
         }
 

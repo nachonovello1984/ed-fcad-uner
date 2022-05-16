@@ -12,7 +12,7 @@ import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
  * @author Nacho
  * @param <T>
  */
-public class Heap<T extends Comparable<? super T>> 
+public class Heap <T extends Comparable<T>>
         extends ArbolBinario<T> 
         implements HeapInterfaz<T> {
 

@@ -11,7 +11,7 @@ import ar.edu.uner.fcad.ed.edlineales.colas.ColaPorEnlaces;
  * @author Nacho
  * @param <T>
  */
-public class ArbolAVL<T extends Comparable<? super T>> extends ArbolABB<T> {
+public class ArbolAVL <T extends Comparable<T>> extends ArbolABB<T> {
 
     private boolean imprimirConFBs;
 

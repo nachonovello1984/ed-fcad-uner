@@ -7,7 +7,7 @@ import ar.edu.uner.fcad.ed.edlineales.iteradores.Iterador;
  * @author Nacho
  * @param <T>
  */
-public class ArbolABB<T extends Comparable<? super T>> implements ArbolABBInterfaz<T>, ArbolABBRecorridosInterfaz<T> {
+public class ArbolABB <T extends Comparable<T>> implements ArbolABBInterfaz<T>, ArbolABBRecorridosInterfaz<T> {
 
     protected NodoABB<T> raiz;
 

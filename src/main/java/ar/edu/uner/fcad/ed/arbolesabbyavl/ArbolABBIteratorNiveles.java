@@ -13,7 +13,7 @@ import ar.edu.uner.fcad.ed.edlineales.ListaEnlazadaNoOrdenada;
  * @author Nacho
  * @param <T>
  */
-public class ArbolABBIteratorNiveles <T extends Comparable<? super T>> implements Iterador<T> {
+public class ArbolABBIteratorNiveles <T extends Comparable<T>> implements Iterador<T> {
     private final Iterador<T> iterador;
 
     public ArbolABBIteratorNiveles(NodoABB<T> raiz) {

@@ -14,7 +14,7 @@ import ar.edu.uner.fcad.ed.edlineales.iteradores.IteradorListaEnlazada;
  * @param <T>
  */
 public class ListaEnlazadaOrdenada 
-        <T extends Comparable<? super T>>
+        <T extends Comparable<T>> 
         implements ListaOrdenada<T>, Iterable<T> {
 
     protected NodoLista<T> header;

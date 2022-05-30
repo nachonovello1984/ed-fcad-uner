@@ -61,7 +61,7 @@
             </exclusions>
         </dependency>
     </dependencies>
-    <build>
+<!--    <build>
         <finalName>maven-code-coverage</finalName>
         <plugins>
             <plugin>
@@ -90,5 +90,5 @@
                 </executions>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 </project>

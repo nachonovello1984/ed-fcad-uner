@@ -430,8 +430,8 @@ public class ListaEnlazadaNoOrdenadaTest {
             instance.addToRear(i);
         }
         
-        Integer expected = 20;
-        Integer actual = instance.get(10);
+        Integer expected = 10;
+        Integer actual = instance.get(instance.size() - 1);
         assertEquals(expected, actual, "El método get() no funciona como se esperaba");
     }
     
